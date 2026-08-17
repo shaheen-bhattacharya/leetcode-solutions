@@ -18,7 +18,7 @@ class Solution:
                 if lsum > rsum:
                     res = max(res, rsum + dfs(i+1, r))
                 else:
-                    res = max(res, lsum + dfs(0, i))
+                    res = max(res, lsum + dfs(l, i))
             dp[key] = res
             return res
             
