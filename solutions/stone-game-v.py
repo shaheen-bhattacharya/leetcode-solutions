@@ -7,7 +7,7 @@ class Solution:
             key = (l, r)
             if key in dp:
                 return dp[key]
-            if r - l <= 1:
+            if r - l <= 0:
                 return 0
             res = 0
             lsum = 0
