@@ -17,8 +17,10 @@ class Solution:
                 rsum -= stoneValue[i]
                 if lsum > rsum:
                     res = max(res, rsum + dfs(i+1, r))
-                else:
+                elif rsum > lsum:
                     res = max(res, lsum + dfs(l, i))
+                else:
+                    res = max(res, lsum + dfs(l, i), rsum + dfs(i+1, r))
             dp[key] = res
             return res
             
