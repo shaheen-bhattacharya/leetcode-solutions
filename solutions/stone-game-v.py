@@ -7,13 +7,12 @@ class Solution:
             key = (l, r)
             if key in dp:
                 return dp[key]
-            if r - l == 0:
+            if r - l <= 1:
                 return 0
             res = 0
             lsum = 0
             rsum = pref[r+1] - pref[l]
             for i in range(l, r+1):
-                print(key, lsum, rsum)
                 lsum += stoneValue[i]
                 rsum -= stoneValue[i]
                 if lsum > rsum:
