@@ -3,12 +3,12 @@ class Solution:
         dp = {}
         n = len(stoneValue)
         pref = [0] + list(accumulate(stoneValue))
+        dp = [[-1] * n for _ in range(n)]
         def dfs(l, r):
-            key = (l, r)
-            if key in dp:
-                return dp[key]
             if r - l <= 0:
                 return 0
+            if dp[l][r] != -1:
+                return dp[l][r]
             res = 0
             lsum = 0
             rsum = pref[r+1] - pref[l]
@@ -21,7 +21,7 @@ class Solution:
                     res = max(res, lsum + dfs(l, i))
                 else:
                     res = max(res, lsum + dfs(l, i), rsum + dfs(i+1, r))
-            dp[key] = res
+            dp[l][r] = res
             return res
             
         return dfs(0, n-1)
