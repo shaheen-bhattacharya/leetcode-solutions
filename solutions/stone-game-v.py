@@ -42,8 +42,8 @@ class Solution:
                     best = max(best, rmax[rpos[l][r]][r])
                 dp[l][r] = best
                 tot = pref[r+1] - pref[l]
-                lmax[l][r] = max(lmax[l-1][r], tot + dp[l][r])
-                rmax[l][r] = max(rmax[l][r-1], tot + dp[l][r])
+                lmax[l][r] = max(lmax[l][r-1], tot + dp[l][r])
+                rmax[l][r] = max(rmax[l+1][r], tot + dp[l][r])
                 
         return dp[0][n-1]
         
