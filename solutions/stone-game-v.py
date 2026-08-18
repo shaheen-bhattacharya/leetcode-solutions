@@ -8,13 +8,13 @@ class Solution:
         lpos = [[-1] * n for _ in range(n)]
         rpos = [[-1] * n for _ in range(n)]
         for l in range(n):
-            lp = l
+            lp = l - 1
             rp = l
             for r in range(l+1, n):
                 tot = pref[r+1] - pref[l]
 
-                while lp < r:
-                    lsum = pref[lp+1] - pref[l]
+                while lp <= r - 1:
+                    lsum = pref[lp+2] - pref[l]
                     if lsum * 2 > tot:
                         break
                     lp += 1
