@@ -1,28 +1,22 @@
 class Solution:
     def stoneGameV(self, stoneValue: List[int]) -> int:
-        dp = {}
         n = len(stoneValue)
         pref = [0] + list(accumulate(stoneValue))
-        dp = [[-1] * n for _ in range(n)]
-        def dfs(l, r):
-            if r - l <= 0:
-                return 0
-            if dp[l][r] != -1:
-                return dp[l][r]
+        dp = [[0] * n for _ in range(n)]
 
-            left, right = l, r 
-            tot = pref[r+1] - pref[l]
-            while left < right:
-                mid = (left + right) // 2
-                if 2 * (pref[mid + 1] - pref[l]) < tot:
-                    left = mid + 1
-                else: 
-                    right = mid
-
-            rsum = pref[r+1] - pref[mid]
-            lsum = pref[mid+1] - pref[l]
-            dp[l][r] = max(lsum + dfs(l, mid), rsum + dfs(mid+1, r))
-
-            return dp[l][r]
-            
-        return dfs(0, n-1)
+        for length in range(2, n+1):
+            for l in range(0, n - length + 1):
+                r = l + length - 1
+                res = 0
+                for i in range(l, r):
+                    leftSum = pref[i + 1] - pref[l]
+                    rightSum = pref[r + 1] - pref[i + 1]
+                    if leftSum < rightSum:
+                        res = max(res, leftSum + dp[l][i])
+                    elif rightSum < leftSum:
+                        res = max(res,rightSum + dp[i + 1][r])
+                    else:
+                        res = max(res,leftSum + dp[l][i],rightSum + dp[i + 1][r])
+                dp[l][r] = res
+        return dp[0][n-1]
+        
