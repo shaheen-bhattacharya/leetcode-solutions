@@ -22,7 +22,7 @@ class Solution:
 
                 while rp < r:
                     lsum = pref[rp+1] - pref[l]
-                    if lsum * 2 > tot:
+                    if lsum * 2 >= tot:
                         break
                     rp += 1
                 rpos[l][r] = rp
