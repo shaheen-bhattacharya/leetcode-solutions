@@ -34,7 +34,6 @@ class Solution:
         for length in range(2, n+1):
             for l in range(0, n - length + 1):
                 r = l + length - 1
-                res = 0
                 best = 0
                 if lpos[l][r] >= l:
                     best = max(best, lmax[l][lpos[l][r]])
