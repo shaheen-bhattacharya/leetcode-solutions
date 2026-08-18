@@ -13,7 +13,7 @@ class Solution:
             for r in range(l+1, n):
                 tot = pref[r+1] - pref[l]
 
-                while lp + 1 < r:
+                while lp <= r - 1:
                     lsum = pref[lp+2] - pref[l]
                     if lsum * 2 > tot:
                         break
