@@ -38,7 +38,7 @@ class Solution:
                 best = 0
                 if lpos[l][r] >= l:
                     best = max(best, lmax[l][lpos[l][r]])
-                else:
+                if rpos[l][r] <= r:
                     best = max(best, rmax[rpos[l][r]+1][r])
                 dp[l][r] = best
                 tot = pref[r+1] - pref[l]
