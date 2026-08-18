@@ -39,7 +39,7 @@ class Solution:
                 if lpos[l][r] >= l:
                     best = max(best, lmax[l][lpos[l][r]])
                 if rpos[l][r] <= r:
-                    best = max(best, rmax[rpos[l][r]+1][r])
+                    best = max(best, rmax[rpos[l][r]][r])
                 dp[l][r] = best
                 tot = pref[r+1] - pref[l]
                 lmax[l][r] = max(lmax[l][r-1], tot + dp[l][r])
