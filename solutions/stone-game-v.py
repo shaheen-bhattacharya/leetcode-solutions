@@ -9,19 +9,20 @@ class Solution:
                 return 0
             if dp[l][r] != -1:
                 return dp[l][r]
-            res = 0
-            lsum = 0
-            rsum = pref[r+1] - pref[l]
-            for i in range(l, r+1):
-                lsum += stoneValue[i]
-                rsum -= stoneValue[i]
-                if lsum > rsum:
-                    res = max(res, rsum + dfs(i+1, r))
-                elif rsum > lsum:
-                    res = max(res, lsum + dfs(l, i))
-                else:
-                    res = max(res, lsum + dfs(l, i), rsum + dfs(i+1, r))
-            dp[l][r] = res
-            return res
+
+            left, right = l, r 
+            tot = pref[r+1] - pref[l]
+            while left < right:
+                mid = (left + right) // 2
+                if 2 * (pref[mid + 1] - pref[l]) < tot:
+                    left = mid + 1
+                else: 
+                    right = mid
+
+            rsum = pref[r+1] - pref[mid]
+            lsum = pref[mid+1] - pref[l]
+            dp[l][r] = max(lsum + dfs(l, mid), rsum + dfs(mid+1, r))
+
+            return dp[l][r]
             
         return dfs(0, n-1)
