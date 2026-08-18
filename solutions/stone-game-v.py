@@ -20,7 +20,7 @@ class Solution:
                     lp += 1
                 lpos[l][r] = lp
 
-                while rp < r:
+                while rp <= r - 1:
                     lsum = pref[rp+1] - pref[l]
                     if lsum * 2 >= tot:
                         break
