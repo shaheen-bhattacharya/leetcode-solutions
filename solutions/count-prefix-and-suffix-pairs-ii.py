@@ -14,7 +14,7 @@ class Trie:
         prev = set()
         l, r = 0, len(word) - 1
         amt = 0
-        while l <= r:
+        while l < r:
             ch = (word[l], word[r])
             if ch not in node.children:
                 node.children[ch] = TrieNode()
