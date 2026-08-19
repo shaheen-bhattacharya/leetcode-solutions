@@ -13,6 +13,7 @@ class Solution:
         
         dp = [0] * n
         res = 0
+        print(words)
         for i in range(n-2, -1, -1):
             for j in range(i+1, n):
                 if good(words[i], words[j]):
