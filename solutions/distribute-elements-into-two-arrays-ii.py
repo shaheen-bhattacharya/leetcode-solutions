@@ -15,5 +15,6 @@ class Solution:
             else:
                 ta = ssl if len(ssl) <= len(ssr) else ssr
                 ta.add(nums[i])
+        print(ssl, ssr)
         return list(ssl) + list(ssr)
 
