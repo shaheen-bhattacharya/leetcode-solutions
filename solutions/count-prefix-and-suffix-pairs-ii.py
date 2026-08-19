@@ -12,16 +12,14 @@ class Trie:
     def insert(self, word, idx):
         node = self.root
         prev = set()
-        l, r = 0, len(word) - 1
+        # l, r = 0, len(word) - 1
         amt = 0
-        while l < r:
-            ch = (word[l], word[r])
+        for i in range(len(word)):
+            ch = (word[i], word[-i-1])
             if ch not in node.children:
                 node.children[ch] = TrieNode()
             node = node.children[ch]
             amt += node.count
-            l += 1
-            r -= 1
 
         node.isWord = True
         node.amt = amt
