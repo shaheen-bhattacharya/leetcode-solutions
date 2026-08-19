@@ -41,7 +41,7 @@ class Solution:
             comb = nbp & nfp
             comb.discard(i)
             res += len(comb)
-            # print(i, nfp, nbp)            
+            print(i, nfp, nbp)            
         return res
 
 
