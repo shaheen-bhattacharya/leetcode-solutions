@@ -1,27 +1,43 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isWord = False
+        self.idx = -1
+        self.prev = set()
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+        self.imap = {}
+    def insert(self, word, idx):
+        node = self.root
+        prev = set()
+        for ch in word:
+            if ch not in node.children:
+                node.children[ch] = TrieNode()
+            node = node.children[ch]
+            if node.isWord:
+                prev.add(node.idx)
+
+        node.isWord = True
+        node.idx = idx
+        node.prev = prev
+        self.imap[idx] = node 
+
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
         words.sort(key=len)
         n = len(words)
-
-        def good(w1, w2):
-            for i in range(len(w1)):
-                f1, l1 = w1[i], w1[-i-1]
-                f2, l2 = w2[i], w2[-i-1]
-                if f1 != f2 or l1 != l2:
-                    return False
-            return True
-        
-        dp = [0] * n
+        ftrie = Trie()
+        btrie = Trie()
+        for i, w in enumerate(words):
+            ftrie.insert(w, i)
+            btrie.insert(w[::-1], i)
         res = 0
-        print(words)
-        for i in range(n-2, -1, -1):
-            for j in range(i+1, n):
-                if good(words[i], words[j]):
-                    dp[i] = dp[j] + 1
-                    res += dp[i]
-                    break
+        for i in range(n):
+            nf = ftrie.imap[i]
+            nb = btrie.imap[i]
+            res += len(nf.prev | nb.prev)
         return res
-                
 
 
                 
