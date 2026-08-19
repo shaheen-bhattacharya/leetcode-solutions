@@ -1,8 +1,8 @@
 class Solution:
     def resultArray(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        a1 = []
-        a2 = []
+        a1 = [nums[0]]
+        a2 = [nums[1]]
 
         ssl = SortedList([nums[0]])
         ssr = SortedList([nums[1]])
