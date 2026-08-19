@@ -39,6 +39,7 @@ class Solution:
             nb = btrie.imap[i]
             nfp = nf.prev
             nbp = nb.prev
+            res += len(nbp | nfp)
             print(i, nfp, nbp)
             # if len(nf) > len(nb):
             #     nf, nb = nb, nf 
