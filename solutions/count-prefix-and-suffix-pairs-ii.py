@@ -35,7 +35,6 @@ class Solution:
             trie.insert(w, i)
 
         res = 0
-        print(trie.imap)
 
         for i in range(n):
             res += trie.imap[i]
