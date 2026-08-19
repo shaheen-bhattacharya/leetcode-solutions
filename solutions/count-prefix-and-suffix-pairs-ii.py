@@ -22,7 +22,7 @@ class Trie:
         node.isWord = True
         node.prev = prev
         node.idxs.add(idx)
-        self.imap[idx] = node 
+        self.imap[idx] = prev 
 
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
@@ -36,12 +36,13 @@ class Solution:
         for i in range(n):
             nf = ftrie.imap[i]
             nb = btrie.imap[i]
-            nfp = nf.prev
-            nbp = nb.prev
-            comb = nbp & nfp
-            comb.discard(i)
-            res += len(comb)
-            print(i, nfp, nbp)            
+            res += len(nf & nb)
+            # nfp = nf.prev
+            # nbp = nb.prev
+            # comb = nbp & nfp
+            # comb.discard(i)
+            # res += len(comb)
+            # print(i, nfp, nbp)            
         return res
 
 
