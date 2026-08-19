@@ -2,12 +2,13 @@ class TrieNode:
     def __init__(self):
         self.children = {}
         self.isWord = False
-        self.idx = -1
+        self.idxs = set()
         self.prev = set()
 class Trie:
     def __init__(self):
         self.root = TrieNode()
         self.imap = {}
+
     def insert(self, word, idx):
         node = self.root
         prev = set()
@@ -16,11 +17,11 @@ class Trie:
                 node.children[ch] = TrieNode()
             node = node.children[ch]
             if node.isWord:
-                prev.add(node.idx)
+                prev |= node.idxs
 
         node.isWord = True
-        node.idx = idx
         node.prev = prev
+        node.idxs.add(idx)
         self.imap[idx] = node 
 
 class Solution:
@@ -40,12 +41,8 @@ class Solution:
             nfp = nf.prev
             nbp = nb.prev
             res += len(nbp | nfp)
-            print(i, nfp, nbp)
-            # if len(nf) > len(nb):
-            #     nf, nb = nb, nf 
-            # for i in nfp:
-            #     if i in nb:
-            #         res += freq[words[i]]
+            # print(i, nfp, nbp)
+            
         # for i in range()
             
 
