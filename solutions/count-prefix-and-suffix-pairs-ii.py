@@ -38,7 +38,7 @@ class Solution:
             nb = btrie.imap[i]
             nfp = nf.prev
             nbp = nb.prev
-            comb = nbp | nfp
+            comb = nbp & nfp
             comb.discard(i)
             res += len(comb)
             print(i, nfp, nbp)            
