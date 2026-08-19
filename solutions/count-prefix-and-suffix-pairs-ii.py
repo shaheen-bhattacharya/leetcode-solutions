@@ -2,8 +2,8 @@ class TrieNode:
     def __init__(self):
         self.children = {}
         self.isWord = False
-        self.idxs = set()
-        self.prev = set()
+        self.amt = 0
+        self.count = 0
 class Trie:
     def __init__(self):
         self.root = TrieNode()
@@ -12,37 +12,33 @@ class Trie:
     def insert(self, word, idx):
         node = self.root
         prev = set()
-        for ch in word:
+        l, r = 0, len(word) - 1
+        amt = 0
+        while l <= r:
+            ch = (word[l], word[r])
             if ch not in node.children:
                 node.children[ch] = TrieNode()
             node = node.children[ch]
-            if node.isWord:
-                prev |= node.idxs
+            amt += node.count
+            l += 1
+            r -= 1
 
         node.isWord = True
-        node.prev = prev
-        node.idxs.add(idx)
-        self.imap[idx] = prev 
+        node.amt = amt
+        self.imap[idx] = node.amt
+        node.count += 1
+
 
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
         n = len(words)
-        ftrie = Trie()
-        btrie = Trie()
+        trie = Trie()
         for i, w in enumerate(words):
-            ftrie.insert(w, i)
-            btrie.insert(w[::-1], i)
+            trie.insert(w, i)
+
         res = 0
         for i in range(n):
-            nf = ftrie.imap[i]
-            nb = btrie.imap[i]
-            res += len(nf & nb)
-            # nfp = nf.prev
-            # nbp = nb.prev
-            # comb = nbp & nfp
-            # comb.discard(i)
-            # res += len(comb)
-            # print(i, nfp, nbp)            
+            res += trie.imap[i]
         return res
 
 
