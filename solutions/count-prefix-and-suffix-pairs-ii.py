@@ -26,6 +26,7 @@ class Trie:
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
         # words.sort(key=len)
+        # freq = Counter(words)
         n = len(words)
         ftrie = Trie()
         btrie = Trie()
@@ -36,7 +37,17 @@ class Solution:
         for i in range(n):
             nf = ftrie.imap[i]
             nb = btrie.imap[i]
-            res += len(nf.prev | nb.prev)
+            nfp = nf.prev
+            nbp = nb.prev
+            print(i, nfp, nbp)
+            # if len(nf) > len(nb):
+            #     nf, nb = nb, nf 
+            # for i in nfp:
+            #     if i in nb:
+            #         res += freq[words[i]]
+        # for i in range()
+            
+
         return res
 
 
