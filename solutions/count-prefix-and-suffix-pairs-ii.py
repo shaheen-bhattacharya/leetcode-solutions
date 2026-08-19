@@ -41,7 +41,7 @@ class Solution:
             nfp = nf.prev
             nbp = nb.prev
             res += len(nbp | nfp)
-            # print(i, nfp, nbp)
+            print(i, nfp, nbp)
             
         # for i in range()
             
