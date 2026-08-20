@@ -30,7 +30,7 @@ class Solution:
                                 
             print(l, l2)
             if curr == k:
-                res += l2 - l + 1
+                res += l2 - l
         return res
             
                 
