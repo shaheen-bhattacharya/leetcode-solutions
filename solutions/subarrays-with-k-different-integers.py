@@ -18,11 +18,11 @@ class Solution:
             tmp = defaultdict(int)
             tl = l
             while curr == k and tl <= r:
-                print("d")
+                # print("d")
+                res += 1
                 tmp[nums[tl]] += 1
                 if tmp[nums[tl]] == freq[nums[tl]]:
                     break
-                res += 1
                 tl += 1
         return res
             
