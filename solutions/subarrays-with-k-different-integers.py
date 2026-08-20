@@ -28,7 +28,6 @@ class Solution:
                     curr2 -= 1
                 l2 += 1
                                 
-            print(l, l2)
             if curr == k:
                 res += l2 - l
         return res
