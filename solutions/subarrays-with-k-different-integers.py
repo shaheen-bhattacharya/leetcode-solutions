@@ -20,6 +20,7 @@ class Solution:
                     l += 1
                     l2 += 1
                 else:
+                    curr -= 1
                     l2 += 1
             print(l, l2)
             if curr == k:
