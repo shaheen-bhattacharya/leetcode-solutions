@@ -2,32 +2,27 @@ class Solution:
     def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
         n = len(nums)
         l = 0
+        l2 = 0
         res = 0
         freq = defaultdict(int)
-        lidx = {}
-        sl = SortedList()
+
         for r in range(n):
             freq[nums[r]] += 1
-            if nums[r] not in lidx:
-                sl.add(r)
-            else:
-                sl.discard(lidx[nums[r]])
-                sl.add(r)
-            lidx[nums[r]] = r
 
             curr = len(freq)
-            while l <= r and curr > k:
+            while l2 <= r and l <= r and curr >= k:
                 freq[nums[l]] -= 1
                 if freq[nums[l]] == 0:
                     del freq[nums[l]]
-                    sl.discard(lidx[nums[l]])
                     curr -= 1
-                l += 1
+                if curr > k:
+                    l += 1
+                    l2 += 1
+                else:
+                    l2 += 1
 
-            tmp = defaultdict(int)
-            tl = l
             if curr == k:
-                res += sl[0] - l + 1
+                res += l2 - l + 1
         return res
             
                 
