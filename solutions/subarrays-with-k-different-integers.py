@@ -26,8 +26,8 @@ class Solution:
 
             tmp = defaultdict(int)
             tl = l
-            i
-            res += sl[0] - l
+            if curr == k:
+                res += sl[0] - l + 1
         return res
             
                 
