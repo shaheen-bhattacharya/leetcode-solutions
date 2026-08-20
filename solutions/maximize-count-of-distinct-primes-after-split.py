@@ -16,7 +16,7 @@ class Solution:
         maxv = max(nums)
         n = len(nums)
         lp, primes = sieve(maxv)
-        print(lp)
+        print(primes)
 
         # @cache
         # def isPrime(num):
