@@ -8,7 +8,7 @@ class Solution:
                     lp[i] = i
                     primes.append(i)
                 for p in primes:
-                    if p * i > n or p > lp[i]:
+                    if p > lp[i] or p * i > n:
                         break
                     lp[p*i] = p
             return lp, primes
