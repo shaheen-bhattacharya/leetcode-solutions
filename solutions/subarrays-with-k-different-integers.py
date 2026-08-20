@@ -14,24 +14,20 @@ class Solution:
             curr = len(freq)
             curr2 = len(freq2)
             # print(freq)
-            while l2 <= r and l <= r and curr > k and curr2 >= k:
-                if curr > k:
-                    freq[nums[l]] -= 1
-                    freq2[nums[l2]] -= 1
-                    if freq[nums[l2]] == 0:
-                        del freq[nums[l2]]
-                        curr2 -= 1
-                    if freq[nums[l]] == 0:
-                        del freq[nums[l]]
-                        curr -= 1
-                    l += 1
-                    l2 += 1
-                else:
-                    freq2[nums[l2]] -= 1
-                    if freq[nums[l2]] == 0:
-                        del freq[nums[l2]]
-                        curr2 -= 1
-                    l2 += 1
+            while l <= r and curr > k:
+                freq[nums[l]] -= 1
+                if freq[nums[l]] == 0:
+                    del freq[nums[l]]
+                    curr -= 1
+                l += 1
+
+            while l2 <= r and curr2 >= k:
+                freq2[nums[l2]] -= 1
+                if freq2[nums[l2]] == 0:
+                    del freq2[nums[l2]]
+                    curr2 -= 1
+                l2 += 1
+                                
             print(l, l2)
             if curr == k:
                 res += l2 - l + 1
