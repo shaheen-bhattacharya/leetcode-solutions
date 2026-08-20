@@ -10,6 +10,7 @@ class Solution:
             freq[nums[r]] += 1
 
             curr = len(freq)
+            print(freq)
             while l2 <= r and l <= r and curr >= k:
                 freq[nums[l]] -= 1
                 if freq[nums[l]] == 0:
@@ -20,7 +21,7 @@ class Solution:
                     l2 += 1
                 else:
                     l2 += 1
-
+            print(l, l2)
             if curr == k:
                 res += l2 - l + 1
         return res
