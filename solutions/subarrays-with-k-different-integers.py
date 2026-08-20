@@ -6,6 +6,7 @@ class Solution:
         freq = defaultdict(int)
         for r in range(n):
             freq[nums[r]] += 1
+            print(freq)
             curr = len(freq)
             while l <= r and curr > k:
                 freq[nums[l]] -= 1
