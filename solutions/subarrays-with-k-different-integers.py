@@ -10,17 +10,19 @@ class Solution:
             freq[nums[r]] += 1
 
             curr = len(freq)
-            print(freq)
-            while l2 <= r and l <= r and curr >= k:
-                freq[nums[l]] -= 1
-                if freq[nums[l]] == 0:
-                    del freq[nums[l]]
-                    curr -= 1
+            curr2 = len(freq)
+            # print(freq)
+            while l2 <= r and l <= r and curr > k and curr2 >= k:
                 if curr > k:
+                    freq[nums[l]] -= 1
+                    if freq[nums[l]] == 0:
+                        del freq[nums[l]]
+                        curr -= 1
+                        curr2 -= 1
                     l += 1
                     l2 += 1
                 else:
-                    curr -= 1
+                    curr2 -= 1
                     l2 += 1
             print(l, l2)
             if curr == k:
