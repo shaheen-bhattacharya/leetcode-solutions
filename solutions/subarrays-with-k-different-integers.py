@@ -17,7 +17,8 @@ class Solution:
 
             tmp = defaultdict(int)
             tl = l
-            while tl <= r:
+            while curr == k and tl <= r:
+                print("d")
                 tmp[nums[tl]] += 1
                 if tmp[nums[tl]] == freq[nums[tl]]:
                     break
