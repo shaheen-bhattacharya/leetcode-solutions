@@ -15,7 +15,6 @@ class Solution:
                 seen.add(tmp.val)
             tmp = tmp.next
         
-        print(bad)
         dummy = ListNode(-23)
         prev = dummy
         prev.next = head
@@ -25,5 +24,8 @@ class Solution:
             if tmp.val in bad:
                 prev.next = nxt
                 tmp.next = None 
+            else:
+                prev = prev.next 
             tmp = nxt
+            
         return dummy.next
