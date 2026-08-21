@@ -15,6 +15,7 @@ class Solution:
                 seen.add(tmp.val)
             tmp = tmp.next
         
+        print(bad)
         dummy = ListNode(-23)
         prev = dummy
         prev.next = head
