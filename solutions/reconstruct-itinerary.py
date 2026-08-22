@@ -11,6 +11,7 @@ class Solution:
                 nei = heapq.heappop(adj[node])
                 dfs(nei)
             res.append(node)
+        dfs("JFK")
         return res[::-1]
         
 
