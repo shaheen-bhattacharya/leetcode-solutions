@@ -9,6 +9,7 @@ class Solution:
         curr = []
         heap = [("JFK", "-1")]
         while heap:
+            print(heap)
             node, par = heapq.heappop(heap)
             curr.append(node)   
             adj[par].discard(node)
