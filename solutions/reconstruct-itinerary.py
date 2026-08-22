@@ -8,7 +8,7 @@ class Solution:
         res = []
         def dfs(node, adj, curr):
             nonlocal res
-            print(curr)
+            # print(curr)
             if len(curr) == n+1:
                 if res == []:
                     res = curr
@@ -21,5 +21,5 @@ class Solution:
                 dfs(nei, adj, curr)
                 curr.pop()
                 adj[node].add(nei)
-        dfs("JFK", adj, [])
+        dfs("JFK", adj, ["JFK"])
         return res
