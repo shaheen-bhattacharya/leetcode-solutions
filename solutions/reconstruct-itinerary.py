@@ -5,21 +5,15 @@ class Solution:
         for u, v in tickets:
             adj[u].add(v)
 
-        res = []
-        def dfs(node, adj, curr):
-            nonlocal res
-            # print(len(curr), n+1)
-            if len(curr) == n+1:
-                if res == []:
-                    res = curr[:]
-                else:
-                    res = min(res, curr[:])
-                return 
+        adj["-1"] = {"JFK"}
+        curr = []
+        heap = [("JFK", "-1")]
+        while heap:
+            node, par = heapq.heappop(heap)
+            curr.append(node)   
+            adj[par].discard(node)
             for nei in adj[node]:
-                adj[node].remove(nei)
-                curr.append(nei)
-                dfs(nei, adj, curr)
-                curr.pop()
-                adj[node].add(nei)
-        dfs("JFK", adj, ["JFK"])
-        return res
+                heapq.heappush(heap, (nei, node))
+        return curr
+
+
