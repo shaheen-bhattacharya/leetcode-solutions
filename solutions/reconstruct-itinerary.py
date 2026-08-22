@@ -8,7 +8,7 @@ class Solution:
         res = []
         def dfs(node, adj, curr):
             nonlocal res
-            print(curr)
+            print(len(curr), n+1)
             if len(curr) == n+1:
                 if res == []:
                     res = curr
