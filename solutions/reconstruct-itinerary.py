@@ -13,7 +13,7 @@ class Solution:
                 if res == []:
                     res = curr[:]
                 else:
-                    res = min(res, curr)
+                    res = min(res, curr[:])
                 return 
             for nei in adj[node]:
                 adj[node].remove(nei)
