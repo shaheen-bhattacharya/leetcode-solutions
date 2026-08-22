@@ -8,10 +8,10 @@ class Solution:
         res = []
         def dfs(node, adj, curr):
             nonlocal res
-            print(len(curr), n+1)
+            # print(len(curr), n+1)
             if len(curr) == n+1:
                 if res == []:
-                    res = curr
+                    res = curr[:]
                 else:
                     res = min(res, curr)
                 return 
