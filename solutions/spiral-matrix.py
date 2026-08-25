@@ -10,6 +10,6 @@ class Solution:
                 res.append(matrix[r][-i-1])
             for c in range(cols-i-1, i-1, -1):
                 res.append(matrix[-i-1][c])
-            for r in range(rows-i-1, i, -1):
+            for r in range(rows-i-2, i, -1):
                 res.append(matrix[r][i])
         return res
