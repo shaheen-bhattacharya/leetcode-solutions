@@ -1,65 +1,40 @@
-from sortedcontainers import SortedList
-from collections import defaultdict
-
-
 class Allocator:
 
     def __init__(self, n: int):
-        # (start, end) inclusive free intervals
-        self.free = SortedList([(0, n - 1)])
-
-        # mID -> [(start, end), ...]
+        self.free = SortedList([(0, n-1)])
         self.blocks = defaultdict(list)
 
     def allocate(self, size: int, mID: int) -> int:
-        # Need the leftmost free interval with enough space
         for i, (s, e) in enumerate(self.free):
-            if e - s + 1 >= size:
-
-                # Remove old interval
+            if s - e + 1 >= size:
                 self.free.pop(i)
-
-                # Allocate [s, s + size - 1]
-                alloc_end = s + size - 1
-
-                # Remaining free space
-                if alloc_end < e:
-                    self.free.add((alloc_end + 1, e))
-
-                self.blocks[mID].append((s, alloc_end))
-
+                self.free.append((s+size, e))
+                self.blocks[mID].append((s, s+size-1))
                 return s
-
         return -1
 
     def freeMemory(self, mID: int) -> int:
-        ans = 0
-
+        ns = len(self.blocks[mID])
         for s, e in self.blocks[mID]:
-            ans += e - s + 1
-
-            # Find where this interval should go
-            idx = self.free.bisect_left((s, e))
-
-            # Merge with previous free interval
-            if idx > 0:
-                ps, pe = self.free[idx - 1]
-
-                if pe + 1 == s:
-                    s = ps
-                    self.free.pop(idx - 1)
-                    idx -= 1
-
-            # Merge with next free interval
-            if idx < len(self.free):
-                ns, ne = self.free[idx]
-
-                if e + 1 == ns:
-                    e = ne
-                    self.free.pop(idx)
-
-            self.free.add((s, e))
+            i = self.free.bisect_left((s, e))
+            self.free.pop(i-1)
+            ps, pe = self.free[i-1]
+            if pe >= s-1:
+                pe = max(pe, e)
+            if i == len(self.free):
+                self.free.append((ps, pe))
+            else:
+                ns, ne = self.free[i+1]
+                if pe > ns:
+                    pe = max(pe, ne)
+                self.free.append((ps, pe))                
 
         del self.blocks[mID]
+        return ns
 
-        return ans
+
+
+# Your Allocator object will be instantiated and called as such:
+# obj = Allocator(n)
+# param_1 = obj.allocate(size,mID)
+# param_2 = obj.freeMemory(mID)
