@@ -14,6 +14,7 @@ class Solution:
         for r in range(rows//2):
             for c in range(cols-1, cols//2, -1):
                 if cols - c - 1 == r:
+                    print(r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
