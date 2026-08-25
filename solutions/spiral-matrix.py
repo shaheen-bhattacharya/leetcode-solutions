@@ -5,7 +5,7 @@ class Solution:
         res = []
         for i in range(d):
             for c in range(i, cols-i):
-                res.append(matrix[i][c])
+                res.append(1000000 + matrix[i][c])
             for r in range(i+1, rows-i-1):
                 res.append(matrix[r][-i-1])
             for c in range(cols-i-1, i-1, -1):
