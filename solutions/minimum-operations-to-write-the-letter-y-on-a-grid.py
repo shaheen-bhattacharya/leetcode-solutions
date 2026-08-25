@@ -24,6 +24,8 @@ class Solution:
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
+        print(fin)
+        print(fout)
         res = inf
         res = min(res, fin[0] + fin[2] + fout[1] + fout[2], fin[0] + fin[2] + fout[0] + fout[1])
         res = min(res, fin[1] + fin[2] + fout[1] + fout[0], fin[1] + fin[2] + fout[0] + fout[2])
