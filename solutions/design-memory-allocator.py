@@ -14,8 +14,9 @@ class Allocator:
         return -1
 
     def freeMemory(self, mID: int) -> int:
-        amt = len(self.blocks[mID])
+        amt = 0
         for s, e in self.blocks[mID]:
+            amt += e - s + 1
             i = self.free.bisect_left((s, e))
             ps, pe = -1, -1
             ns, ne = -1, -1
