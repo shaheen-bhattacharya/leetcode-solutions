@@ -13,6 +13,6 @@ class Solution:
                     res.append(matrix[-i-1][c])
             if rows//2 != i:
                 for r in range(rows-i-2, i, -1):
-                    res.append(matrix[r][i])
+                    res.append(-matrix[r][i])
         return res
             
