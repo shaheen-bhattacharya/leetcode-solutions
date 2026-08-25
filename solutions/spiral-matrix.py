@@ -3,6 +3,7 @@ class Solution:
         rows, cols = len(matrix), len(matrix[0])
         d = math.ceil(min(rows, cols) / 2)
         res = []
+        print(d)
         for i in range(d):
             for c in range(d, cols-d):
                 res.append(matrix[i][c])
