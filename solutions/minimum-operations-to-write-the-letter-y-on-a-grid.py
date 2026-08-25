@@ -7,16 +7,16 @@ class Solution:
         for r in range(rows//2):
             for c in range(cols//2):
                 if r == c:
-                    print(r, c)
+                    # print(r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
 
         for r in range(rows//2):
             for c in range(cols-1, cols//2, -1):
-                print(r, c)
                 if cols - c - 1 == r:
                     fin[grid[r][c]] += 1
+                    print(r, c)
                 else:
                     fout[grid[r][c]] += 1
 
