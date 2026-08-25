@@ -1,59 +1,50 @@
-class SegTree:
-    def __init__(self, n):
-        self.n = n
-        self.tree = [0] * (4 * n)
-    
-    def update(self, i, val):
-        def dfs(node, l, r):#node represents [l, r]
-            if l == r and r == i:
-                self.tree[node] = val
-                return 
-            mid = (l + r) // 2
-            
-            if i <= mid:
-                dfs(2*node, l, mid)
-            else:
-                dfs(2*node+1, mid+1, r)
-
-            self.tree[node] = max(self.tree[node*2], self.tree[2*node+1])
-        return dfs(1, 0, self.n-1)
-
-    def query(self, ql, qr):
-        def dfs(node, l, r):
-            if r < ql or l > qr:
-                return 0
-            
-            if ql <= l and r <= qr:
-                return self.tree[node]
-            
-            mid = (l + r) // 2
-            return max(dfs(2*node, l, mid), dfs(2*node+1, mid+1, r))
-        return dfs(1, 0, self.n-1)
-    
 class Solution:
     def getResults(self, queries: List[List[int]]) -> List[bool]:
-        res = []
-        obs = SortedList([0])
-        n = max([q[1] for q in queries]) + 1
-        seg = SegTree(n + 1)
-        seg.update(0, inf)
-
-        for q in queries:
-            if q[0] == 1:
-                if q[1] == 0:
-                    continue
-                idx = obs.bisect_left(q[1])
-                prev = obs[idx - 1]
-                nxt = obs[idx] if idx < len(obs) else -1
-                seg.update(prev, q[1] - prev)
-                if nxt == -1:
-                    seg.update(q[1], inf)
+        inf = 10**10
+        n = min(5 * 10^4, len(queries))
+        tree = [0] * (4 * (n+1))
+        #tree[node] = max pos from [l, r) where 
+        def update(idx, amt):
+            def dfs(node, l, r):
+                if l+1 == r:
+                    tree[node] = amt
+                    return 
+                m = (l + r) // 2
+                if m > idx:
+                    dfs(2 * node, l, m)
                 else:
-                    seg.update(q[1], nxt - q[1])
-                obs.add(q[1])
-        
+                    dfs(2 * node + 1, m, r)
+                tree[node] = max(tree[2 * node], tree[2*node+1])
+            dfs(1, 0, n)
+
+        def query(ql, qr):
+            def dfs(node, l, r):
+                if ql >= r or qr <= l:
+                    return 0
+                if ql <= l and r <= qr:
+                    return tree[node]
+                m = (l + r) // 2
+                return max(dfs(2 * node, l, m), dfs(2 * node + 1, m, r))
+            return dfs(1, 0, n)
+
+        sl = SortedList([0])
+        update(0, inf)
+        res = []
+        for i in range(len(queries)):
+            if queries[i][0] == 1:
+                x = queries[i][1]
+                sl.add(x)
+                i = sl.bisect_left(x)
+                if i + 1 == len(sl):
+                    update(x, inf)
+                else:
+                    update(x, sl[i+1] - x)
+                update(sl[i-1], x - sl[i-1])
             else:
-                res.append(q[2] <= seg.query(0, q[1]-q[2])) 
+                x, sz = queries[i][1], queries[i][2]
+                res.append(query(0, x+1) >= sz)
         return res
                 
+
+
 
