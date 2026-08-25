@@ -26,6 +26,9 @@ class Solution:
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
+        for r in range(rows//2):
+            fout[grid[r][cols//2]] += 1
+            
         print(fin)
         print(fout)
         res = inf
