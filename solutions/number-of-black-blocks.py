@@ -7,11 +7,11 @@ class Solution:
         for r, c in coordinates:
             for dx, dy in [(0, 0), (0, -1), (-1, -1), (-1, 0)]:
                 nr, nc = r + dx, c + dy
-                if not (0 <= nr < m and 0 <= nc < n):
+                if not (0 <= nr < m-1 and 0 <= nc < n-1):
                     continue
                 starts[(nr, nc)] += 1
 
-        print(starts)
+        # print(starts)
         res[0] = tot
         for key in starts:
             res[starts[key]] += 1
