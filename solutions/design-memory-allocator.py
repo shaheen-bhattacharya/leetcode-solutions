@@ -8,7 +8,8 @@ class Allocator:
         for i, (s, e) in enumerate(self.free):
             if e - s + 1 >= size:
                 self.free.pop(i)
-                self.free.add((s+size, e))
+                if s + size <= e:
+                    self.free.add((s+size, e))
                 self.blocks[mID].append((s, s+size-1))
                 return s
         return -1
