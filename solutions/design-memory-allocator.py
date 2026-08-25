@@ -6,9 +6,9 @@ class Allocator:
 
     def allocate(self, size: int, mID: int) -> int:
         for i, (s, e) in enumerate(self.free):
-            if s - e + 1 >= size:
+            if e - s + 1 >= size:
                 self.free.pop(i)
-                self.free.append((s+size, e))
+                self.free.add((s+size, e))
                 self.blocks[mID].append((s, s+size-1))
                 return s
         return -1
@@ -17,17 +17,27 @@ class Allocator:
         amt = len(self.blocks[mID])
         for s, e in self.blocks[mID]:
             i = self.free.bisect_left((s, e))
-            self.free.pop(i-1)
-            ps, pe = self.free[i-1]
-            if pe >= s-1:
-                pe = max(pe, e)
-            if i == len(self.free):
-                self.free.append((ps, pe))
-            else:
-                ns, ne = self.free[i+1]
-                if pe > ns:
-                    pe = max(pe, ne)
-                self.free.append((ps, pe))                
+            ps, pe = -1, -1
+            ns, ne = -1, -1
+            if i > 0:
+                ps, pe = self.free[i-1]
+                self.free.pop(i-1)
+            if i < len(self.free):
+                ns, ne = self.free[i]
+                self.free.pop(i)
+
+            if (ps, pe) != (-1, -1):
+                if pe != s - 1:
+                    self.free.add((ps, pe))
+                else:
+                    s, e = ps, e
+
+            if (ns, ne) != (-1, -1):
+                if ns != e + 1:
+                    self.free.add((ns, ne))
+                else:
+                    s, e = s, ne
+            self.free.add((s, e))
 
         del self.blocks[mID]
         return amt
