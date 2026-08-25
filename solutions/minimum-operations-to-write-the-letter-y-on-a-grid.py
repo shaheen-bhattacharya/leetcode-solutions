@@ -22,7 +22,7 @@ class Solution:
         for r in range(rows//2, rows):
             for c in range(cols):
                 if c == cols//2:
-                    print("a",r, c)
+                    # print("a",r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
