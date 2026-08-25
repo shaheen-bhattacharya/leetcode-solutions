@@ -11,6 +11,7 @@ class Solution:
                     continue
                 starts[(nr, nc)] += 1
 
+        print(starts)
         res[0] = tot
         for key in starts:
             res[starts[key]] += 1
