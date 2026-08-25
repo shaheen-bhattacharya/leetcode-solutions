@@ -16,14 +16,13 @@ class Solution:
             for c in range(cols-1, cols//2, -1):
                 if cols - c - 1 == r:
                     fin[grid[r][c]] += 1
-                    print(r, c)
                 else:
                     fout[grid[r][c]] += 1
 
         for r in range(rows//2, rows):
             for c in range(cols):
                 if c == cols//2:
-                    # print("a",r, c)
+                    print("a",r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
