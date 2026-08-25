@@ -7,6 +7,7 @@ class Solution:
         for r in range(rows//2):
             for c in range(cols//2):
                 if r == c:
+                    print(r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
@@ -14,7 +15,6 @@ class Solution:
         for r in range(rows//2):
             for c in range(cols-1, cols//2, -1):
                 if cols - c - 1 == r:
-                    print(r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
@@ -22,6 +22,7 @@ class Solution:
         for r in range(rows//2, rows):
             for c in range(cols):
                 if r == rows//2:
+                    print(r, c)
                     fin[grid[r][c]] += 1
                 else:
                     fout[grid[r][c]] += 1
