@@ -9,13 +9,12 @@ class Solution:
             for i in range(1, len(s1)+1):
                 pref1.add(s1[:i])
         
+        res = 0
         for s2 in sarr2:
             for i in range(1, len(s2)+1):
-                pref2.add(s2[:i])
-        res = 0
-        for p1 in pref1:
-            if p1 in pref2:
-                res = max(res, len(p1))
+                s = s2[:i]
+                if s in pref1:
+                    res = max(res, len(s))
         return res
         
 
