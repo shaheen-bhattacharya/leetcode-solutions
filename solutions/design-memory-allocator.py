@@ -24,6 +24,7 @@ class Allocator:
             if i > 0:
                 ps, pe = self.free[i-1]
                 self.free.pop(i-1)
+                i -= 1
             if i < len(self.free):
                 ns, ne = self.free[i]
                 self.free.pop(i)
