@@ -1,7 +1,7 @@
 class Solution:
     def getResults(self, queries: List[List[int]]) -> List[bool]:
         inf = 10**10
-        n = max(q[1] for q in queries) + 1
+        n = max(q[1] for q in queries)
         tree = [0] * (4 * (n+1))
         #tree[node] = max pos from [l, r) where 
         def update(idx, amt):
@@ -28,7 +28,7 @@ class Solution:
             return dfs(1, 0, n)
 
         sl = SortedList([0])
-        update(0, inf)
+        # update(0, inf)
         res = []
         for i in range(len(queries)):
             if queries[i][0] == 1:
