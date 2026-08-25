@@ -6,11 +6,11 @@ class Solution:
         pref2 = set()
 
         for s1 in sarr1:
-            for i in range(1, len(s1)):
+            for i in range(1, len(s1)+1):
                 pref1.add(s1[:i])
         
         for s2 in sarr2:
-            for i in range(1, len(s2)):
+            for i in range(1, len(s2)+1):
                 pref2.add(s2[:i])
         res = 0
         for p1 in pref1:
