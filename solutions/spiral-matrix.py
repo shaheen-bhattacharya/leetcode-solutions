@@ -1,7 +1,7 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         rows, cols = len(matrix), len(matrix[0])
-        d = min(rows, cols) // 2
+        d = math.ceil(min(rows, cols) / 2)
         res = []
         for i in range(d):
             for c in range(i, cols-i):
