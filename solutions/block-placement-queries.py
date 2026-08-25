@@ -42,7 +42,7 @@ class Solution:
                 update(sl[i-1], x - sl[i-1])
             else:
                 x, sz = queries[i][1], queries[i][2]
-                res.append(query(0, x+1) >= sz)
+                res.append(query(0, x-sz) >= sz)
         return res
                 
 
