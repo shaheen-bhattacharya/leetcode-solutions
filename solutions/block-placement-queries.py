@@ -2,33 +2,33 @@ class Solution:
     def getResults(self, queries: List[List[int]]) -> List[bool]:
         inf = 10**10
         n = max(q[1] for q in queries)
-        tree = [0] * (4 * (n+1))
+        tree = [0] * (4 * n)
         #tree[node] = max pos from [l, r) where 
         def update(idx, amt):
             def dfs(node, l, r):
-                if l+1 == r:
+                if l == r:
                     tree[node] = amt
                     return 
                 m = (l + r) // 2
-                if m > idx:
+                if m >= idx:
                     dfs(2 * node, l, m)
                 else:
-                    dfs(2 * node + 1, m, r)
+                    dfs(2 * node + 1, m+1, r)
                 tree[node] = max(tree[2 * node], tree[2*node+1])
-            dfs(1, 0, n)
+            dfs(1, 0, n-1)
 
         def query(ql, qr):
             def dfs(node, l, r):
-                if ql >= r or qr <= l:
+                if ql > r or qr < l:
                     return 0
                 if ql <= l and r <= qr:
                     return tree[node]
                 m = (l + r) // 2
-                return max(dfs(2 * node, l, m), dfs(2 * node + 1, m, r))
-            return dfs(1, 0, n)
+                return max(dfs(2 * node, l, m), dfs(2 * node + 1, m+1, r))
+            return dfs(1, 0, n-1)
 
         sl = SortedList([0])
-        # update(0, inf)
+        update(0, inf)
         res = []
         for i in range(len(queries)):
             if queries[i][0] == 1:
