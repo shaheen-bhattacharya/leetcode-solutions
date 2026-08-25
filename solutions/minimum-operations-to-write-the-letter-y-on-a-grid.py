@@ -28,9 +28,9 @@ class Solution:
                     fout[grid[r][c]] += 1
         for r in range(rows//2):
             fout[grid[r][cols//2]] += 1
-            
-        print(fin)
-        print(fout)
+
+        # print(fin)
+        # print(fout)
         res = inf
         res = min(res, fin[0] + fin[2] + fout[1] + fout[2], fin[0] + fin[2] + fout[0] + fout[1])
         res = min(res, fin[1] + fin[2] + fout[1] + fout[0], fin[1] + fin[2] + fout[0] + fout[2])
