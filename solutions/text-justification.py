@@ -31,7 +31,6 @@ class Solution:
                 left = maxWidth
         if curr[-1][-1] == " ":
             curr[-1] = curr[-1][:-1]
-        if left > 0:
             left += 1
         return lines + [("".join(curr) + " "*(left))]
 
