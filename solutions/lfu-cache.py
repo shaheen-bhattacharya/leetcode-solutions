@@ -50,11 +50,12 @@ class LFUCache:
 
     def put(self, key: int, value: int) -> None:
         if key not in self.rmap:
-            if len(self.rmap) > self.capacity:
+            if len(self.rmap) == self.capacity:
                 head, tail = self.lls[self.mu]
                 rnode = head.next
                 del self.rmap[rnode.key]
                 self.remove(rnode)
+
             self.rmap[key] = Node(value, 1, key)
             self.mu = 1
             node = self.rmap[key]
