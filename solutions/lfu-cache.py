@@ -69,8 +69,6 @@ class LFUCache:
             rnode = head.next
             del self.rmap[rnode.key]
             self.remove(rnode)
-            if rnode.uses == self.mu and head.next == tail:
-                self.mu += 1
 
 # Your LFUCache object will be instantiated and called as such:
 # obj = LFUCache(capacity)
