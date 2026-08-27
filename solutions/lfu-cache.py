@@ -41,10 +41,10 @@ class LFUCache:
             return -1
         node = self.rmap[key]
         head, tail = self.lls[node.uses]
-        node.uses += 1
         self.remove(node)
-        if head.next == tail:
+        if self.mu == node.uses and head.next == tail:
             self.mu += 1
+        node.uses += 1
         self.insert(node, node.uses)
         return node.val
 
@@ -56,18 +56,20 @@ class LFUCache:
             self.insert(node, 1)
         else:
             node = self.rmap[key]
+            node.val = value
             self.remove(node)
             head, tail = self.lls[node.uses]
-            if head.next == tail:
+            if self.mu == node.uses and head.next == tail:
                 self.mu += 1
             node.uses += 1
             self.insert(node, node.uses)
+
         if len(self.rmap) > self.capacity:
             head, tail = self.lls[self.mu]
             rnode = head.next
             del self.rmap[rnode.key]
             self.remove(rnode)
-            if head.next == tail:
+            if rnode.uses == self.mu and head.next == tail:
                 self.mu += 1
 
 # Your LFUCache object will be instantiated and called as such:
