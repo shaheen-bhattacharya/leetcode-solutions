@@ -32,7 +32,7 @@ class Solution:
         if curr[-1][-1] == " ":
             curr[-1] = curr[-1][:-1]
 
-        return lines + [("".join(curr) + " "*left)]
+        return lines + [("".join(curr) + " "*(left+1))]
 
 
 
