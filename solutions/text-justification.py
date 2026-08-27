@@ -28,8 +28,8 @@ class Solution:
                 left = maxWidth
         if curr[-1][-1] == " ":
             curr[-1] = curr[-1][:-1]
-            lines.append("".join(curr))
-            
+            lines.append(",".join(curr))
+
         return lines
 
 
