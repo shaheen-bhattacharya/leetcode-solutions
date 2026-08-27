@@ -40,9 +40,9 @@ class LFUCache:
         if key not in self.rmap:
             return -1
         node = self.rmap[key]
+        head, tail = self.lls[node.uses]
         node.uses += 1
         self.remove(node)
-        head, tail = self.lls[node.uses]
         if head.next == tail:
             self.mu += 1
         self.insert(node, node.uses)
