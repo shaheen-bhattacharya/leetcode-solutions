@@ -9,10 +9,12 @@ class MyHashMap:
         self.size *= 2
         tmp = [[] for _ in range(self.size)]
 
-        for b in buckets:
+        for b in self.buckets:
             for k, v in b:
                 h = hash(k) % self.size
                 tmp[h].append((k, v))
+
+        self.buckets = tmp.copy()
 
     def put(self, key: int, value: int) -> None:
         h = hash(key) % self.size
@@ -23,7 +25,7 @@ class MyHashMap:
         self.buckets[h].append((key, value))
         self.nums += 1
         if self.nums/self.size >= 0.75:
-            resize()
+            self.resize()
  
     def get(self, key: int) -> int:
         h = hash(key) % self.size
