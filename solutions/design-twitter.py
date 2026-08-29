@@ -6,14 +6,14 @@ class Twitter:
         self.following = defaultdict(set)
 
     def postTweet(self, userId: int, tweetId: int) -> None:
-        self.posts[userId].append(tweetId)
+        self.posts[userId].appendleft(tweetId)
         if len(self.posts[userId]) > 10:
-            self.posts[userId].popleft()
+            self.posts[userId].pop()
 
         for nei in self.followers[userId]:
-            self.posts[nei].append(tweetId)
+            self.posts[nei].appendleft(tweetId)
             if len(self.posts[nei]) > 10:
-                self.posts[nei].popleft()
+                self.posts[nei].pop()
 
     def getNewsFeed(self, userId: int) -> List[int]:
         return list(self.posts[userId])
