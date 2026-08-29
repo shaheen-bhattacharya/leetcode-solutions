@@ -29,11 +29,12 @@ class Twitter:
         return ret
         
     def follow(self, followerId: int, followeeId: int) -> None:
-        self.following[followerId].add(followeeId)
-        self.followers[followeeId].add(followerId)
-        tmp = self.posts[followeeId].copy()
-        while tmp:
-            self.feed[followerId].appendleft(tmp.pop())
+        if followeeId not in self.following:
+            self.following[followerId].add(followeeId)
+            self.followers[followeeId].add(followerId)
+            tmp = self.posts[followeeId].copy()
+            while tmp:
+                self.feed[followerId].appendleft(tmp.pop())
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].discard(followeeId)
