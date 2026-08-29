@@ -29,7 +29,7 @@ class Twitter:
         return ret
         
     def follow(self, followerId: int, followeeId: int) -> None:
-        if followeeId not in self.following:
+        if followeeId not in self.following[followerId]:
             self.following[followerId].add(followeeId)
             self.followers[followeeId].add(followerId)
             tmp = self.posts[followeeId].copy()
