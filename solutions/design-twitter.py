@@ -2,39 +2,35 @@ class Twitter:
 
     def __init__(self):
         self.posts = defaultdict(deque)
-        self.feed = defaultdict(deque)
         self.corr = {}
         self.followers = defaultdict(set)
         self.following = defaultdict(set)
+        self.time = 0
 
     def postTweet(self, userId: int, tweetId: int) -> None:
-        self.posts[userId].appendleft(tweetId)
-        self.feed[userId].appendleft(tweetId)
+        self.posts[userId].appendleft((self.time, tweetId))
         self.corr[tweetId] = userId
-
-        for nei in self.followers[userId]:
-            self.feed[nei].appendleft(tweetId)
+        self.time += 1
 
     def getNewsFeed(self, userId: int) -> List[int]:
         ret = []
-        count = 0
-        for t in self.feed[userId]:
-            if count == 10:
-                break
-            user = self.corr[t]
-            if user not in self.following[userId] and user != userId:
-                continue
-            ret.append(t)
-            count += 1
-        return ret
-        
+        heap = []
+        for uf in self.followers[userId]:
+            tmp = self.posts[uf].copy()
+            while tmp:
+                t, tid = tmp.popleft()
+                heapq.heappush(heap, (-t, tid))
+                if len(heap) > 10:
+                    heapq.heappop(heap)
+        while heap:
+            t, tid = heapq.heappop(heap)
+            ret.append(tid)
+        return ret[::-1]
+
     def follow(self, followerId: int, followeeId: int) -> None:
         if followeeId not in self.following[followerId]:
             self.following[followerId].add(followeeId)
             self.followers[followeeId].add(followerId)
-            tmp = self.posts[followeeId].copy()
-            while tmp:
-                self.feed[followerId].appendleft(tmp.pop())
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].discard(followeeId)
