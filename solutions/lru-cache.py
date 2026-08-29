@@ -32,6 +32,7 @@ class LRUCache:
         node = self.corr[key]
         self.remove(node)
         self.insert(node)
+        return node.val
 
     def put(self, key: int, value: int) -> None:
         if key in self.corr:
