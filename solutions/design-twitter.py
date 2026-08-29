@@ -21,13 +21,13 @@ class Twitter:
             tmp = self.posts[uf].copy()
             while tmp:
                 t, tid = tmp.popleft()
-                heapq.heappush(heap, (-t, tid))
+                heapq.heappush(heap, (t, tid))
                 if len(heap) > 10:
                     heapq.heappop(heap)
         while heap:
             t, tid = heapq.heappop(heap)
             ret.append(tid)
-        return ret
+        return ret[::-1]
 
     def follow(self, followerId: int, followeeId: int) -> None:
         if followeeId not in self.following[followerId]:
