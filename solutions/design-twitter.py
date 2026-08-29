@@ -27,7 +27,7 @@ class Twitter:
         while heap:
             t, tid = heapq.heappop(heap)
             ret.append(tid)
-        return ret[::-1]
+        return ret
 
     def follow(self, followerId: int, followeeId: int) -> None:
         if followeeId not in self.following[followerId]:
