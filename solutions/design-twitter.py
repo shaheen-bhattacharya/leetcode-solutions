@@ -22,7 +22,7 @@ class Twitter:
             if count == 10:
                 break
             user = self.corr[t]
-            if user not in self.following[userId]:
+            if user not in self.following[userId] and user != userId:
                 continue
             ret.append(t)
             count += 1
