@@ -20,7 +20,7 @@ class Graph:
                 nc = cost + c
                 dist[nei] = min(dist[nei], nc)
                 heapq.heappush(heap, (nei, dist[nei]))
-        return dist[node2]
+        return dist[node2] if dist[node2] != inf else -1
                 
 
 
