@@ -1,11 +1,9 @@
 class Graph:
 
     def __init__(self, n: int, edges: List[List[int]]):
-        self.adj = defaultdict(list)
         self.n = n
         self.dist = [[inf]*n for _ in range(n)]
         for u, v, c in edges:
-            self.adj[u].append((v, c))
             self.dist[u][v] = c
 
         for i in range(n):
@@ -18,12 +16,12 @@ class Graph:
 
     def addEdge(self, edge: List[int]) -> None:
         u, v, c = edge
-        self.adj[u].append((v, c))
         if c >= self.dist[u][v]:
             return 
+        self.dist[u][v] = c
         for i in range(self.n):
             for j in range(self.n):
-                self.dist[i][j] = min(self.dist[i][j], self.dist[i][u] + c + self.dist[i][v])
+                self.dist[i][j] = min(self.dist[i][j], self.dist[i][u] + c + self.dist[v][j])
 
     def shortestPath(self, node1: int, node2: int) -> int:
         val = self.dist[node1][node2]
