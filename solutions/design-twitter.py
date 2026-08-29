@@ -15,7 +15,7 @@ class Twitter:
     def getNewsFeed(self, userId: int) -> List[int]:
         ret = []
         heap = []
-        for uf in self.followers[userId]:
+        for uf in self.following[userId]:
             tmp = self.posts[uf].copy()
             while tmp:
                 t, tid = tmp.popleft()
