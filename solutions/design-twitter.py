@@ -46,7 +46,7 @@ class Twitter:
                     (time, tweetId, user, i - 1)
                 )
 
-        return res[::]
+        return res[::-1]
 
     def follow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].add(followeeId)
