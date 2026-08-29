@@ -2,14 +2,11 @@ class Twitter:
 
     def __init__(self):
         self.posts = defaultdict(deque)
-        self.corr = {}
-        self.followers = defaultdict(set)
         self.following = defaultdict(set)
         self.time = 0
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         self.posts[userId].appendleft((self.time, tweetId))
-        self.corr[tweetId] = userId
         self.time += 1
 
     def getNewsFeed(self, userId: int) -> List[int]:
@@ -32,11 +29,9 @@ class Twitter:
     def follow(self, followerId: int, followeeId: int) -> None:
         if followeeId not in self.following[followerId]:
             self.following[followerId].add(followeeId)
-            self.followers[followeeId].add(followerId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].discard(followeeId)
-        self.followers[followeeId].discard(followerId)
 
 
 # Your Twitter object will be instantiated and called as such:
