@@ -2,21 +2,31 @@ class Twitter:
 
     def __init__(self):
         self.posts = defaultdict(deque)
+        self.feed = defaultdict(deque)
+        self.corr = {}
         self.followers = defaultdict(set)
         self.following = defaultdict(set)
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         self.posts[userId].appendleft(tweetId)
-        if len(self.posts[userId]) > 10:
-            self.posts[userId].pop()
+        self.feed[userId].appendleft(tweetId)
+        self.corr[tweetId] = userId
 
         for nei in self.followers[userId]:
-            self.posts[nei].appendleft(tweetId)
-            if len(self.posts[nei]) > 10:
-                self.posts[nei].pop()
+            self.feed[nei].appendleft(tweetId)
 
     def getNewsFeed(self, userId: int) -> List[int]:
-        return list(self.posts[userId])
+        ret = []
+        count = 0
+        for t in self.feed[userId]:
+            if count == 10:
+                break
+            user = self.corr[t]
+            if user not in self.following[userId]:
+                continue
+            ret.append(t)
+            count += 1
+        return ret
         
     def follow(self, followerId: int, followeeId: int) -> None:
         self.following[followerId].add(followeeId)
