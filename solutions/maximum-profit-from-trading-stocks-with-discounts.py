@@ -30,7 +30,7 @@ class Solution:
                 for ch in adj[i]:
                     take = merge(take, dp[ch][1])
                 
-                best = [0] * (budget + 1)
+                best = [-inf] * (budget + 1)
                 for b in range(pr, budget+1):
                     best[b] = max(best[b], take[b - pr] + profit)
 
