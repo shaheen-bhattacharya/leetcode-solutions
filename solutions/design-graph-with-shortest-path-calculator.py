@@ -18,8 +18,9 @@ class Graph:
                 continue
             for nei, c in self.adj[node]:
                 nc = cost + c
-                dist[nei] = min(dist[nei], nc)
-                heapq.heappush(heap, (nei, dist[nei]))
+                if nc < dist[nei]:
+                    dist[nei] = nc
+                    heapq.heappush(heap, (dist[nei], nei))
         return dist[node2] if dist[node2] != inf else -1
                 
 
