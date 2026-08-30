@@ -3,6 +3,8 @@ class Graph:
     def __init__(self, n: int, edges: List[List[int]]):
         self.n = n
         self.adj = defaultdict(list)
+        for u, v, c in edges:
+            self.adj[u].append((v, c))
 
     def addEdge(self, edge: List[int]) -> None:
         u, v, c = edge
