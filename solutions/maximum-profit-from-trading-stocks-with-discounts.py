@@ -11,7 +11,7 @@ class Solution:
             res = [0] * (budget+1)
             for b1 in range(budget+1):
                 for b2 in range(budget+1-b1):
-                    res[b1+b2] = max(res[b1+b2], c1[b1], c2[b2])
+                    res[b1+b2] = max(res[b1+b2], c1[b1] + c2[b2])
             return res
 
         def dfs(i):
