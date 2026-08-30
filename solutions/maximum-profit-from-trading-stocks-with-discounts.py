@@ -35,9 +35,8 @@ class Solution:
                     best[b] = max(best[b], take[b - pr] + profit)
 
                 for b in range(budget+1):
-                    dp[i][pb][b] = max(dp[i][pb][b], skip[b], best[b])
+                    dp[i][pb][b] = max(skip[b], best[b])
         dfs(0)
-        print(dp[0][0])
         return max(dp[0][0])
 
 
