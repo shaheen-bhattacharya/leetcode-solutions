@@ -12,4 +12,5 @@ class Solution:
                 if r == rows-1 and ndp[c] == 0:
                     return True
             dp = ndp
+            print(dp)
         return False
