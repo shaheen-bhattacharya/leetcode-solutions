@@ -10,5 +10,6 @@ class Solution:
                 mindx = i
         i, j = min(mindx, maxdx), max(mindx, maxdx)
         return min(i + n - j - 1, j+1, n-i-1)
+        print(i+n-j-1)
     
             
