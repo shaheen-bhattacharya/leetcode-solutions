@@ -16,6 +16,8 @@ class Graph:
         dist[node1] = 0
         while heap:
             cost, node = heapq.heappop(heap)
+            if node == node2:
+                return cost
             if cost > dist[node]:
                 continue
             for nei, c in self.adj[node]:
