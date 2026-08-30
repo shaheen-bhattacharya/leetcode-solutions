@@ -12,6 +12,6 @@ class Solution:
                 mindx = i
         i, j = min(mindx, maxdx), max(mindx, maxdx)
         return min(i+1+n-j, j+1, n-i)
-        print(i+n-j-1)
+        # print(i+n-j-1)
     
             
