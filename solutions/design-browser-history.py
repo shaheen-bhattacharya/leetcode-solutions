@@ -17,7 +17,7 @@ class BrowserHistory:
         self.curr = node
 
     def back(self, steps: int) -> str:
-        while self.curr and steps > 0:
+        while self.curr and steps > 1:
             self.curr = self.curr.prev
             steps -= 1
         if not self.curr:
@@ -25,7 +25,7 @@ class BrowserHistory:
         return self.curr.site
 
     def forward(self, steps: int) -> str:
-        while self.curr.next and steps > 0:
+        while self.curr.next and steps > 1:
             self.curr = self.curr.next 
             steps -= 1
         return self.curr.site
