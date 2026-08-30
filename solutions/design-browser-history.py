@@ -12,10 +12,10 @@ class BrowserHistory:
 
     def visit(self, url: str) -> None:
         node = Node(url)
-        self.head.next = node
-        node.prev = self.head
-        self.curr = node
-        print(self.curr.site)
+        self.curr.next = node
+        node.prev = self.curr
+        self.curr = self.curr.next
+        # print(self.curr.site)
 
     def back(self, steps: int) -> str:
         # print(self.curr.site)
