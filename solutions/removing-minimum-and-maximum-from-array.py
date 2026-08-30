@@ -3,8 +3,8 @@ class Solution:
         mindx = 0
         maxdx = 0
         n = len(nums)
-        if n == 1:
-            return 0
+        # if n == 1:
+        #     return 0
         for i in range(1, n):
             if nums[i] > nums[maxdx]:
                 maxdx = i
