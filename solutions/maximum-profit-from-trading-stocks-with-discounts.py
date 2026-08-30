@@ -11,7 +11,7 @@ class Solution:
             res = [0] * (budget+1)
             for b1 in range(budget+1):
                 for b2 in range(budget+1-b1):
-                    res[b1+b2] = max(res[b], c1[b1], c2[b2])
+                    res[b1+b2] = max(res[b1+b2], c1[b1], c2[b2])
             return res
 
         def dfs(i):
@@ -19,8 +19,8 @@ class Solution:
                 dfs(ch)
             
             for pb in (0, 1):
-                price = price[i]//2 if pb else price[i]
-                profit = future[i] - price[i]
+                pr = present[i]//2 if pb else present[i]
+                profit = future[i] - pr
 
                 skip = [0] * (budget + 1)
                 for ch in adj[i]:
@@ -31,12 +31,12 @@ class Solution:
                     take = merge(take, dp[ch][1])
                 
                 best = [0] * (budget + 1)
-                for b in range(price, budget+1):
-                    best[b] = max(best[b], take[b - price] + profit)
+                for b in range(pr, budget+1):
+                    best[b] = max(best[b], take[b - pr] + profit)
 
                 for b in range(budget+1):
                     dp[i][pb][b] = max(dp[i][pb][b], skip[b], best[b])
-
+        dfs(0)
         return max(dp[0][0])
 
 
