@@ -18,11 +18,10 @@ class BrowserHistory:
 
     def back(self, steps: int) -> str:
         # print(self.curr.site)
-        while self.curr and steps > 0:
+        while self.curr.prev and steps > 0:
+            print(self.curr.site, steps)
             self.curr = self.curr.prev
             steps -= 1
-        if not self.curr:
-            self.curr = self.head
         return self.curr.site
 
     def forward(self, steps: int) -> str:
