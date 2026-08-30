@@ -14,7 +14,7 @@ class Graph:
         dist[node1] = 0
         while heap:
             cost, node = heapq.heappop(heap)
-            if cost >= dist[node]:
+            if cost > dist[node]:
                 continue
             for nei, c in self.adj[node]:
                 nc = cost + c
