@@ -15,12 +15,9 @@ class BrowserHistory:
         self.curr.next = node
         node.prev = self.curr
         self.curr = self.curr.next
-        # print(self.curr.site)
 
     def back(self, steps: int) -> str:
-        # print(self.curr.site)
         while self.curr.prev and steps > 0:
-            # print(self.curr.site, steps)
             self.curr = self.curr.prev
             steps -= 1
         return self.curr.site
