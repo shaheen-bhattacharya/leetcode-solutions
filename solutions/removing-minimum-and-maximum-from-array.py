@@ -9,7 +9,7 @@ class Solution:
             if nums[i] < nums[mindx]:
                 mindx = i
         i, j = min(mindx, maxdx), max(mindx, maxdx)
-        return min(i + n - j, j+1, n-i-1)
+        return min(i+1 + n - j, j+1, n-i-1)
         print(i+n-j-1)
     
             
