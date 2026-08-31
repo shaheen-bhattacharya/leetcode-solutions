@@ -12,6 +12,7 @@ class Solution:
                 return True
 
             for i in range(len(arr)):
+                print("d")
                 if pref[i+1] == tot - pref[i+1] - arr[i]:
                     return True
             return False
