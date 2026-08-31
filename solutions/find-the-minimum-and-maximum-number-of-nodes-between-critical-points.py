@@ -13,7 +13,7 @@ class Solution:
         i = 1
         while curr.next:
             if (curr.val > prev.val and curr.val > curr.next.val) or (curr.val < prev.val and curr.val < curr.next.val):
-                # print(curr.val)
+                print(curr.val)
                 if fst == -1:
                     fst = i
                 elif snd == -1:
