@@ -12,7 +12,7 @@ class Solution:
                 bottom[row[c]] += 1
                 bsum += row[c]
 
-        for r in range(rows-):
+        for r in range(rows):
             rs = 0
             for c in range(cols):
                 top[grid[r][c]] += 1
