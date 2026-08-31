@@ -18,12 +18,12 @@ class Solution:
             return False
 
         if rows == 1:
-            return works(grid[0])
+            return works(grid[0]) or works(grid[0][::-1]) or works(grid[0][1:])
         if cols == 1:
             arr = [grid[0][0]]
             for r in range(1, rows):
                 arr.append(grid[r][0])
-            return works(arr)
+            return works(arr) or works(arr[::-1]) or works(arr[1:])
 
         top = defaultdict(int)
         bottom = defaultdict(int)
