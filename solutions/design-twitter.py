@@ -15,8 +15,9 @@ class Twitter:
         res = []
         for user in users:
             i = len(self.tweets[user]) - 1
-            t, tid = self.tweets[user][i]
-            heapq.heappush(heap, (-t, tid, user, i-1))
+            if i >= 0:
+                t, tid = self.tweets[user][i]
+                heapq.heappush(heap, (-t, tid, user, i-1))
         
         while heap and len(res) < 10:
             nt, tid, user, i = heapq.heappop(heap)
@@ -31,7 +32,7 @@ class Twitter:
         self.following[followerId].add(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        self.following[followerId].remove(followeeId)
+        self.following[followerId].discard(followeeId)
 
 
 # Your Twitter object will be instantiated and called as such:
