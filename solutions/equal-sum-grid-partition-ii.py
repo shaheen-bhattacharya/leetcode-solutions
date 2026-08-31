@@ -8,9 +8,10 @@ class Solution:
             pref = [0] + list(accumulate(arr))
             ps = set(pref)
             tot = pref[-1]
-            print(tot//2, ps)
             if tot//2 in ps:
                 return True
+            if not flag and tot%2 == 1:
+                return False
             if flag:
                 for i in range(len(arr)-1):
                     if pref[i+1] == tot - pref[i+1] - arr[i+1]:
