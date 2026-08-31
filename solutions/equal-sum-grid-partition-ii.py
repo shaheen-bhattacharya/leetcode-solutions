@@ -58,6 +58,7 @@ class Solution:
 
             lsum += rs
             rsum -= rs
+            print(lsum, rsum)
             if lsum == rsum:
                 return True
             diff = abs(lsum-rsum)
