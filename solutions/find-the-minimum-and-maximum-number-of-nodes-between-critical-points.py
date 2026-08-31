@@ -8,20 +8,19 @@ class Solution:
         curr = head.next 
         prev = head
         fst = -1
-        snd = -1
         sl = -1
+        minv = inf
+        
         i = 1
         while curr.next:
             if (curr.val > prev.val and curr.val > curr.next.val) or (curr.val < prev.val and curr.val < curr.next.val):
-                print(curr.val)
                 if fst == -1:
                     fst = i
-                elif snd == -1:
-                    snd = i
+                minv = min(minv, i - sl)
                 sl = i
             prev = prev.next
             curr = curr.next
             i += 1
-        if snd == -1:
+        if sl == -1:
             return [-1, -1]
-        return [snd - fst, sl - fst]
+        return [minv, sl - fst]
