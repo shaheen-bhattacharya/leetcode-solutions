@@ -22,6 +22,6 @@ class Solution:
             prev = prev.next
             curr = curr.next
             i += 1
-        if sl == -1:
+        if sl == -1 or minv == inf:
             return [-1, -1]
         return [minv, sl - fst]
