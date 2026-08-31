@@ -1,25 +1,27 @@
 class Solution:
     def canPartitionGrid(self, grid: List[List[int]]) -> bool:
         rows, cols = len(grid), len(grid[0])
-        if rows == 1:
-            pref = set(accumulate(grid[0]))
-            tot = max(pref) 
+        def works(arr):
+            if len(arr) <= 1:
+                return False
+            acc = 0 
+            pref = set(accumulate(arr))
+            tot = max(pref)
             if tot % 2 == 1:
                 return False
             if tot//2 in pref:
                 return True
             return False
+
+        if rows == 1:
+            return works(grid[0]) or works(grid[0][::-1]) or works(grid[0][1:])
         if cols == 1:
             pref = [grid[0][0]]
+            arr = [grid[0][0]]
             for r in range(1, rows):
                 pref.append(pref[-1] + grid[r][0])
-            tot = pref[-1]
-            s = set(pref)
-            if tot % 2 == 1:
-                return False
-            if tot//2 in pref:
-                return True
-            return False
+                arr.append(grid[r][0])
+            return works(arr) or works(arr[::-1]) or works(arr[1:])
 
         top = defaultdict(int)
         bottom = defaultdict(int)
