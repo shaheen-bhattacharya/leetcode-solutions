@@ -11,9 +11,9 @@ class Solution:
             if tot//2 in ps:
                 return True
 
-            for i in range(len(arr)):
+            for i in range(len(arr)-1):
                 print("d")
-                if pref[i+1] == tot - pref[i+1] - arr[i]:
+                if pref[i+1] == tot - pref[i+1] - arr[i+1]:
                     return True
             return False
 
