@@ -5,23 +5,26 @@ class Solution:
             if len(arr) <= 1:
                 return False
             acc = 0 
-            pref = set(accumulate(arr))
-            tot = max(pref)
+            pref = [0] + list(accumulate(arr))
+            ps = set(pref)
+            tot = pref[-1]
             if tot % 2 == 1:
                 return False
-            if tot//2 in pref:
+            if tot//2 in ps:
                 return True
+
+            for i in range(len(arr)):
+                if pref[i+1] == tot - pref[i+1] - arr[i]:
+                    return True
             return False
 
         if rows == 1:
-            return works(grid[0]) or works(grid[0][::-1]) or works(grid[0][1:])
+            return works(grid[0])
         if cols == 1:
-            pref = [grid[0][0]]
             arr = [grid[0][0]]
             for r in range(1, rows):
-                pref.append(pref[-1] + grid[r][0])
                 arr.append(grid[r][0])
-            return works(arr) or works(arr[::-1]) or works(arr[1:])
+            return works(arr)
 
         top = defaultdict(int)
         bottom = defaultdict(int)
