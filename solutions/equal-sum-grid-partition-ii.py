@@ -25,7 +25,7 @@ class Solution:
             diff = abs(bsum-tsum)
             if bsum > tsum:
                 if r == rows-2:
-                    if (grid[r][-1] == diff or grid[r][0] == diff):
+                    if (grid[r+1][-1] == diff or grid[r+1][0] == diff):
                         return True
                 else:
                     if bottom[diff] > 0:
@@ -64,7 +64,7 @@ class Solution:
             if rsum > lsum:
                 if c == cols-2:
                     print("d",lsum, rsum)
-                    if (grid[0][c] == diff or grid[-1][c] == diff):
+                    if (grid[0][c+1] == diff or grid[-1][c+1] == diff):
                         return True
                 else:
                     if right[diff] > 0:
