@@ -8,8 +8,6 @@ class Solution:
             pref = [0] + list(accumulate(arr))
             ps = set(pref)
             tot = pref[-1]
-            if tot % 2 == 1:
-                return False
             if tot//2 in ps:
                 return True
 
