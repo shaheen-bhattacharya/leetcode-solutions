@@ -1,7 +1,7 @@
 class Solution:
     def canPartitionGrid(self, grid: List[List[int]]) -> bool:
         rows, cols = len(grid), len(grid[0])
-        def works(arr):
+        def works(arr, flag=True):
             if len(arr) <= 1:
                 return False
             acc = 0 
@@ -10,20 +10,19 @@ class Solution:
             tot = pref[-1]
             if tot//2 in ps:
                 return True
-
-            for i in range(len(arr)-1):
-                print("d")
-                if pref[i+1] == tot - pref[i+1] - arr[i+1]:
-                    return True
+            if flag:
+                for i in range(len(arr)-1):
+                    if pref[i+1] == tot - pref[i+1] - arr[i+1]:
+                        return True
             return False
 
         if rows == 1:
-            return works(grid[0]) or works(grid[0][::-1]) or works(grid[0][1:])
+            return works(grid[0]) or works(grid[0][::-1], False) or works(grid[0][1:], False)
         if cols == 1:
             arr = [grid[0][0]]
             for r in range(1, rows):
                 arr.append(grid[r][0])
-            return works(arr) or works(arr[::-1]) or works(arr[1:])
+            return works(arr) or works(arr[::-1], False) or works(arr[1:], False)
 
         top = defaultdict(int)
         bottom = defaultdict(int)
