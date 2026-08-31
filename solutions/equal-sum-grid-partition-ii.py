@@ -21,6 +21,7 @@ class Solution:
                 rs += grid[r][c]  
             tsum += rs
             bsum -= rs
+            print(tsum, bsum)
             if bsum == tsum:
                 return True
             diff = max(bsum, tsum) - min(bsum, tsum)
