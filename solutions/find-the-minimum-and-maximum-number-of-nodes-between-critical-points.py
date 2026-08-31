@@ -16,8 +16,9 @@ class Solution:
             if (curr.val > prev.val and curr.val > curr.next.val) or (curr.val < prev.val and curr.val < curr.next.val):
                 if fst == -1:
                     fst = i
-                minv = min(minv, i - sl)
-                sl = i
+                else:
+                    minv = min(minv, i - sl)
+                    sl = i
             prev = prev.next
             curr = curr.next
             i += 1
