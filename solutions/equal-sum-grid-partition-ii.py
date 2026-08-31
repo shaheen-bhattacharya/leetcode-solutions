@@ -1,157 +1,109 @@
-from typing import List
-from collections import defaultdict
-
 class Solution:
     def canPartitionGrid(self, grid: List[List[int]]) -> bool:
         rows, cols = len(grid), len(grid[0])
-
-        # ============================================
-        # HORIZONTAL CUTS
-        # ============================================
+        if rows == 1:
+            pref = set(accumulate(grid[0]))
+            tot = max(pref) 
+            if tot % 2 == 1:
+                return False
+            if tot//2 in pref:
+                return True
+            return False
+        if cols == 1:
+            pref = [grid[0][0]]
+            for r in range(1, rows):
+                pref.append(pref[-1] + grid[r][0])
+            tot = pref[-1]
+            s = set(pref)
+            if tot % 2 == 1:
+                return False
+            if tot//2 in pref:
+                return True
+            return False
 
         top = defaultdict(int)
         bottom = defaultdict(int)
-
         tsum = 0
         bsum = 0
 
-        # Initially everything is in bottom
         for row in grid:
-            for x in row:
-                bottom[x] += 1
-                bsum += x
-
-        # Cut after row r
-        # Don't process the last row because bottom
-        # must remain non-empty.
-        for r in range(rows - 1):
-            rs = 0
-
-            # Move row r from bottom -> top
             for c in range(cols):
-                x = grid[r][c]
+                bottom[row[c]] += 1
+                bsum += row[c]
+        
 
-                top[x] += 1
-                bottom[x] -= 1
-
-                rs += x
-
+        for r in range(rows-1):
+            rs = 0
+            for c in range(cols):
+                top[grid[r][c]] += 1
+                bottom[grid[r][c]] -= 1
+                rs += grid[r][c]  
             tsum += rs
             bsum -= rs
-
-            # Already equal
-            if tsum == bsum:
+            if bsum == tsum:
                 return True
-
-            diff = abs(tsum - bsum)
-
-            # ----------------------------------------
-            # Bottom is larger
-            # ----------------------------------------
+            diff = abs(bsum-tsum)
             if bsum > tsum:
-
-                # Bottom consists of exactly one row.
-                # Only the two endpoints can be removed
-                # without disconnecting the row.
-                if r == rows - 2:
-                    if (grid[r + 1][0] == diff or
-                        grid[r + 1][-1] == diff):
+                if r == rows-2:
+                    if (grid[r+1][-1] == diff or grid[r+1][0] == diff):
                         return True
-
-                # Bottom has multiple rows, so removing
-                # any single cell keeps it connected.
-                elif bottom[diff] > 0:
-                    return True
-
-            # ----------------------------------------
-            # Top is larger
-            # ----------------------------------------
-            elif tsum > bsum:
-
-                # Top consists of exactly one row.
-                # Only the two endpoints can be removed.
+                else:
+                    if bottom[diff] > 0:
+                        return True
+            if bsum < tsum:
                 if r == 0:
-                    if (grid[0][0] == diff or
-                        grid[0][-1] == diff):
+                    if (grid[r][0] == diff or grid[r][-1] == diff):
                         return True
-
-                # Top has multiple rows, so any cell works.
-                elif top[diff] > 0:
-                    return True
-
-        # ============================================
-        # VERTICAL CUTS
-        # ============================================
-
+                else:
+                    if top[diff] > 0:
+                        return True
+        #vertical
         left = defaultdict(int)
         right = defaultdict(int)
-
         lsum = 0
         rsum = 0
 
-        # Initially everything is in right
         for c in range(cols):
             for r in range(rows):
-                x = grid[r][c]
+                right[grid[r][c]] += 1
+                rsum += grid[r][c]
 
-                right[x] += 1
-                rsum += x
-
-        # Cut after column c
-        # Don't process the last column because right
-        # must remain non-empty.
-        for c in range(cols - 1):
-            cs = 0
-
-            # Move column c from right -> left
+        for c in range(cols-1):
+            rs = 0
             for r in range(rows):
-                x = grid[r][c]
+                left[grid[r][c]] += 1
+                right[grid[r][c]] -= 1
+                rs += grid[r][c] 
 
-                left[x] += 1
-                right[x] -= 1
-
-                cs += x
-
-            lsum += cs
-            rsum -= cs
-
-            # Already equal
+            lsum += rs
+            rsum -= rs
+            # print(lsum, rsum)
             if lsum == rsum:
                 return True
-
-            diff = abs(lsum - rsum)
-
-            # ----------------------------------------
-            # Right is larger
-            # ----------------------------------------
+            diff = abs(lsum-rsum)
             if rsum > lsum:
-
-                # Right consists of exactly one column.
-                # Only the top and bottom cells can be removed.
-                if c == cols - 2:
-                    if (grid[0][c + 1] == diff or
-                        grid[-1][c + 1] == diff):
+                if c == cols-2:
+                    # print("d",lsum, rsum)
+                    if (grid[0][c+1] == diff or grid[-1][c+1] == diff):
                         return True
-
-                # Right has multiple columns, so any cell
-                # can be removed while keeping it connected.
-                elif right[diff] > 0:
-                    return True
-
-            # ----------------------------------------
-            # Left is larger
-            # ----------------------------------------
-            elif lsum > rsum:
-
-                # Left consists of exactly one column.
-                # Only the top and bottom cells can be removed.
+                else:
+                    if right[diff] > 0:
+                        return True
+            if rsum < lsum:
                 if c == 0:
-                    if (grid[0][0] == diff or
-                        grid[-1][0] == diff):
+                    if (grid[0][c] == diff or grid[-1][c] == diff):
                         return True
-
-                # Left has multiple columns, so any cell works.
-                elif left[diff] > 0:
-                    return True
-
+                else:
+                    if left[diff] > 0:
+                        return True
         return False
+        
+        
+            
+
+
+        
+
+
+        
+
