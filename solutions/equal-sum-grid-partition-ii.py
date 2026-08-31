@@ -48,7 +48,7 @@ class Solution:
                 right[grid[r][c]] += 1
                 rsum += grid[r][c]
 
-        for c in range(cols-1):
+        for c in range(cols):
             rs = 0
             for r in range(rows):
                 left[grid[r][c]] += 1
