@@ -15,8 +15,6 @@ class Solution:
 
         for r in range(rows-1):
             rs = 0
-            cb = set()
-            ct = set()
             for c in range(cols):
                 top[grid[r][c]] += 1
                 bottom[grid[r][c]] -= 1
@@ -25,7 +23,7 @@ class Solution:
             bsum -= rs
             if bsum == tsum:
                 return True
-            diff = max(bsum, tsum) - min(bsum, tsum)
+            diff = abs(bsum-tsum)
             if bsum > tsum:
                 if r == rows-2:
                     if (grid[r][-1] == diff or grid[r][0] == diff):
@@ -40,7 +38,46 @@ class Solution:
                 else:
                     if top[diff] > 0:
                         return True
+        #vertical
+        left = defaultdict(int)
+        right = defaultdict(int)
+        lsum = 0
+        rsum = 0
+
+        for c in range(cols):
+            for r in range(rows):
+                right[grid[r][c]] += 1
+                rsum += grid[r][c]
+
+        for c in range(cols-1):
+            rs = 0
+            for r in range(rows):
+                left[grid[r][c]] += 1
+                right[grid[r][c]] -= 1
+                rs += grid[r][c] 
+
+            lsum += rs
+            rsum -= rs
+            if lsum == rsum:
+                return True
+            diff = abs(lsum-rsum)
+            if rsum > lsum:
+                if c == cols-2:
+                    if (grid[0][c] == diff or grid[-1][c] == diff):
+                        return True
+                else:
+                    if right[diff] > 0:
+                        return True
+            if rsum < lsum:
+                if c == 0:
+                    if (grid[0][c] == diff or grid[-1][c] == diff):
+                        return True
+                else:
+                    if left[diff] > 0:
+                        return True
         return False
+        
+        
             
 
 
