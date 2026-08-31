@@ -1,7 +1,6 @@
 class Solution:
     def canPartitionGrid(self, grid: List[List[int]]) -> bool:
         rows, cols = len(grid), len(grid[0])
-
         top = defaultdict(int)
         bottom = defaultdict(int)
         tsum = 0
@@ -58,11 +57,12 @@ class Solution:
 
             lsum += rs
             rsum -= rs
-            print(lsum, rsum)
+            # print(lsum, rsum)
             if lsum == rsum:
                 return True
             diff = abs(lsum-rsum)
             if rsum > lsum:
+                print(lsum, rsum)
                 if c == cols-2:
                     if (grid[0][c] == diff or grid[-1][c] == diff):
                         return True
