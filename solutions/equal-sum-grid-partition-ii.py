@@ -12,16 +12,16 @@ class Solution:
                 bottom[row[c]] += 1
                 bsum += row[c]
 
-        # if cols == 1:
-        #     rs = 0
-        #     for r in range(cols):
-        #         top[grid[r][0]] += 1
-        #         bottom[grid[r][0]] -= 1
-        #         rs += grid[r][0]
-        #         tsum += rs
-        #         bsum -= rs
-        #         if tsum == bsum:
-        #             return True
+        if cols == 1:
+            rs = 0
+            for r in range(cols):
+                top[grid[r][0]] += 1
+                bottom[grid[r][0]] -= 1
+                rs += grid[r][0]
+                tsum += rs
+                bsum -= rs
+                if tsum == bsum:
+                    return True
                 
 
         for r in range(rows-1):
