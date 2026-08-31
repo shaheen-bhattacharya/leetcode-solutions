@@ -13,6 +13,7 @@ class Solution:
         i = 1
         while curr.next:
             if (curr.val > prev.val and curr.val > curr.next.val) or (curr.val < prev.val and curr.val < curr.next.val):
+                # print(curr.val)
                 if fst == -1:
                     fst = i
                 elif snd == -1:
@@ -20,6 +21,7 @@ class Solution:
                 sl = i
             prev = prev.next
             curr = curr.next
+            i += 1
         if snd == -1:
             return [-1, -1]
         return [snd - fst, sl - fst]
