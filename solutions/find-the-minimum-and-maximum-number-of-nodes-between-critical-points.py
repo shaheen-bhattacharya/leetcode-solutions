@@ -18,7 +18,7 @@ class Solution:
                     fst = i
                 else:
                     minv = min(minv, i - sl)
-                    sl = i
+                sl = i
             prev = prev.next
             curr = curr.next
             i += 1
