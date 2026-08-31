@@ -62,8 +62,8 @@ class Solution:
                 return True
             diff = abs(lsum-rsum)
             if rsum > lsum:
-                print(lsum, rsum)
                 if c == cols-2:
+                    print(lsum, rsum)
                     if (grid[0][c] == diff or grid[-1][c] == diff):
                         return True
                 else:
