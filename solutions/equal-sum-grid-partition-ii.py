@@ -12,7 +12,7 @@ class Solution:
                 bottom[row[c]] += 1
                 bsum += row[c]
 
-        for r in range(rows):
+        for r in range(rows-1):
             rs = 0
             for c in range(cols):
                 top[grid[r][c]] += 1
@@ -48,7 +48,7 @@ class Solution:
                 right[grid[r][c]] += 1
                 rsum += grid[r][c]
 
-        for c in range(cols-1):
+        for c in range(cols):
             rs = 0
             for r in range(rows):
                 left[grid[r][c]] += 1
