@@ -3,20 +3,22 @@ class EventManager:
     def __init__(self, events: list[list[int]]):
         self.heap = []
         self.corr = {}
+        self.removed = set()
         for e, p in events:
             self.corr[e] = p
             heapq.heappush(self.heap, (-p, e))
 
     def updatePriority(self, eventId: int, newPriority: int) -> None:
-        if self.corr[eventId] != newPriority:
-            self.corr[eventId] = newPriority
-            heapq.heappush(self.heap, (-newPriority, eventId))
+        self.corr[eventId] = newPriority
+        heapq.heappush(self.heap, (-newPriority, eventId))
+        self.removed.discard(eventId)
 
     def pollHighest(self) -> int:
         while self.heap:
             np, e = heapq.heappop(self.heap)
-            if self.corr[e] != -np:
+            if e in self.removed:
                 continue
+            self.removed.add(e)
             return e
         return -1
 
