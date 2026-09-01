@@ -16,7 +16,7 @@ class EventManager:
     def pollHighest(self) -> int:
         while self.heap:
             np, e = heapq.heappop(self.heap)
-            if e in self.removed:
+            if e in self.removed or self.corr[e] != -np:
                 continue
             self.removed.add(e)
             return e
