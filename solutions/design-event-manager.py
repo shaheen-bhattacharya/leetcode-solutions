@@ -8,8 +8,9 @@ class EventManager:
             heapq.heappush(self.heap, (-p, e))
 
     def updatePriority(self, eventId: int, newPriority: int) -> None:
-        self.corr[eventId] = newPriority
-        heapq.heappush(self.heap, (-newPriority, eventId))
+        if self.corr[eventId] != newPriority:
+            self.corr[eventId] = newPriority
+            heapq.heappush(self.heap, (-newPriority, eventId))
 
     def pollHighest(self) -> int:
         while self.heap:
