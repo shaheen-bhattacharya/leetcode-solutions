@@ -16,6 +16,7 @@ class EventManager:
             np, e = heapq.heappop(self.heap)
             if self.corr[e] != -np:
                 continue
+            heapq.heappush(self.heap, (np, e))
             return e
         return -1
 
