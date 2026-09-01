@@ -14,7 +14,7 @@ class EventManager:
     def pollHighest(self) -> int:
         while self.heap:
             np, e = heapq.heappop(self.heap)
-            if self.corr[e] == -np:
+            if self.corr[e] != -np:
                 continue
             return e
         return -1
