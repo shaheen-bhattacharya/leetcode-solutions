@@ -24,7 +24,7 @@ class Solution:
                 r = mid
 
         t, o = good(l)
-        t -= (o-m) * l
+        t -= (o-m) * (l-1)
         return t % MOD
 
 
