@@ -24,7 +24,7 @@ class Solution:
                 r = mid
 
         if l == 0:
-            return good(l)[0]
+            return good(l)[0] % MOD
         t, o = good(l)
         t -= (o-m) * (l-1)
         return t % MOD
