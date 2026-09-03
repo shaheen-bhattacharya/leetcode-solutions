@@ -1,0 +1,33 @@
+class Solution:
+    def maxTotalValue(self, value: list[int], decay: list[int], m: int) -> int:
+        MOD = 1_000_000_007
+        n = len(value)
+        def good(th):
+            tot = 0
+            ops = 0
+            for i in range(n):
+                if value[i] < th:
+                    continue
+                need = (value[i] - th)//decay[i] + 1
+                if need > 0:
+                    tot += value[i] * need - decay[i] * (need - 1) * need//2
+                    ops += need
+            return (tot, ops) if ops <= m else (-inf, ops)
+        
+        maxv = max(value)
+        l, r = 0, maxv + 1
+        while l < r:
+            m = (l+r)//2
+            if good(l)[0] < good(m)[0]:
+                l = m + 1
+            else:
+                r = m 
+        t, o = good(l-1)
+        tot = (m - o) * l
+        return (t + tot) % MOD
+
+
+
+                
+
+            
