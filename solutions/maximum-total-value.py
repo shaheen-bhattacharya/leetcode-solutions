@@ -18,7 +18,7 @@ class Solution:
         l, r = 0, maxv + 1
         while l < r:
             mid = (l+r)//2
-            if good(mid)[1] > m:
+            if good(mid)[1] >= m:
                 l = mid + 1
             else:
                 r = mid
