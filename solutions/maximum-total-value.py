@@ -12,7 +12,7 @@ class Solution:
                 if need > 0:
                     tot += value[i] * need - decay[i] * (need - 1) * need//2
                     ops += need
-            return (tot, ops) if ops <= m else (-inf, ops)
+            return (tot, ops)
         
         maxv = max(value)
         l, r = 0, maxv + 1
@@ -22,9 +22,10 @@ class Solution:
                 l = mid + 1
             else:
                 r = mid
-        t, o = good(l-1)
-        tot = (m - o) * l
-        return (t + tot) % MOD
+
+        t, o = good(l)
+        t -= (o-m) * l
+        return t % MOD
 
 
 
