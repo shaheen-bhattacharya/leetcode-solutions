@@ -17,11 +17,11 @@ class Solution:
         maxv = max(value)
         l, r = 0, maxv + 1
         while l < r:
-            m = (l+r)//2
-            if good(l)[0] < good(m)[0]:
-                l = m + 1
+            mid = (l+r)//2
+            if good(l)[0] < good(mid)[0]:
+                l = mid + 1
             else:
-                r = m 
+                r = mid
         t, o = good(l-1)
         tot = (m - o) * l
         return (t + tot) % MOD
