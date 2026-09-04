@@ -20,8 +20,7 @@ class Solution:
             t = 0
             for j in range(i+1, n):
                 dist = position[j] - position[i]
-                t += time[j-1]
-                ret = min(ret, t * rate + dfs(j, amt+j-i-1, i))
+                ret = min(ret, dist * rate + dfs(j, amt+j-i-1, i))
             dp[key] = ret
             return ret
         return dfs(0,0,0)
