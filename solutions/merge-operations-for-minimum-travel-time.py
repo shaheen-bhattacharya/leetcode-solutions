@@ -15,7 +15,7 @@ class Solution:
             if amt > k:
                 return inf
             
-            rate = pref[i] - pref[pi]
+            rate = pref[i+1] - pref[pi+1]
             ret = inf
             t = 0
             for j in range(i+1, n):
