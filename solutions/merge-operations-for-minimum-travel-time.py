@@ -15,10 +15,12 @@ class Solution:
             if amt > k:
                 return inf
             
-            rate = pref[i+1] - pref[pi]
+            rate = pref[i+1] - pref[pi+1]
             ret = inf
             t = 0
             for j in range(i+1, n):
+                if amt+j-i-1 > k:
+                    break
                 dist = position[j] - position[i]
                 ret = min(ret, dist * rate + dfs(j, amt+j-i-1, i))
             dp[key] = ret
