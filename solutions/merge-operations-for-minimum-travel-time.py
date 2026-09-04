@@ -19,12 +19,10 @@ class Solution:
             ret = inf
             t = 0
             for j in range(i+1, n):
-                if amt+j-i-1 > k:
-                    break
                 dist = position[j] - position[i]
                 ret = min(ret, dist * rate + dfs(j, amt+j-i-1, i))
             dp[key] = ret
             return ret
-        return dfs(0,0,0)
+        return dfs(0,0,-1)
 
 
