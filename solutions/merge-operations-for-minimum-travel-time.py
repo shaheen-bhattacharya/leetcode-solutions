@@ -9,7 +9,7 @@ class Solution:
             key = (i, amt)
             if key in dp:
                 return dp[key]
-            if i == n:
+            if i == n-1:
                 return 0 if amt == k else inf
             if amt > k:
                 return inf
