@@ -5,21 +5,25 @@ class Solution:
         5 8 3
         """
         dp = {}
-        def dfs(i, amt):
-            key = (i, amt)
+        pref = [0] + list(accumulate(time))
+        def dfs(i, amt, pi):
+            key = (i, amt, pi)
             if key in dp:
                 return dp[key]
             if i == n-1:
                 return 0 if amt == k else inf
             if amt > k:
                 return inf
+            
+            rate = pref[i] - pref[pi]
             ret = inf
             t = 0
             for j in range(i+1, n):
+                dist = position[j] - position[i]
                 t += time[j-1]
-                ret = min(ret, t * (position[j] - position[i+1]) + dfs(j, amt+j-i-1))
+                ret = min(ret, t * rate + dfs(j, amt+j-i-1, i))
             dp[key] = ret
             return ret
-        return dfs(0,0)
+        return dfs(0,0,0)
 
 
