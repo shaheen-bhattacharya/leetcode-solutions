@@ -15,6 +15,8 @@ class Solution:
         for u, v in queries:
             if comp[u] != comp[v]:
                 res.append(-1)
+            elif u == v:
+                res.append(0)
             else:
                 val = abs(nums[v] - nums[u])
                 add = val//maxDiff + 1 if val < maxDiff else val//maxDiff
