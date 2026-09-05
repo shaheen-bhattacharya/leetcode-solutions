@@ -40,7 +40,7 @@ class Solution:
 
         while heap:
             tot, nd = heapq.heappop(heap)
-            if not nd.next or tot != nd.val + nd.next.val:
+            if nd.next == tail or tot != nd.val + nd.next.val:
                 continue
             rem = 0
             if nd.val > nd.next.val:
@@ -53,8 +53,6 @@ class Solution:
             nxt = nd.next
             nxt.next.prev = nd
             nd.next = nxt.next
-            nxt.prev = None
-            nxt.next = None
             if nd.next != tail:
                 heapq.heappush(heap, (nd.val + nd.next.val, nd))
             if nd.prev != head:
