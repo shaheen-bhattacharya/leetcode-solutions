@@ -45,7 +45,7 @@ class Solution:
             rem = 0
             if nd.val > nd.next.val:
                 rem += 1
-            if nd.val < nd.prev.val:
+            if nd.prev != head and nd.val < nd.prev.val:
                 rem += 1
             if nd.next.next != tail and nd.next.next.val < nd.next.val:
                 rem += 1
@@ -57,9 +57,10 @@ class Solution:
                 heapq.heappush(heap, (nd.val + nd.next.val, nd))
             if nd.prev != head:
                 heapq.heappush(heap, (nd.prev.val + nd.val, nd))
-            if nd.val > nd.next.val:
+
+            if nd.next != tail and nd.val > nd.next.val:
                 rem -= 1
-            if nd.prev.val > nd.val:
+            if nd.prev != head and nd.prev.val > nd.val:
                 rem -= 1
             bad -= rem
             ops += 1
