@@ -55,6 +55,10 @@ class Solution:
             nd.next = nxt.next
             nxt.prev = None
             nxt.next = None
+            if nd.next != tail:
+                heapq.heappush(heap, (nd.val + nd.next.val, nd))
+            if nd.prev != head:
+                heapq.heappush(heap, (nd.prev.val + nd.val, nd))
             if nd.val > nd.next.val:
                 rem -= 1
             if nd.prev.val > nd.val:
