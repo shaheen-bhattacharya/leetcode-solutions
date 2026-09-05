@@ -18,6 +18,6 @@ class Solution:
                 res.append(0)
             else:
                 val = abs(nums[v] - nums[u])
-                add = ceil(val//maxDiff)
+                add = ceil(val/maxDiff)
                 res.append(add)
         return res
