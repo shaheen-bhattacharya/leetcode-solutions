@@ -10,7 +10,6 @@ class Solution:
             if num - pnum > maxDiff:
                 cur += 1
             comp[idx] = cur
-        print(comp)
         res = []
         for u, v in queries:
             if comp[u] != comp[v]:
@@ -19,6 +18,6 @@ class Solution:
                 res.append(0)
             else:
                 val = abs(nums[v] - nums[u])
-                add = val//maxDiff + 1 if val % maxDiff == 0 else val//maxDiff + 1
+                add = ceil(val//maxDiff)
                 res.append(add)
         return res
