@@ -11,7 +11,7 @@ class Solution:
                 cur += 1
             comp[idx] = cur
         
-        LOG = 16
+        LOG = n.bit_length()
         up = [[0] * n for _ in range(LOG)]
 
         for i in range(n):  
