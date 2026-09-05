@@ -17,3 +17,4 @@ class Solution:
                 res.append(-1)
             else:
                 res.append(abs(nums[v] - nums[u])//maxDiff + 1)
+        return res
