@@ -40,7 +40,7 @@ class Solution:
 
         while heap:
             tot, nd = heapq.heappop(heap)
-            if nd.next == tail or tot != nd.val + nd.next.val:
+            if (not nd.next) or nd.next == tail or tot != nd.val + nd.next.val:
                 continue
             rem = 0
             if nd.val > nd.next.val:
