@@ -10,7 +10,7 @@ class Solution:
             if num - pnum > maxDiff:
                 cur += 1
             comp[idx] = cur
-
+        print(comp)
         res = []
         for u, v in queries:
             if comp[u] != comp[v]:
