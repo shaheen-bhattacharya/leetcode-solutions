@@ -17,6 +17,6 @@ class Solution:
                 res.append(-1)
             else:
                 val = abs(nums[v] - nums[u])
-                add = val//maxDiff + 1 if val == maxDiff else val//maxDiff
+                add = val//maxDiff + 1 if val < maxDiff else val//maxDiff
                 res.append(add)
         return res
