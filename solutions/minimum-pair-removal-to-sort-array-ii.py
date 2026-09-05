@@ -33,14 +33,14 @@ class Solution:
         while curr.next != tail:
             if curr.next.val < curr.val:
                 bad += 1
-            heapq.heappush(heap, (curr.val + curr.next.val, curr))
+            heapq.heappush(heap, (curr.val + curr.next.val, curr.idx, curr))
             curr = curr.next
 
         if bad == 0:
             return ops
 
         while heap:
-            tot, nd = heapq.heappop(heap)
+            tot, _, nd = heapq.heappop(heap)
             if (not nd.next) or nd.next == tail or tot != nd.val + nd.next.val:
                 continue
             rem = 0
@@ -57,9 +57,9 @@ class Solution:
             nd.next = nxt.next
             
             if nd.next != tail:
-                heapq.heappush(heap, (nd.val + nd.next.val, nd))
+                heapq.heappush(heap, (nd.val + nd.next.val, nd.idx, nd))
             if nd.prev != head:
-                heapq.heappush(heap, (nd.prev.val + nd.val, nd))
+                heapq.heappush(heap, (nd.prev.val + nd.val, nd.idx, nd))
             if nd.next != tail and nd.val > nd.next.val:
                 rem -= 1
             if nd.prev != head and nd.prev.val > nd.val:
