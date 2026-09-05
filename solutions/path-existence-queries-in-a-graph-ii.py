@@ -19,5 +19,5 @@ class Solution:
             else:
                 val = abs(nums[v] - nums[u])
                 add = ceil(val/maxDiff)
-                res.append(add)
+                res.append(add if add else 1)
         return res
