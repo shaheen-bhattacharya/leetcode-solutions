@@ -18,5 +18,5 @@ class Solution:
             else:
                 val = abs(nums[v] - nums[u])
                 add = val//maxDiff + 1 if val == maxDiff else val//maxDiff
-                res.append(abs(nums[v] - nums[u])//maxDiff + 1)
+                res.append(add)
         return res
