@@ -59,7 +59,7 @@ class Solution:
             if nd.next != tail:
                 heapq.heappush(heap, (nd.val + nd.next.val, nd.idx, nd))
             if nd.prev != head:
-                heapq.heappush(heap, (nd.prev.val + nd.val, nd.idx, nd))
+                heapq.heappush(heap, (nd.prev.val + nd.val, nd.prev.idx, nd.prev))
             if nd.next != tail and nd.val > nd.next.val:
                 rem -= 1
             if nd.prev != head and nd.prev.val > nd.val:
