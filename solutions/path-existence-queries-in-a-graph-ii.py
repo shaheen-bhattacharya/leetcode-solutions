@@ -9,7 +9,7 @@ class Solution:
             pnum, _ = inum[i-1]
             if num - pnum <= maxDiff:
                 cur += 1
-            comp[i] = cur
+            comp[idx] = cur
         
         res = []
         for u, v in queries:
