@@ -20,7 +20,7 @@ class Solution:
                     return d
                 if d > dist[node]:
                     continue
-                i = corr[nums[u]]
+                i = corr[nums[node]]
                 j = i
                 while j < nk and keys[j] - keys[i] <= maxDiff:
                     for nei in nodes[keys[j]]:
