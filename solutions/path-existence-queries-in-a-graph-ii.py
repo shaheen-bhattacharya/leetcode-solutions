@@ -7,10 +7,9 @@ class Solution:
         for i in range(1, n):
             num, idx = inum[i]
             pnum, _ = inum[i-1]
-            if num - pnum <= maxDiff:
+            if num - pnum > maxDiff:
                 cur += 1
             comp[idx] = cur
-        
         res = []
         for u, v in queries:
             if comp[u] != comp[v]:
