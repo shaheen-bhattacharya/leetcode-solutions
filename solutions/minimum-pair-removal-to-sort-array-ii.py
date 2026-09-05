@@ -62,6 +62,8 @@ class Solution:
                 rem -= 1
             if nd.prev != head and nd.prev.val > nd.val:
                 rem -= 1
+            nxt.next = None
+            nxt.prev = None
             bad -= rem
             ops += 1
             if bad == 0:
