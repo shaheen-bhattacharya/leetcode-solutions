@@ -32,8 +32,8 @@ class Solution:
         while curr.next != tail:
             if curr.next.val < curr.val:
                 bad += 1
-            curr = curr.next
             heapq.heappush(heap, (curr.val + curr.next.val, curr))
+            curr = curr.next
 
         if bad == 0:
             return ops
