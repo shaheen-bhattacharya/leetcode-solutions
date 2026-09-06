@@ -2,41 +2,44 @@ class TrieNode:
     def __init__(self):
         self.isWord = False
         self.children = {}
+        self.idx = -1
 class Trie:
     def __init__(self):
         self.root = TrieNode()
 
-    def insert(self, word):
+    def insert(self, word, idx):
         node = self.root
-        for i in range(len(word)-1, -1, -1):
-            ch = word[i]
+        for ch in word:
             if ch not in node.children:
                 node.children[ch] = TrieNode()
+            node.idx = idx
+            idx += 1
             node = node.children[ch]
         node.isWord = True
 
 class Solution:
     def longestPalindrome(self, s: str, t: str) -> int:
         #yrtxhrcbaterrt abcuitiutgu
-        def lpal(word):
-            nw = len(word)
-            ret = 0
-            for i in range(nw):
-                for l, r in [(i, i), (i, i+1)]:
-                    while l >= 0 and r < nw:
-                        if word[l] == word[r]:
-                            l -= 1
-                            r += 1
-                        else:
-                            break
-                    ret = max(ret, r - l - 1)
-            return ret
-                        
+        s = s[::-1]
+        def plen(word):
+            n = len(word)
+            best = [1] * n
+            for c in range(n):
+                for l, r in [(c, c), (c, c+1)]:
+                    while l >= 0 and r < n and word[l] == word[r]:
+                        best[l] = max(best[l], r - l + 1)
+                        l -= 1
+                        r += 1
+            return best
+        
+        bestS = plen(s)
+        bestT = plen(t)
+        
         trie = Trie()
         ns = len(s)
         nt = len(t)
         for i in range(ns):
-            trie.insert(s[i:])    
+            trie.insert(s[i:], i)    
         res = 0
         for i in range(nt):
             node = trie.root
@@ -47,6 +50,7 @@ class Solution:
                     break
                 cnt += 2
                 node = node.children[ch]
-            res = max(res, cnt)
-        res = max(res, lpal(s), lpal(t))
+            sidx = node.idx
+            tidx = j
+            res = max(res, cnt + max(bestS[sidx], bestT[tidx]))
         return res
