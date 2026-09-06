@@ -16,10 +16,6 @@ class Solution:
                             best[r] = max(best[r], r - l + 1)
                         l -= 1
                         r += 1
-            if flag:
-                best[-1] = 0
-            else:
-                best[0] = 0
             return best
         
         bestS = plen(s, True)
