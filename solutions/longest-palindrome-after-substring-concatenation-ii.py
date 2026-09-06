@@ -15,7 +15,6 @@ class Solution:
                             best[r] = max(best[r], r - l + 1)
                         l -= 1
                         r += 1
-
             return best
         
         bestS = plen(s, True)
