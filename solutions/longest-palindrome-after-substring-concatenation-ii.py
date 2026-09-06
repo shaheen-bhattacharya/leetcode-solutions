@@ -47,9 +47,9 @@ class Solution:
                     cnt += 2
                     node = node.children[ch]
                 else:
+                    if i > 0 or len(node.children) > 0:
+                        cnt += 1
                     break
-            if i > 0 or len(node.children) > 0:
-                cnt += 1
             res = max(res, cnt)
         res = max(res, lpal(s), lpal(t))
         return res
