@@ -2,7 +2,7 @@ class TrieNode:
     def __init__(self):
         self.isWord = False
         self.children = {}
-        self.idx = 0
+        self.idx = -1
 class Trie:
     def __init__(self):
         self.root = TrieNode()
@@ -35,14 +35,13 @@ class Solution:
         
         bestS = plen(s)
         bestT = plen(t)
-        print(bestT)
-        
+
         trie = Trie()
         ns = len(s)
         nt = len(t)
         for i in range(ns):
             trie.insert(s[i:], i)    
-        res = 0
+        res = max(bestT[0], bestS[0])
         for i in range(nt):
             node = trie.root
             cnt = 0
