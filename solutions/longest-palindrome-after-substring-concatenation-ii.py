@@ -1,7 +1,7 @@
 class Solution:
     def longestPalindrome(self, s: str, t: str) -> int:
         #yrtxhrcbaterrt abcuitiutgu
-        s = s[::-1]
+        # s = s[::-1]
         ns = len(s)
         nt = len(t)
         def plen(word, flag):
