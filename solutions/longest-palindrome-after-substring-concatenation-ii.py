@@ -2,7 +2,7 @@ class TrieNode:
     def __init__(self):
         self.isWord = False
         self.children = {}
-        self.idx = -1
+        self.idx = 0
 class Trie:
     def __init__(self):
         self.root = TrieNode()
