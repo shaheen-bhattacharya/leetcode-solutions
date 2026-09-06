@@ -22,16 +22,17 @@ class Solution:
         dp = [[0]*ns for _ in range(nt)]
         #dp[i][j] = longest matching substring from i from t and j from s
         for i in range(nt):
-            dp[i][-1] = t[i] == s[-1]
+            if t[i] == s[-1]:
+                dp[i][-1] = 1
 
         for i in range(ns):
-            dp[-1][i] = t[-1] == s[i]
+            if t[-1] == s[i]:
+                dp[-1][i] = 1
 
         for i in range(nt-2, -1, -1):
             for j in range(ns-2, -1, -1):
                 if t[i] == s[j]:
                     dp[i][j] = max(dp[i][j], 1 + dp[i+1][j+1])
-        print(dp)
         res = 0
         for i in range(nt):
             for j in range(ns):
