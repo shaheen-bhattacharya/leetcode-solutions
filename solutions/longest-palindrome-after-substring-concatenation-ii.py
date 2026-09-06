@@ -4,20 +4,23 @@ class Solution:
         s = s[::-1]
         ns = len(s)
         nt = len(t)
-        def plen(word):
+        def plen(word, flag):
             n = len(word)
             best = [1] * (n+1)
             for c in range(n):
                 for l, r in [(c, c), (c, c+1)]:
                     while l >= 0 and r < n and word[l] == word[r]:
-                        best[l] = max(best[l], r - l + 1)
+                        if flag:
+                            best[l] = max(best[l], r - l + 1)
+                        else:
+                            best[r] = max(best[r], r - l + 1)
                         l -= 1
                         r += 1
             best[-1] = 0
             return best
         
-        bestS = plen(s)
-        bestT = plen(t)
+        bestS = plen(s, True)
+        bestT = plen(t, False)
 
         dp = [[0]*ns for _ in range(nt)]
         #dp[i][j] = longest matching substring from i from t and j from s
