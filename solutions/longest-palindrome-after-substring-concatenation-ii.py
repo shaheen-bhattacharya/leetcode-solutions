@@ -5,7 +5,7 @@ class Solution:
         nt = len(t)
         def plen(word, flag):
             n = len(word)
-            best = [1] * (n+1)
+            best = [0] * (n+1)
             for c in range(n):
                 for l, r in [(c, c), (c, c+1)]:
                     while l >= 0 and r < n and word[l] == word[r]:
@@ -15,7 +15,7 @@ class Solution:
                             best[r] = max(best[r], r - l + 1)
                         l -= 1
                         r += 1
-            best[-1] = 0
+
             return best
         
         bestS = plen(s, True)
