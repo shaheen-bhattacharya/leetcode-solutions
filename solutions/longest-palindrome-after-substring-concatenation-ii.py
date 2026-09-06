@@ -21,33 +21,22 @@ class Solution:
         bestT = plen(t, False)
         s = s[::-1]
 
-        dp = [[0]*ns for _ in range(nt)]
+        dp = [[0]*(ns+1) for _ in range(nt+1)]
         #dp[i][j] = longest matching substring from i from t and j from s
-        for i in range(nt):
-            if t[i] == s[-1]:
-                dp[i][-1] = 1
 
-        for i in range(ns):
-            if t[-1] == s[i]:
-                dp[-1][i] = 1
-
-        for i in range(nt-2, -1, -1):
-            for j in range(ns-2, -1, -1):
+        for i in range(nt-1, -1, -1):
+            for j in range(ns-1, -1, -1):
                 if t[i] == s[j]:
                     dp[i][j] = max(dp[i][j], 1 + dp[i+1][j+1])
+
         res = max(bestS[0], bestT[nt-1])
         for i in range(nt):
             for j in range(ns):
                 if dp[i][j] > 0:
                     L = dp[i][j]
                     orig_s_idx = ns - 1 - (j + L - 1)
-                    
-                    # 3. Remaining s palindrome must start AFTER orig_s_idx
                     rem_s = bestS[orig_s_idx + 1] if orig_s_idx + 1 < ns else 0
-                    
-                    # 4. Remaining t palindrome must end BEFORE i
                     rem_t = bestT[i - 1] if i - 1 >= 0 else 0
-
                     res = max(res, 2 * L + max(rem_s, rem_t))
 
         return res
