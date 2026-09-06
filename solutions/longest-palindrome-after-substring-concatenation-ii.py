@@ -35,7 +35,7 @@ class Solution:
             for j in range(ns-2, -1, -1):
                 if t[i] == s[j]:
                     dp[i][j] = max(dp[i][j], 1 + dp[i+1][j+1])
-        res = max(bestS[0], bestT[-1])
+        res = max(bestS[0], bestT[nt-1])
         for i in range(nt):
             for j in range(ns):
                 if dp[i][j] > 0:
