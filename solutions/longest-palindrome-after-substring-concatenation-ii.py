@@ -43,8 +43,8 @@ class Solution:
             cnt = 0
             for j in range(i, nt):
                 ch = t[j]
-                cnt += 2
                 if ch in node.children:
+                    cnt += 2
                     node = node.children[ch]
                 else:
                     break
@@ -52,5 +52,4 @@ class Solution:
                 cnt += 1
             res = max(res, cnt)
         res = max(res, lpal(s), lpal(t))
-        print(lpal(s))
         return res
