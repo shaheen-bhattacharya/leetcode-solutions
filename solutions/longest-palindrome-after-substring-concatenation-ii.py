@@ -39,5 +39,5 @@ class Solution:
         res = max(bestS[0], bestT[0])
         for i in range(nt):
             for j in range(ns):
-                res = max(res, 2 * dp[i][j] + max(bestS[j+1], bestT[i+1]))
+                res = max(res, 2 * dp[i][j] + max(bestS[j+1], bestT[i-1]))
         return res
