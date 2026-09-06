@@ -47,7 +47,7 @@ class Solution:
             node = trie.root
             cnt = 0
             for j in range(i, nt):
-                print('f')
+                print(i, j)
                 ch = t[j]
                 if ch not in node.children:
                     break
