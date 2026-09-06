@@ -17,6 +17,21 @@ class Trie:
 
 class Solution:
     def longestPalindrome(self, s: str, t: str) -> int:
+        #yrtxhrcbaterrt abcuitiutgu
+        def lpal(word):
+            nw = len(word)
+            ret = 0
+            for i in range(nw):
+                for l, r in [(i, i), (i, i+1)]:
+                    while l >= 0 and r < nw:
+                        if word[l] == word[r]:
+                            l -= 1
+                            r += 1
+                        else:
+                            break
+                    ret = max(ret, r - l - 1)
+            return ret
+                        
         trie = Trie()
         ns = len(s)
         nt = len(t)
@@ -25,10 +40,16 @@ class Solution:
         res = 0
         for i in range(nt):
             node = trie.root
-            ch = t[i]
             cnt = 0
-            while ch in node.children:
+            for j in range(i, nt):
+                ch = t[j]
+                cnt += 2
+                if ch in node.children:
+                    node = node.children[ch]
+                else:
+                    break
+            if i > 0 or len(node.children) > 0:
                 cnt += 1
-                node = node.children[ch]
             res = max(res, cnt)
+        res = max(res, lpal(s), lpal(t))
         return res
