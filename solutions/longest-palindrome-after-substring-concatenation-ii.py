@@ -35,6 +35,8 @@ class Solution:
         
         bestS = plen(s)
         bestT = plen(t)
+        print(bestS)
+        print(bestT)
         
         trie = Trie()
         ns = len(s)
@@ -51,9 +53,7 @@ class Solution:
                     break
                 cnt += 2
                 node = node.children[ch]
-            print(cnt)
             sidx = node.idx+1
-            print(bestS[sidx])
             tidx = j
             res = max(res, cnt + max(bestS[sidx], bestT[tidx]))
         return res
