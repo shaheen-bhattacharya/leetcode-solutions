@@ -1,6 +1,6 @@
 class TrieNode:
     def __init__(self):
-        self.isWord = True
+        self.isWord = False
         self.children = {}
 class Trie:
     def __init__(self):
@@ -43,14 +43,10 @@ class Solution:
             cnt = 0
             for j in range(i, nt):
                 ch = t[j]
-                print(ch, j)
-                if ch in node.children:
-                    cnt += 2
-                    node = node.children[ch]
-                else:
-                    if i > 0 or len(node.children) > 0:
-                        cnt += 1
+                if ch not in node.children:
                     break
+                cnt += 2
+                node = node.children[ch]
             res = max(res, cnt)
         res = max(res, lpal(s), lpal(t))
         return res
