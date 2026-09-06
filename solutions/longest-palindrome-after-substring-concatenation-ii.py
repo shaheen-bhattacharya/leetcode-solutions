@@ -23,13 +23,14 @@ class Solution:
         s = s[::-1]
         def plen(word):
             n = len(word)
-            best = [1] * n
+            best = [1] * (n+1)
             for c in range(n):
                 for l, r in [(c, c), (c, c+1)]:
                     while l >= 0 and r < n and word[l] == word[r]:
                         best[l] = max(best[l], r - l + 1)
                         l -= 1
                         r += 1
+            best[-1] = 0
             return best
         
         bestS = plen(s)
@@ -50,7 +51,7 @@ class Solution:
                     break
                 cnt += 2
                 node = node.children[ch]
-            sidx = node.idx
+            sidx = node.idx+1
             tidx = j
             res = max(res, cnt + max(bestS[sidx], bestT[tidx]))
         return res
