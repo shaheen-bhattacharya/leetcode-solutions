@@ -38,5 +38,14 @@ class Solution:
         res = max(bestS[0], bestT[-1])
         for i in range(nt):
             for j in range(ns):
-                res = max(res, 2 * dp[i][j] + max(bestS[j+1], bestT[i-1]))
+                if dp[i][j] > 0:
+                    L = dp[i][j]
+                    
+                    # Remaining palindrome in s after index j (starts at j + 1)
+                    rem_s = bestS[j + 1] if j + 1 < ns else 0
+                    
+                    # Remaining palindrome in t before index i (ends at i - 1)
+                    rem_t = bestT[i - 1] if i - 1 >= 0 else 0
+
+                    res = max(res, 2 * L + max(rem_s, rem_t))
         return res
