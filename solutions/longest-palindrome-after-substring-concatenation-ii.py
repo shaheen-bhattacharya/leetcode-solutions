@@ -40,7 +40,7 @@ class Solution:
             for j in range(ns):
                 if dp[i][j] > 0:
                     L = dp[i][j]
-                    rem_s = bestS[j + 1]                    
+                    rem_s = bestS[j + 1] if j + 1 < ns else 0                    
                     rem_t = bestT[i - 1] if i - 1 >= 0 else 0
                     res = max(res, 2 * L + max(rem_s, rem_t))
         return res
