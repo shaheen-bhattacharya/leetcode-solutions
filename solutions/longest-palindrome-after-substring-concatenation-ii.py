@@ -43,6 +43,7 @@ class Solution:
             cnt = 0
             for j in range(i, nt):
                 ch = t[j]
+                print(ch, j)
                 if ch in node.children:
                     cnt += 2
                     node = node.children[ch]
