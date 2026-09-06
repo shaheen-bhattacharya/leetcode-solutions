@@ -21,7 +21,12 @@ class Solution:
 
         dp = [[0]*ns for _ in range(nt)]
         #dp[i][j] = longest matching substring from i from t and j from s
-        dp[-1][-1] = s[-1] == t[-1]
+        for i in range(nt):
+            dp[i][-1] = t[i] == s[-1]
+            
+        for i in range(ns):
+            dp[-1][i] = t[-1] == s[i]
+
         for i in range(nt-2, -1, -1):
             for j in range(ns-2, -1, -1):
                 if t[i] == s[j]:
