@@ -51,6 +51,7 @@ class Solution:
                     break
                 cnt += 2
                 node = node.children[ch]
+            print(cnt)
             sidx = node.idx+1
             tidx = j
             res = max(res, cnt + max(bestS[sidx], bestT[tidx]))
