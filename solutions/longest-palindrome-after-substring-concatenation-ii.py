@@ -47,13 +47,13 @@ class Solution:
             node = trie.root
             cnt = 0
             for j in range(i, nt):
+                print('f')
                 ch = t[j]
                 if ch not in node.children:
                     break
                 cnt += 2
                 node = node.children[ch]
             sidx = node.idx+1
-            print(j)
             tidx = j
             res = max(res, cnt + max(bestS[sidx], bestT[tidx]))
         return res
