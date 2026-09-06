@@ -23,7 +23,7 @@ class Solution:
         #dp[i][j] = longest matching substring from i from t and j from s
         for i in range(nt):
             dp[i][-1] = t[i] == s[-1]
-            
+
         for i in range(ns):
             dp[-1][i] = t[-1] == s[i]
 
@@ -31,7 +31,7 @@ class Solution:
             for j in range(ns-2, -1, -1):
                 if t[i] == s[j]:
                     dp[i][j] = max(dp[i][j], 1 + dp[i+1][j+1])
-        
+        print(dp)
         res = 0
         for i in range(nt):
             for j in range(ns):
