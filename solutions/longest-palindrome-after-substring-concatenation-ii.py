@@ -51,5 +51,6 @@ class Solution:
             if i > 0 or len(node.children) > 0:
                 cnt += 1
             res = max(res, cnt)
+        print(res)
         res = max(res, lpal(s), lpal(t))
         return res
