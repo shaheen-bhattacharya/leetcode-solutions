@@ -1,7 +1,6 @@
 class Solution:
     def longestPalindrome(self, s: str, t: str) -> int:
         #yrtxhrcbaterrt abcuitiutgu
-        # s = s[::-1]
         ns = len(s)
         nt = len(t)
         def plen(word, flag):
@@ -20,6 +19,7 @@ class Solution:
         
         bestS = plen(s, True)
         bestT = plen(t, False)
+        s = s[::-1]
 
         dp = [[0]*ns for _ in range(nt)]
         #dp[i][j] = longest matching substring from i from t and j from s
@@ -40,7 +40,14 @@ class Solution:
             for j in range(ns):
                 if dp[i][j] > 0:
                     L = dp[i][j]
-                    rem_s = bestS[j + 1] if j + 1 < ns else 0                    
+                    orig_s_idx = ns - 1 - (j + L - 1)
+                    
+                    # 3. Remaining s palindrome must start AFTER orig_s_idx
+                    rem_s = bestS[orig_s_idx + 1] if orig_s_idx + 1 < ns else 0
+                    
+                    # 4. Remaining t palindrome must end BEFORE i
                     rem_t = bestT[i - 1] if i - 1 >= 0 else 0
+
                     res = max(res, 2 * L + max(rem_s, rem_t))
+
         return res
