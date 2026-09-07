@@ -17,7 +17,7 @@ class Solution:
                 upper = digit if tight else 9
                 lower = 1 if i == 0 else 0
                 ret = 0
-                for j in range(0, upper+1):
+                for j in range(lower, upper+1):
                     nt = False
                     if tight and j == digit:
                         nt = True
