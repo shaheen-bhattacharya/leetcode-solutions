@@ -15,7 +15,7 @@ class Solution:
                     if zero:
                         return 0
                     else:
-                        if prod % tot == 0:
+                        if prod % tot == 0 and num == 20:
                             print(prod, tot)
                         return prod % tot == 0
                 digit = int(snum[i])
