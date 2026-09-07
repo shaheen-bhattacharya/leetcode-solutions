@@ -12,6 +12,7 @@ class Solution:
             tot = 0
             while curr <= r:
                 nxt = 4 ** (pl + 1)
+                print(curr, nxt)
                 if nxt > r:
                     freq[pl+1] = r - curr if curr == l else r - curr - 1
                 else:
