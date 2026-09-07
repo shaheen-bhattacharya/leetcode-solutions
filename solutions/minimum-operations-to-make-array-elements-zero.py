@@ -14,7 +14,7 @@ class Solution:
                 nxt = 4 ** (pl + 1)
                 # print(curr, nxt)
                 if nxt-1 >= r:
-                    freq[pl+1] = r - curr + 1
+                    freq[pl+1] = r - curr
                 else:
                     freq[pl+1] = nxt - curr
 
@@ -24,14 +24,13 @@ class Solution:
                 pl += 1
                 curr = nxt
 
-            print(freq)
-            print(left)
+            # print(freq)
+            # print(left)
             for i in range(len(left) - 1):
                 tot += left[i]
                 left[i+1] -= left[i]
             if left:
                 tot += left[-1]
-            print(tot)
             return tot
         
         res = 0
