@@ -13,9 +13,9 @@ class Solution:
             while curr < r:
                 nxt = 4 ** (pl + 1)
                 if nxt >= r:
-                    freq[pl+1] = r - curr + 1
+                    freq[pl+1] = r - curr + 1 if curr == l else r - curr
                 else:
-                    freq[pl+1] = nxt - curr + 1
+                    freq[pl+1] = nxt - curr + 1 if curr == l else nxt - curr
 
                 tot += freq[pl+1]//2 * (pl+1)
                 if freq[pl+1] % 2 == 1:
