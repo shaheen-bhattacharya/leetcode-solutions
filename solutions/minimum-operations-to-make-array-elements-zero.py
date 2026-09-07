@@ -23,7 +23,6 @@ class Solution:
                 pl += 1
                 curr = nxt
 
-            print(freq)
             for i in range(len(left) - 1):
                 tot += left[i]
                 left[i+1] -= left[i]
