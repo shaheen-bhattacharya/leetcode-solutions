@@ -13,7 +13,7 @@ class Solution:
             while curr <= r:
                 nxt = 4 ** (pl + 1)
                 if nxt > r:
-                    freq[pl+1] = r - curr + 1 if curr == l else r - curr
+                    freq[pl+1] = r - curr if curr == l else r - curr - 1
                 else:
                     freq[pl+1] = nxt - curr + 1 if curr == l else nxt - curr
 
