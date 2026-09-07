@@ -31,6 +31,7 @@ class Solution:
                 left[i+1] -= left[i]
             if left:
                 tot += left[-1]
+            print(tot)
             return tot
         
         res = 0
