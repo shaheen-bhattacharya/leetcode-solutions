@@ -14,9 +14,9 @@ class Solution:
                 nxt = 4 ** (pl + 1)
                 print(curr, nxt)
                 if nxt > r:
-                    freq[pl+1] = r - curr if curr == l else r - curr - 1
+                    freq[pl+1] = r - curr
                 else:
-                    freq[pl+1] = nxt - curr + 1 if curr == l else nxt - curr
+                    freq[pl+1] = nxt - curr
 
                 tot += freq[pl+1]//2 * (pl+1)
                 if freq[pl+1] % 2 == 1:
