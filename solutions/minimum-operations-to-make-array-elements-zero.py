@@ -14,7 +14,6 @@ class Solution:
                     tmp = r - curr + 1
                 else:
                     tmp = nxt - curr
-                # print(tmp)
                 tot += tmp * (pl+1)
                 pl += 1
                 curr = nxt
