@@ -21,10 +21,13 @@ class Solution:
                 tot += freq[pl+1]//2 * (pl+1)
                 if freq[pl+1] % 2 == 1:
                     left.append(pl+1)
+                else:
+                    left.append(pl+1)
+                    left.append(pl+1)
                 pl += 1
                 curr = nxt
 
-            print(freq)
+            # print(freq)
             # print(left)
             for i in range(len(left) - 1):
                 tot += left[i]
