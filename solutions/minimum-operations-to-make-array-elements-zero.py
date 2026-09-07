@@ -12,7 +12,7 @@ class Solution:
             tot = 0
             while curr <= r:
                 nxt = 4 ** (pl + 1)
-                print(curr, nxt)
+                # print(curr, nxt)
                 if nxt > r:
                     freq[pl+1] = r - curr
                 else:
@@ -24,7 +24,7 @@ class Solution:
                 pl += 1
                 curr = nxt
 
-            # print(freq)
+            print(freq)
             for i in range(len(left) - 1):
                 tot += left[i]
                 left[i+1] -= left[i]
