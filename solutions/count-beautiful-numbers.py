@@ -15,13 +15,12 @@ class Solution:
                     if zero:
                         return 0
                     else:
-                        if prod % tot == 0 and num == 20:
+                        if prod % tot == 0:
                             print(prod, tot)
                         return prod % tot == 0
                 digit = int(snum[i])
-                upper = digit if tight else 9
                 ret = 0
-                for j in range(upper+1):
+                for j in range(10):
                     nt = False
                     if tight and j == digit:
                         nt = True
