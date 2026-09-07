@@ -13,8 +13,8 @@ class Solution:
             while curr <= r:
                 nxt = 4 ** (pl + 1)
                 # print(curr, nxt)
-                if nxt > r:
-                    freq[pl+1] = r - curr
+                if nxt-1 >= r:
+                    freq[pl+1] = r - curr + 1
                 else:
                     freq[pl+1] = nxt - curr
 
