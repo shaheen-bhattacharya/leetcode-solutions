@@ -1,27 +1,29 @@
 class Solution:
     def minOperations(self, queries: List[List[int]]) -> int:
         #4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
-        #2, 3, 5, 6, 8
+        #2, 3, 4, 5, 6
+        #1, 1, 2, 2, 2
 
         def solve(l, r):
             pl = int(math.log(l, 4))
             freq = {}
             curr = l
+            left = []
+            tot = 0
             while curr < r:
                 nxt = 4 ** (pl + 1)
                 if nxt >= r:
                     freq[pl+1] = r - curr + 1
-                    break
-                freq[pl+1] = nxt - curr + 1
+                else:
+                    freq[pl+1] = nxt - curr + 1
+
+                tot += freq[pl+1]//2 * (pl+1)
+                if freq[pl+1] % 2 == 1:
+                    left.append(pl+1)
                 pl += 1
                 curr = nxt
-            tot = 0 
-            left = []
-            for key in freq:
-                tot += freq[key]//2 * key
-                if freq[key] % 2 == 1:
-                    left.append(key)
-            left.sort()
+
+            print(left)
             for i in range(len(left) - 1):
                 tot += left[i]
                 left[i+1] -= left[i]
