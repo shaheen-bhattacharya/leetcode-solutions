@@ -6,35 +6,19 @@ class Solution:
 
         def solve(l, r):
             pl = int(math.log(l, 4))
-            freq = {}
             curr = l
-            left = []
             tot = 0
             while curr <= r:
                 nxt = 4 ** (pl + 1)
-                # print(curr, nxt)
                 if nxt-1 >= r:
-                    freq[pl+1] = r - curr + 1
+                    tmp = r - curr + 1
                 else:
-                    freq[pl+1] = nxt - curr
-
-                tot += freq[pl+1]//2 * (pl+1)
-                if freq[pl+1] % 2 == 1:
-                    left.append(pl+1)
-                else:
-                    left.append(pl+1)
-                    left.append(pl+1)
+                    tmp = nxt - curr
+                tot += tmp ** (pl+1)
                 pl += 1
                 curr = nxt
 
-            # print(freq)
-            # print(left)
-            for i in range(len(left) - 1):
-                tot += left[i]
-                left[i+1] -= left[i]
-            if left:
-                tot += left[-1]
-            return tot
+            return ceil(tot/2)
         
         res = 0
         for l, r in queries:
