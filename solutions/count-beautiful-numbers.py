@@ -15,6 +15,8 @@ class Solution:
                     if zero:
                         return 0
                     else:
+                        if prod % tot == 0:
+                            print(prod, tot)
                         return prod % tot == 0
                 digit = int(snum[i])
                 upper = digit if tight else 9
