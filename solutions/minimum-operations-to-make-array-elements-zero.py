@@ -10,9 +10,9 @@ class Solution:
             curr = l
             left = []
             tot = 0
-            while curr < r:
+            while curr <= r:
                 nxt = 4 ** (pl + 1)
-                if nxt >= r:
+                if nxt > r:
                     freq[pl+1] = r - curr + 1 if curr == l else r - curr
                 else:
                     freq[pl+1] = nxt - curr + 1 if curr == l else nxt - curr
@@ -22,8 +22,8 @@ class Solution:
                     left.append(pl+1)
                 pl += 1
                 curr = nxt
-                
-            print(freq)
+
+            # print(freq)
             for i in range(len(left) - 1):
                 tot += left[i]
                 left[i+1] -= left[i]
