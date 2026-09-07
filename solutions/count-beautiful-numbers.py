@@ -15,15 +15,13 @@ class Solution:
                     if zero:
                         return 0
                     else:
-                        if prod % tot == 0:
-                            print(prod, tot)
                         return prod % tot == 0
                 digit = int(snum[i])
                 upper = digit if tight else 9
                 ret = 0
                 for j in range(upper+1):
                     nt = False
-                    np = prod * j if not zero else prod
+                    np = prod if (zero and j == 0) else prod * j
                     if tight and j == digit:
                         nt = True
                     ret += dfs(i+1,zero and j==0, nt, np, tot + j)
