@@ -19,12 +19,14 @@ class Solution:
                             print(prod, tot)
                         return prod % tot == 0
                 digit = int(snum[i])
+                upper = digit if tight else 9
                 ret = 0
-                for j in range(10):
+                for j in range(upper+1):
                     nt = False
+                    np = prod * j if not zero else prod
                     if tight and j == digit:
                         nt = True
-                    ret += dfs(i+1,zero and j==0, nt, prod * j, tot + j)
+                    ret += dfs(i+1,zero and j==0, nt, np, tot + j)
                 dp[key] = ret
                 return ret
             return dfs(0, True, True, 1, 0)
