@@ -27,7 +27,7 @@ class Solution:
                 dfs(2*node, l, m)
                 dfs(2*node+1, m+1, r)
                 tree[node] = max(tree[2*node], tree[2*node+1])
-            dfs(1, 1, n)
+            dfs(1, 1, n-1)
         
         def query(ql, qr):
             def dfs(node, l, r):
@@ -38,24 +38,44 @@ class Solution:
                 m = (l+r)//2
                 push(node)
                 return max(dfs(2*node, l, m), dfs(2*node+1, m+1, r))
-            return dfs(1, 1, n)
+            return dfs(1, 1, n-1)
 
+        def sieve(n):
+            primes = []
+            lp = [-1] * (n+1)
+            for i in range(2, n+1):
+                if lp[i] == -1:
+                    lp[i] = i
+                    primes.append(i)
+                for p in primes:
+                    if p > lp[i] or p * i > n:
+                        break
+                    lp[p*i] = p
+            return lp, primes
+        lp, primes = sieve(max(nums))
+
+        dist = set()
         for i, num in enumerate(nums):
-            pos[num].add(i)
+            if lp[num] == num:
+                dist.add(num)
+            if pos[num]:
+                pl, pr = pos[num][0], pos[num][-1]
+                update(pl+1, pr, -1)
+            pos[num].add(i) 
+            nl, nr = pos[num][0], pos[num][-1]
+            update(nl, nr, 1)
 
         res = []
         for i, val in queries:
             old = nums[i]
             pl, pr = pos[old][0], pos[old][-1]
+            update(pl, pr, -1)
             pos[old].remove(i)
             nums[i] = val
             pos[val].add(i)
             nl, nr = pos[val][0], pos[val][-1]
-            if nl < pl:
-                update(nl+1, min(pl, nr), val)
-            elif nr > pr:
-                update(max(nl, pr)+1, nr, val)
-            res.append(query(1, n))
+            update(nl, nr, 1)            
+            res.append(query(1, n-1))
         return res
 
             
