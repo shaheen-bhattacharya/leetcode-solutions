@@ -27,6 +27,7 @@ class Solution:
                 dfs(2*node, l, m)
                 dfs(2*node+1, m+1, r)
                 tree[node] = max(tree[2*node], tree[2*node+1])
+            dfs(1, 1, n)
         
         def query(ql, qr):
             def dfs(node, l, r):
@@ -37,6 +38,7 @@ class Solution:
                 m = (l+r)//2
                 push(node)
                 return max(dfs(2*node, l, m), dfs(2*node+1, m+1, r))
+            return dfs(1, 1, n)
 
         for i, num in enumerate(nums):
             pos[num].add(i)
