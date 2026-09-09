@@ -38,7 +38,7 @@ class Solution:
                 elif v > nsml2:
                     nsml2 = v
 
-            nl = max(left, nsml2)
+            nl = max(cl, nsml2)
             tot = pref[node] - pref[path[nl]]
             if tot > best:
                 best = tot
