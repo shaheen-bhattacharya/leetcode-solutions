@@ -67,7 +67,10 @@ class Solution:
                 if not pos[old]:
                     dist -= 1
             if lp[val] == val:
-                pos[val].add(i)
+                plv, prv = pos[val][0], pos[val][-1]
+                if plv < prv:
+                    update(plv, prv, -1)
+                pos[val].add(i) 
                 nl, nr = pos[val][0], pos[val][-1]
                 update(nl+1, nr, 1)
                 if len(pos) == 1:      
