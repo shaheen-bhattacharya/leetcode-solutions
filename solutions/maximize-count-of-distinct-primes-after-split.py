@@ -55,7 +55,7 @@ class Solution:
         for i, num in enumerate(nums):
             if lp[num] == num:
                 l, r = pos[num][0], pos[num][-1]
-                if len(pos[num]) >= 2:
+                if l < r:
                     update(l+1, r, 1)
 
         res = []
