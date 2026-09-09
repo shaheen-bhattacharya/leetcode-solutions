@@ -35,7 +35,7 @@ class Solution:
                 if v > nsml:
                     nsml2 = nsml
                     nsml = v
-                elif v > sml2:
+                elif v > nsml2:
                     nsml2 = v
 
             cl = max(left, nsml2)
