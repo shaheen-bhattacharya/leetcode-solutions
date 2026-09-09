@@ -32,13 +32,13 @@ class Solution:
 
             if k >= 2:
                 v = occ[val][-2] + 1
-                if v > sml:
-                    sml2 = sml
-                    sml = v
+                if v > nsml:
+                    nsml2 = nsml
+                    nsml = v
                 elif v > sml2:
-                    sml2 = v
+                    nsml2 = v
 
-            nl = max(left, sml2)
+            nl = max(left, nsml2)
             tot = pref[node] - pref[path[nl]]
             if tot > best:
                 best = tot
@@ -47,7 +47,7 @@ class Solution:
             for nei, l in adj[node]:
                 if nei == par:
                     continue
-                dfs(nei, node, occ, nl, path, sml, sml2)
+                dfs(nei, node, occ, nl, path, nsml, nsml2)
 
             path.pop()
             occ[val].pop()
