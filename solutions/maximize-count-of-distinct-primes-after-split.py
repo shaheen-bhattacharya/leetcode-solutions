@@ -42,7 +42,7 @@ class Solution:
                     lp[p*i] = p
             return lp, primes
 
-        lp, primes = sieve(max(nums))
+        lp, primes = sieve(10001)
 
         dist = 0
         for i, num in enumerate(nums):
