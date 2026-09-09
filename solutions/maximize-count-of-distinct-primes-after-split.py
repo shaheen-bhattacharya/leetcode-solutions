@@ -60,25 +60,30 @@ class Solution:
             old = nums[i]
             if lp[old] == old:
                 pl, pr = pos[old][0], pos[old][-1]
-                if pl < pr:
-                    update(pl+1, pr, -1)
                 pos[old].remove(i)
                 if pos[old]:
                     nl, nr = pos[old][0], pos[old][-1]
-                    update(nl+1, nr, 1)
-                if not pos[old]:
+                    if nl > pl:
+                        update(pl+1, nl, -1)
+                    if nr < pr:
+                        update(nr+1, pr, -1)
+                else:
+                    if pl < pr:
+                        update(pl+1, pr)
                     dist -= 1
 
             if lp[val] == val:
-                if pos[val]:
-                    plv, prv = pos[val][0], pos[val][-1]
-                    if plv < prv:
-                        update(plv+1, prv, -1)
                 if not pos[val]:
                     dist += 1
-                pos[val].add(i) 
-                nl, nr = pos[val][0], pos[val][-1]
-                update(nl+1, nr, 1)
+                    pos[val].add(i)
+                else:
+                    plv, prv = pos[val][0], pos[val][-1]
+                    pos[val].add(i) 
+                    nl, nr = pos[val][0], pos[val][-1]
+                    if nl < plv:
+                        update(nl+1, plv, 1)
+                    if nr > prv:
+                        update(prv+1, nr, 1)
 
             nums[i] = val  
             res.append(dist + tree[1])
