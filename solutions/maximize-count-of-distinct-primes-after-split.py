@@ -49,7 +49,8 @@ class Solution:
         for i, num in enumerate(nums):
             if lp[num] == num:
                 pos[num].add(i) 
-                dist += 1
+                if len(pos[num]) == 1:
+                    dist += 1
         
         for i, num in enumerate(nums):
             if lp[num] == num:
