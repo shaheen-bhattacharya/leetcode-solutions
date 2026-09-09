@@ -24,11 +24,12 @@ class Solution:
             val = nums[node]
             path.append(node)
             occ[val].append(len(path) - 1)
-            nsml = max(sml, cl)
-            nsml2 = max(sml2, cl)
             k = len(occ[val])
             if k >= 3:
                 cl = max(cl, occ[val][-3] + 1)
+
+            nsml = max(sml, cl)
+            nsml2 = max(sml2, cl)
 
             if k >= 2:
                 v = occ[val][-2] + 1
