@@ -38,11 +38,11 @@ class Solution:
                 elif v > sml2:
                     nsml2 = v
 
-            nl = max(left, nsml2)
-            tot = pref[node] - pref[path[nl]]
+            cl = max(left, nsml2)
+            tot = pref[node] - pref[path[cl]]
             if tot > best:
                 best = tot
-                mn = min(mn, len(path) - nl)
+                mn = min(mn, len(path) - cl)
             
             for nei, l in adj[node]:
                 if nei == par:
@@ -53,7 +53,7 @@ class Solution:
             occ[val].pop()
         
         dfs(0, -1, defaultdict(list), 0, [], 0, 0)
-        return [best, mn]
+        return [best, mn if mn != inf else 1]
 
 
             
