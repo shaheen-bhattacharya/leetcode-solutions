@@ -52,8 +52,8 @@ class Solution:
                 if len(pos[num]) == 1:
                     dist += 1
         
-        for i, num in enumerate(nums):
-            if lp[num] == num:
+        for num in range(2, 100001):
+            if pos[num]:
                 l, r = pos[num][0], pos[num][-1]
                 if l < r:
                     update(l+1, r, 1)
