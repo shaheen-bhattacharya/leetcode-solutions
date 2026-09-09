@@ -70,7 +70,7 @@ class Solution:
                 if pos[val]:
                     plv, prv = pos[val][0], pos[val][-1]
                     if plv < prv:
-                        update(plv, prv, -1)
+                        update(plv+1, prv, -1)
                 if not pos[val]:
                     dist += 1
                 pos[val].add(i) 
