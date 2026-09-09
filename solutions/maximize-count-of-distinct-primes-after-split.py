@@ -23,8 +23,10 @@ class Solution:
                     return
                 m = (l + r) //2
                 push(node)
-                dfs(2*node, l, m)
-                dfs(2*node+1, m+1, r)
+                if ql <= m:
+                    dfs(2*node, l, m)
+                if qr > m:
+                    dfs(2*node+1, m+1, r)
                 tree[node] = max(tree[2*node], tree[2*node+1])
             dfs(1, 1, n-1)
         
@@ -69,7 +71,7 @@ class Solution:
                         update(nr+1, pr, -1)
                 else:
                     if pl < pr:
-                        update(pl+1, pr)
+                        update(pl+1, pr, -1)
                     dist -= 1
 
             if lp[val] == val:
