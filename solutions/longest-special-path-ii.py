@@ -38,11 +38,11 @@ class Solution:
                 elif v > nsml2:
                     nsml2 = v
 
-            cl = max(left, nsml2)
-            tot = pref[node] - pref[path[cl]]
+            nl = max(left, nsml2)
+            tot = pref[node] - pref[path[nl]]
             if tot > best:
                 best = tot
-                mn = min(mn, len(path) - cl)
+                mn = min(mn, len(path) - nl)
             
             for nei, l in adj[node]:
                 if nei == par:
