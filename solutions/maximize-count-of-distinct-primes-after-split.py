@@ -52,14 +52,15 @@ class Solution:
         dist = 0
         for i, num in enumerate(nums):
             if lp[num] == num:
-                if not pos[num]:
-                    dist += 1
-                if pos[num]:
-                    pl, pr = pos[num][0], pos[num][-1]
-                    update(pl+1, pr, -1)
                 pos[num].add(i) 
-                nl, nr = pos[num][0], pos[num][-1]
-                update(nl+1, nr, 1)
+                if len(pos[num]) == 1:
+                    dist += 1
+        
+        for num in range(2, maxv):
+            if pos[num]:
+                l, r = pos[num][0], pos[num][-1]
+                if l < r:
+                    update(l+1, r, 1)
 
         res = []
         for i, val in queries:
