@@ -3,7 +3,7 @@ class Solution:
         n = len(nums)
         tree = [0] * (4 * n)
         lazy = [0] * (4 * n)
-        pos = defaultdict(SortedList)
+        pos = [SortedList() for _ in range(100001)]
 
         def push(node):
             if lazy[node] != 0:
