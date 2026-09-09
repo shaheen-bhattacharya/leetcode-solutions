@@ -72,7 +72,7 @@ class Solution:
                     if plv < prv:
                         update(plv, prv, -1)
                 if not pos[val]:
-                    dist -= 1
+                    dist += 1
                 pos[val].add(i) 
                 nl, nr = pos[val][0], pos[val][-1]
                 update(nl+1, nr, 1)
