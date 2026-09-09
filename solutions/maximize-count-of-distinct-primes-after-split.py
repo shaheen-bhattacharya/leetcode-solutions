@@ -3,7 +3,6 @@ class Solution:
         n = len(nums)
         tree = [0] * (4 * n)
         lazy = [0] * (4 * n)
-        maxv = max(nums)
         pos = defaultdict(SortedList)
 
         def push(node):
@@ -42,7 +41,7 @@ class Solution:
                     lp[p*i] = p
             return lp, primes
 
-        lp, primes = sieve(10001)
+        lp, primes = sieve(100001)
 
         dist = 0
         for i, num in enumerate(nums):
@@ -69,7 +68,7 @@ class Solution:
                     update(nl+1, nr, 1)
                 if not pos[old]:
                     dist -= 1
-                    
+
             if lp[val] == val:
                 if pos[val]:
                     plv, prv = pos[val][0], pos[val][-1]
