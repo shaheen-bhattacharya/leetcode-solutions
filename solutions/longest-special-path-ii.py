@@ -43,6 +43,8 @@ class Solution:
             tot = pref[node] - pref[path[nl]]
             if tot > best:
                 best = tot
+                mn = len(path) - nl
+            elif tot == best:
                 mn = min(mn, len(path) - nl)
             
             for nei, l in adj[node]:
