@@ -46,7 +46,7 @@ class Solution:
                     continue
                 dfs(nei, node, occ, nl, path)
             path.pop()
-            occ[node] = oldocc
+            occ[val] = oldocc
         
         dfs(0, -1, defaultdict(list), 0, [])
         return [best, mn]
