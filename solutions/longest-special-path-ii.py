@@ -47,7 +47,7 @@ class Solution:
             for nei, l in adj[node]:
                 if nei == par:
                     continue
-                dfs(nei, node, occ, nl, path, nsml, nsml2)
+                dfs(nei, node, occ, cl, path, nsml, nsml2)
 
             path.pop()
             occ[val].pop()
