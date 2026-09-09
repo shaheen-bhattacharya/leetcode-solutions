@@ -24,8 +24,8 @@ class Solution:
             val = nums[node]
             path.append(node)
             occ[val].append(len(path) - 1)
-            nsml = sml
-            nsml2 = sml2
+            nsml = max(sml, cl)
+            nsml2 = max(sml2, cl)
             k = len(occ[val])
             if k >= 3:
                 cl = max(cl, occ[val][-3] + 1)
