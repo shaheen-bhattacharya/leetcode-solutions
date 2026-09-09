@@ -17,25 +17,21 @@ class Solution:
 
         best = 0
         mn = inf
-        def dfs(node, par, occ, left, path):
+        def dfs(node, par, occ, left, path, sml, sml2):
             nonlocal best
             nonlocal mn
             nl = left
             val = nums[node]
-            oldocc = occ[val][:]
             path.append(node)
-            if len(occ[val]) == 2:
-                if left < occ[val][-2]:
-                    nl = occ[val][-2]
-                    occ[val][-2] = occ[val][-1]
-                    occ[val][-1] = len(path)-1
-                else:
-                    occ[val][-2] = occ[val][-1]
-                    occ[val].pop()
-                    if occ[val][-1] < left:
-                        occ[val][-1].pop()
-            else:
-                occ[val].append(len(path)-1)
+            occ[val].append(len(path) - 1)
+            if len(occ[val]) >= 2 and left < occ[val][-2]:
+                v = occ[val][-2]
+                if v < sml:
+                    sml2 = sml
+                    sml = v
+                elif v < sml2:
+                    sml2 = v
+            nl = max(left, sml + 1) if sml != inf else left
             tot = pref[node] - pref[path[nl]]
             if tot > best:
                 best = tot
@@ -44,11 +40,11 @@ class Solution:
             for nei, l in adj[node]:
                 if nei == par:
                     continue
-                dfs(nei, node, occ, nl, path)
+                dfs(nei, node, occ, nl, path, sml, sml2)
             path.pop()
-            occ[val] = oldocc
+            occ[val].pop()
         
-        dfs(0, -1, defaultdict(list), 0, [])
+        dfs(0, -1, defaultdict(list), 0, [], inf, inf)
         return [best, mn]
 
 
