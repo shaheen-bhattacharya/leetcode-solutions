@@ -64,8 +64,12 @@ class Solution:
                 if pl < pr:
                     update(pl+1, pr, -1)
                 pos[old].remove(i)
+                if pos[old]:
+                    nl, nr = pos[old][0], pos[old][-1]
+                    update(nl+1, nr, 1)
                 if not pos[old]:
                     dist -= 1
+                    
             if lp[val] == val:
                 if pos[val]:
                     plv, prv = pos[val][0], pos[val][-1]
