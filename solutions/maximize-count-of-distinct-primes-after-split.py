@@ -19,8 +19,8 @@ class Solution:
                 if r < ql or l > qr:
                     return 
                 if ql <= l and r <= qr:
-                    lazy[node] += 1
-                    tree[node] += 1
+                    lazy[node] += val
+                    tree[node] += val
                     return
                 m = (l + r) //2
                 push(node)
@@ -29,17 +29,6 @@ class Solution:
                 tree[node] = max(tree[2*node], tree[2*node+1])
             dfs(1, 1, n-1)
         
-        def query(ql, qr):
-            def dfs(node, l, r):
-                if r < ql or l > qr:
-                    return 0
-                if ql <= l and r <= qr:
-                    return tree[node]
-                m = (l+r)//2
-                push(node)
-                return max(dfs(2*node, l, m), dfs(2*node+1, m+1, r))
-            return dfs(1, 1, n-1)
-
         def sieve(n):
             primes = []
             lp = [-1] * (n+1)
@@ -52,30 +41,38 @@ class Solution:
                         break
                     lp[p*i] = p
             return lp, primes
+
         lp, primes = sieve(max(nums))
 
-        dist = set()
+        dist = 0
         for i, num in enumerate(nums):
             if lp[num] == num:
-                dist.add(num)
-            if pos[num]:
-                pl, pr = pos[num][0], pos[num][-1]
-                update(pl+1, pr, -1)
-            pos[num].add(i) 
-            nl, nr = pos[num][0], pos[num][-1]
-            update(nl, nr, 1)
+                if not pos[num]:
+                    dist += 1
+                if pos[num]:
+                    pl, pr = pos[num][0], pos[num][-1]
+                    update(pl+1, pr, -1)
+                pos[num].add(i) 
+                nl, nr = pos[num][0], pos[num][-1]
+                update(nl+1, nr, 1)
 
         res = []
         for i, val in queries:
             old = nums[i]
-            pl, pr = pos[old][0], pos[old][-1]
-            update(pl, pr, -1)
-            pos[old].remove(i)
-            nums[i] = val
-            pos[val].add(i)
-            nl, nr = pos[val][0], pos[val][-1]
-            update(nl, nr, 1)            
-            res.append(query(1, n-1))
+            if lp[old] == old:
+                pl, pr = pos[old][0], pos[old][-1]
+                if pl < pr:
+                    update(pl+1, pr, -1)
+                pos[old].remove(i)
+                if not pos[old]:
+                    dist -= 1
+            if lp[val] == val:
+                pos[val].add(i)
+                nl, nr = pos[val][0], pos[val][-1]
+                update(nl+1, nr, 1)      
+                dist += 1    
+            nums[i] = val  
+            res.append(dist + tree[1])
         return res
 
             
