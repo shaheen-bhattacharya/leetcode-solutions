@@ -3,7 +3,11 @@ class Solution:
         n = len(nums)
         tree = [0] * (4 * n)
         lazy = [0] * (4 * n)
-        pos = [SortedList() for _ in range(100001)]
+        maxv = max(nums)
+        for i, val in queries:
+            maxv = max(maxv, val)
+        maxv += 1
+        pos = [SortedList() for _ in range(maxv)]
 
         def push(node):
             if lazy[node] != 0:
@@ -43,7 +47,7 @@ class Solution:
                     lp[p*i] = p
             return lp, primes
 
-        lp, primes = sieve(100001)
+        lp, primes = sieve(maxv)
 
         dist = 0
         for i, num in enumerate(nums):
@@ -52,7 +56,7 @@ class Solution:
                 if len(pos[num]) == 1:
                     dist += 1
         
-        for num in range(2, 100001):
+        for num in range(2, maxv):
             if pos[num]:
                 l, r = pos[num][0], pos[num][-1]
                 if l < r:
