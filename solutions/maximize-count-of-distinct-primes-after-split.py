@@ -63,8 +63,11 @@ class Solution:
                     update(l+1, r, 1)
 
         res = []
-        for i, val in queries:
+        for i, val in queries: 
             old = nums[i]
+            if old == val:
+                res.append(dist + tree[1])
+                continue
             if lp[old] == old:
                 pl, pr = pos[old][0], pos[old][-1]
                 pos[old].remove(i)
