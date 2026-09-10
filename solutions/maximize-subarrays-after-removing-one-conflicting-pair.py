@@ -11,7 +11,7 @@ class Solution:
         for i, (a, b) in enumerate(conflictingPairs):
             if a > b:
                 a, b = b, a
-            pairs[b].append(a)
+            pairs[b].append(a+1)
         
         mx1 = 1
         mx2 = 1
