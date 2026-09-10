@@ -3,8 +3,8 @@ class Solution:
         #1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
         #[4, 8]
 
-        fst = [0] * (n+1) #fst[i] = earlierst l pos for l to i be valid 
-        snd = [0] * (n+1)
+        fst = [1] * (n+1) #fst[i] = earlierst l pos for l to i be valid 
+        snd = [1] * (n+1)
 
         for a, b in conflictingPairs:
             if a > b:
