@@ -14,6 +14,8 @@ class Solution:
                 fst[b] = a+1
             elif a+1 > snd[b]:
                 snd[b] = a+1
+        print(fst)
+        print(snd)
         tot = 0
         for i in range(1, n+1):
             l = fst[i] - i + 1
