@@ -5,5 +5,5 @@ class Solution:
         for c in coins:
             for i in range(1, amount+1):
                 if i - c >= 0:
-                    dp[amount] = min(dp[amount], dp[i-c]+1)
+                    dp[i] = min(dp[i], dp[i-c]+1)
         return dp[amount] if dp[amount] != inf else -1
