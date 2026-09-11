@@ -13,5 +13,6 @@ class Solution:
             tot += 1
             prev = curr
             if curr < prev:
+                print("d")
                 tot -= 1
         return tot
