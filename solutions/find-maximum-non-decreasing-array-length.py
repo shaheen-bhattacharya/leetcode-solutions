@@ -10,9 +10,9 @@ class Solution:
             while i < n and curr < prev:
                 curr += nums[i]
                 i += 1
+            print(curr)
             tot += 1
             prev = curr
             if curr < prev:
-                print("d")
                 tot -= 1
         return tot
