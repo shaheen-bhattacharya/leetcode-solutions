@@ -4,7 +4,7 @@ class Solution:
         #ab{}
         n = len(expression)
         def calc(ops):
-            print(ops)
+            # print(ops)
             st = set()
             ops = ops[::-1]
             while len(ops) > 1:
@@ -18,7 +18,7 @@ class Solution:
         def dfs(l, r):
             if r < l:
                 return set()
-            print(l, r)
+            # print(l, r)
             res = set()
             need = []
             i = l
