@@ -4,6 +4,7 @@ class Solution:
         #ab{}
         n = len(expression)
         def calc(ops):
+            print(ops)
             if len(ops) == 0:
                 return set()
             if len(ops) == 1:
