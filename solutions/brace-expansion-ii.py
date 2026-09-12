@@ -7,7 +7,6 @@ class Solution:
             if len(ops) == 0:
                 return set()
             if len(ops) == 1:
-                print(ops)
                 return ops[0]
             ops = ops[::-1]
             while len(ops) > 1:
@@ -46,13 +45,13 @@ class Solution:
                     need.append(dfs(s+1, i-2))
                     end = False
                 else:
-                    # if (l, r) == (1, 3):
-                        # print(need)
+                    if (l, r) == (1, 3):
+                        print(need)
                     res |= calc(need)
                     need = []
                     i += 1
-            if (l, r) == (1, 3):
-                print(res)
+            # if (l, r) == (1, 3):
+            #     print(res)
             return res
 
         return list(sorted(dfs(0, n-1)))
