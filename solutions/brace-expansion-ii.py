@@ -45,10 +45,12 @@ class Solution:
                     res |= calc(need)
                     need = []
                     i += 1
+                    if (l, r) == (0, 13):
+                        print(res)
                 if need:
-                    print("f",l,r,need)
+                    # print("f",l,r,need)
                     res |= calc(need)
-            print(l,r,res)
+            # print(l,r,res)
             return res
         return list(sorted(dfs(0, n-1)))
 
