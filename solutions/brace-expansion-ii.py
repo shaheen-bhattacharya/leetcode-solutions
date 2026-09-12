@@ -4,6 +4,7 @@ class Solution:
         #ab{}
         n = len(expression)
         def calc(ops):
+            print(ops)
             st = set()
             ops = ops[::-1]
             while len(ops) > 1:
