@@ -20,7 +20,7 @@ class Solution:
             for l in range(1, upper+1):
                 if i + tri[l] > n:
                     break
-                dp[i+tri[l]] = min(dp[i+tri[l]], l+dp[i])
+                dp[i+tri[l]] = min(dp[i+tri[l]], l+1+dp[i])
                 
         return dp[n]
                 
