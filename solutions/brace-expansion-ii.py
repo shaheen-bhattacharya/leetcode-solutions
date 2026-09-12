@@ -46,10 +46,10 @@ class Solution:
                     need = []
                     i += 1
                 if need:
+                    print(need)
                     res |= calc(need)
             print(l,r,res)
             return res
-
         return list(sorted(dfs(0, n-1)))
 
 
