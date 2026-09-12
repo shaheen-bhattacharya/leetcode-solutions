@@ -45,8 +45,9 @@ class Solution:
                     res |= calc(need)
                     need = []
                     i += 1
-                    if (l, r) == (0, 13):
-                        print(res)
+                    
+                if (l, r) == (0, 13):
+                    print(res)
                 if need:
                     # print("f",l,r,need)
                     res |= calc(need)
