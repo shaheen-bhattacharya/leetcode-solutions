@@ -16,7 +16,7 @@ class Solution:
         dp = [inf] * (n+1)
         dp[0] = 0
             
-        for i in range(1, n):
+        for i in range(1, n+1):
             for l in range(1, upper+1):
                 if i + tri[l] > n:
                     break
