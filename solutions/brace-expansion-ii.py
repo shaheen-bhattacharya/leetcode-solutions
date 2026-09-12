@@ -41,7 +41,7 @@ class Solution:
                     res |= calc(need)
                     need = []
                     i += 1
-                return res
+            return res
 
         return list(sorted(dfs(0, n-1)))
 
