@@ -18,7 +18,7 @@ class Solution:
                     for s in snd:
                         st.add(f+s)
                 ops.append(st)
-            # print(ops[0])
+            print(ops[0])
             return ops[0]
 
 
