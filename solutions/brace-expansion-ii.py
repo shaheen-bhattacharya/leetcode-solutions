@@ -6,6 +6,8 @@ class Solution:
         def calc(ops):
             if len(ops) == 0:
                 return set()
+            if len(ops) == 1:
+                return ops[0]
             # print(ops)
             ops = ops[::-1]
             while len(ops) > 1:
@@ -16,6 +18,7 @@ class Solution:
                     for s in snd:
                         st.add(f+s)
                 ops.append(st)
+            print(ops[0])
             return ops[0]
 
         def dfs(l, r):
