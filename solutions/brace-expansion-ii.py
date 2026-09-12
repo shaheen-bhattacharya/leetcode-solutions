@@ -50,8 +50,8 @@ class Solution:
                     res |= calc(need)
                     need = []
                     i += 1
-                if (l, r) == (1, 3):
-                    print(need)
+            if (l, r) == (1, 3):
+                print(res)
             return res
 
         return list(sorted(dfs(0, n-1)))
