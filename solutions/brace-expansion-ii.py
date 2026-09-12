@@ -46,7 +46,7 @@ class Solution:
                     need = []
                     i += 1
                 if need:
-                    print(l,r,need)
+                    print("f",l,r,need)
                     res |= calc(need)
             print(l,r,res)
             return res
