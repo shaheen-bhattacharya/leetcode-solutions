@@ -8,6 +8,7 @@ class Solution:
                 return set()
             if len(ops) == 1:
                 return ops[0]
+            print(ops)
             ops = ops[::-1]
             while len(ops) > 1:
                 st = set()
