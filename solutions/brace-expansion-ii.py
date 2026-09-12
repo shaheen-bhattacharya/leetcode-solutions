@@ -45,8 +45,8 @@ class Solution:
                     need.append(dfs(s+1, i-2))
                     end = False
                 else:
-                    if (l, r) == (1, 3):
-                        print(need)
+                    # if (l, r) == (1, 3):
+                        # print(need)
                     res |= calc(need)
                     need = []
                     i += 1
