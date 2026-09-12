@@ -24,7 +24,6 @@ class Solution:
         def dfs(l, r):
             if r < l:
                 return set()
-            # print(l, r)
             res = set()
             need = []
             i = l
@@ -45,15 +44,12 @@ class Solution:
                     need.append(dfs(s+1, i-2))
                     end = False
                 else:
-                    if (l, r) == (1, 3):
-                        print(need)
                     res |= calc(need)
                     need = []
                     i += 1
                 if need:
                     res |= calc(need)
-            # if (l, r) == (1, 3):
-            #     print(res)
+            print(l,r,res)
             return res
 
         return list(sorted(dfs(0, n-1)))
