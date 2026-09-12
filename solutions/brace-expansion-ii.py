@@ -45,6 +45,7 @@ class Solution:
                     need.append(dfs(s+1, i-2))
                     end = False
                 else:
+                    print(expression[i])
                     if (l, r) == (1, 3):
                         print(need)
                     res |= calc(need)
