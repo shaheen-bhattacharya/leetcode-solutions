@@ -45,12 +45,13 @@ class Solution:
                     need.append(dfs(s+1, i-2))
                     end = False
                 else:
-                    print(expression[i])
                     if (l, r) == (1, 3):
                         print(need)
                     res |= calc(need)
                     need = []
                     i += 1
+                if need:
+                    res |= calc(need)
             # if (l, r) == (1, 3):
             #     print(res)
             return res
