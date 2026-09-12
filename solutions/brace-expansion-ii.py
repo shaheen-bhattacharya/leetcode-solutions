@@ -4,16 +4,19 @@ class Solution:
         #ab{}
         n = len(expression)
         def calc(ops):
+            if len(ops) == 0:
+                return set()
             # print(ops)
-            st = set()
             ops = ops[::-1]
             while len(ops) > 1:
+                st = set()
                 fst = ops.pop()
                 snd = ops.pop()
                 for f in fst:
                     for s in snd:
                         st.add(f+s)
-            return st
+                ops.append(st)
+            return ops[0]
 
         def dfs(l, r):
             if r < l:
