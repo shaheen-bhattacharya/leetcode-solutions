@@ -8,7 +8,6 @@ class Solution:
                 return set()
             if len(ops) == 1:
                 return ops[0]
-            # print(ops)
             ops = ops[::-1]
             while len(ops) > 1:
                 st = set()
@@ -18,8 +17,9 @@ class Solution:
                     for s in snd:
                         st.add(f+s)
                 ops.append(st)
-            print(ops[0])
+            # print(ops[0])
             return ops[0]
+
 
         def dfs(l, r):
             if r < l:
@@ -50,6 +50,8 @@ class Solution:
                     res |= calc(need)
                     need = []
                     i += 1
+                if (l, r) == (1, 3):
+                    print(need)
             return res
 
         return list(sorted(dfs(0, n-1)))
