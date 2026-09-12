@@ -22,7 +22,7 @@ class Solution:
                     break
                 dp[i+tri[l]] = min(dp[i+tri[l]], l+1+dp[i])
                 
-        return dp[n]
+        return dp[n]-1
                 
         
         
