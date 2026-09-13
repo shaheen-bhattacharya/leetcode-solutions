@@ -3,14 +3,12 @@ class Solution:
         stack = []
         n = len(nums)
         pref = [0] + list(accumulate(nums))
-        dpl = [0] * n
-        dpl[0] = 1
+        dpl = [1] * n
         for i in range(1, n):
             if nums[i] > nums[i-1]:
                 dpl[i] = dpl[i-1] + 1
 
-        dpr = [0] * n
-        dpr[n-1] = 1
+        dpr = [1] * n
         for i in range(n-2, -1, -1):
             if nums[i] < nums[i+1]:
                 dpr[i] = dpr[i+1] + 1
