@@ -32,7 +32,7 @@ class Solution:
         
         res = 0
         for i in range(n):
-            lops = min(i - left[i], dpl[i]-1)
+            lops = min(i - left[i], dpl[i])
             l, r = i+1, min(right[i], i + dpr[i])
             while l < r:
                 m = (l+r)//2
