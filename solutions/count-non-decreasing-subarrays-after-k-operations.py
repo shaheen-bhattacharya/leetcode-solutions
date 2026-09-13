@@ -23,7 +23,7 @@ class Solution:
         
         res = 0
         for i in range(n):
-            lops = i - left[i] - 1
+            lops = i - left[i]
             l, r = i+1, right[i]
             while l < r:
                 m = (l+r)//2
