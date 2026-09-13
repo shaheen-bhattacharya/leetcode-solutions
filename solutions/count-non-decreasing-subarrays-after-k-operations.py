@@ -40,7 +40,7 @@ class Solution:
                 else:
                     r = m
             rops = r - i - 1
-            if rops == 1:
+            if rops == 0:
                 rops += dpr[r-1]
             res += lops * rops
             # print(lops, rops, res)
