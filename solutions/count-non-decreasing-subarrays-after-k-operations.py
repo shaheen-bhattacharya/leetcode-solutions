@@ -9,7 +9,7 @@ class Solution:
                 dpl[i] = dpl[i-1] + 1
         dpr = [1] * n
         for i in range(n-2, -1, -1):
-            if nums[i] >= nums[i+1]:
+            if nums[i] <= nums[i+1]:
                 dpr[i] = dpr[i+1] + 1
         
         left = [-1] * n
