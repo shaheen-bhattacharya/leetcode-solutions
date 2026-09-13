@@ -12,6 +12,7 @@ class Solution:
                 left[i] = stack[-1]
             stack.append(i)
 
+        stack = []
         right = [n] * n
         for i in range(n-1, -1, -1):
             while stack and nums[i] >= nums[stack[-1]]:
