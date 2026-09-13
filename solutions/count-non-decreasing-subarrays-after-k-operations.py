@@ -33,5 +33,6 @@ class Solution:
                     r = m
             rops = min(right[i], r) - i
             res += lops * rops
+            print(i, lops, rops, r)
         return res
 
