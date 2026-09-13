@@ -11,7 +11,6 @@ class Solution:
             if stack:
                 left[i] = stack[-1]
             stack.append(i)
-        print(left)
 
         right = [n] * n
         for i in range(n-1, -1, -1):
@@ -20,6 +19,7 @@ class Solution:
             if stack:
                 right[i] = stack[-1]
             stack.append(i)
+        print(right)
         
         res = 0
         for i in range(n):
