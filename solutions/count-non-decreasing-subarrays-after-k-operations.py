@@ -39,7 +39,7 @@ class Solution:
                     l = m + 1
                 else:
                     r = m
-            rops = r - 1 - i
+            rops = r - i
             if rops == 1:
                 rops += dpr[r-1]
             res += lops * rops
