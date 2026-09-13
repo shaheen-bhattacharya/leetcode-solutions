@@ -7,12 +7,6 @@ class Solution:
         for i in range(1, n):
             if nums[i] > nums[i-1]:
                 dpl[i] = dpl[i-1] + 1
-
-        dpr = [1] * n
-        for i in range(n-2, -1, -1):
-            if nums[i] <= nums[i+1]:
-                dpr[i] = dpr[i+1] + 1
-        print(dpr)
         
         left = [-1] * n
         for i in range(n):
@@ -34,7 +28,7 @@ class Solution:
         res = 0
         for i in range(n):
             lops = min(i - left[i], dpl[i])
-            l, r = i+1, min(right[i], i + dpr[i] + 1)
+            l, r = i+1, right[i]
             while l < r:
                 m = (l+r)//2
                 if nums[i] * (m-i) - (pref[m+1] - pref[i+1]) <= k:
