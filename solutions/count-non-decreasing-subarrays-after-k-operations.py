@@ -39,9 +39,9 @@ class Solution:
                     l = m + 1
                 else:
                     r = m
-            rops = r - i
+            rops = r - 1 - i
             if rops == 1:
-                rops += dpr[i] - 1
+                rops += dpr[r-1]
             res += lops * rops
             # print(lops, rops, res)
         return res
