@@ -27,12 +27,12 @@ class Solution:
             l, r = i+1, right[i]
             while l < r:
                 m = (l+r)//2
-                if pref[m+1] - pref[i+1] <= 4 * (m-i) + k:
+                if pref[m+1] - pref[i+1] <= nums[i] * (m-i) + k:
                     l = m + 1
                 else:
                     r = m
             rops = min(right[i], r) - i
             res += lops * rops
-            print(i, lops, rops, r)
+            # print(i, lops, rops, r)
         return res
 
