@@ -34,8 +34,8 @@ class Solution:
         
         res = 0
         for i in range(n):
-            lops = i - left[i]
-            l, r = i+1, right[i]
+            lops = min(i - left[i], dpl[i]-1)
+            l, r = i+1, min(right[i], i + dpr[i])
             while l < r:
                 m = (l+r)//2
                 if nums[i] * (m-i) - (pref[m+1] - pref[i+1]) <= k:
@@ -44,6 +44,6 @@ class Solution:
                     r = m
             rops = r - i
             res += lops * rops
-            print(lops, rops)
+            # print(lops, rops)
         return res
 
