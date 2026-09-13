@@ -27,7 +27,7 @@ class Solution:
             l, r = i+1, right[i]
             while l < r:
                 m = (l+r)//2
-                if pref[m+1] - pref[i+1] <= nums[i] * (m-i) + k:
+                if nums[i] * (m-i) - (pref[m+1] - pref[i+1]) <= k:
                     l = m + 1
                 else:
                     r = m
