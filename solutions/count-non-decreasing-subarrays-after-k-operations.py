@@ -33,7 +33,7 @@ class Solution:
         res = 0
         for i in range(n):
             lops = min(i - left[i], dpl[i])
-            l, r = i+1, min(right[i], i + dpr[i])
+            l, r = i+1, min(right[i], i + dpr[i] + 1)
             while l < r:
                 m = (l+r)//2
                 if nums[i] * (m-i) - (pref[m+1] - pref[i+1]) <= k:
