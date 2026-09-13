@@ -26,6 +26,7 @@ class Solution:
             lops = i - left[i]
             l, r = i+1, right[i]
             while l < r:
+                print(i, l, r)
                 m = (l+r)//2
                 if nums[i] * (m-i) - (pref[m+1] - pref[i+1]) <= k:
                     l = m + 1
@@ -33,6 +34,6 @@ class Solution:
                     r = m
             rops = min(right[i], r) - i
             res += lops * rops
-            print(i, lops, rops, r)
+            # print(i, lops, rops, r)
         return res
 
