@@ -21,6 +21,7 @@ class Solution:
                 right[i] = stack[-1]
             stack.append(i)
         
+        print(right)
         res = 0
         for i in range(n):
             lops = i - left[i]
