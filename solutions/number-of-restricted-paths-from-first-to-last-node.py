@@ -29,7 +29,7 @@ class Solution:
             for nei, w in adj[node]:
                 if dist[nei] >= dist[node]:
                     continue
-                ret += (1 + dfs(nei)) % MOD
+                ret += dfs(nei) % MOD
             dp[node] = ret % MOD
             return ret % MOD
         return dfs(1)
