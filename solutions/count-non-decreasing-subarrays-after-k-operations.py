@@ -44,6 +44,6 @@ class Solution:
                     r = m
             rops = r - i
             res += lops * rops
-            # print(lops, rops)
+            print(lops, rops)
         return res
 
