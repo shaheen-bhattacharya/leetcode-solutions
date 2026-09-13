@@ -41,7 +41,7 @@ class Solution:
                     r = m
             rops = r - i
             if rops == 1:
-                rops += dpr[i]
+                rops += dpr[i] - 1
             res += lops * rops
             # print(lops, rops, res)
         return res
