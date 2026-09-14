@@ -22,7 +22,7 @@ class Solution:
                 r -= 1
                 tc -= 1
                 if tc > 0:
-                    q.append((top, tc))
+                    q.appendleft((top, tc))
             res += r - i + 1
         return res
                 
