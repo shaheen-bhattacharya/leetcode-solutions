@@ -20,9 +20,9 @@ class Solution:
             #process right
             while cost > k:
                 top, tc = q.popleft()
+                cost -= (top - nums[r])
                 r -= 1
                 tc -= 1
-                cost -= (top - nums[r])
                 if tc > 0:
                     q.append((top, tc))
             res += r - i + 1
