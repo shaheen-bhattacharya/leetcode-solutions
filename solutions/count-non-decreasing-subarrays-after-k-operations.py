@@ -1,6 +1,8 @@
 class Solution:
     def countNonDecreasingSubarrays(self, nums: List[int], k: int) -> int:
         n = len(nums)
+        if n == 1:
+            return 1
         q = deque([(nums[-1], 1)])
         cost = 0
         r = len(nums) - 1
