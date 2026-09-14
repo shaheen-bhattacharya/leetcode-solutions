@@ -5,7 +5,7 @@ class Solution:
         cost = 0
         r = len(nums) - 1
 
-        res = 0
+        res = 1
         for i in range(n-2, -1, -1):
             c=1
             #process left
@@ -24,7 +24,7 @@ class Solution:
                 if tc > 0:
                     q.append((top, tc))
             res += r - i + 1
-        return res + 1
+        return res
                 
 
 
