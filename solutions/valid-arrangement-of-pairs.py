@@ -15,6 +15,7 @@ class Solution:
                 break
         res = []
         def dfs(s):
+            print(s)
             while adj[s]:
                 e = adj[s].pop()
                 dfs(e)
