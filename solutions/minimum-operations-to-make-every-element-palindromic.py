@@ -16,10 +16,7 @@ class Solution:
                 if nsn <= rf:
                     res = f"{fst}{rf}"
                     nf = str(int(fst)-1)
-                    nnf = nf
-                    if nf[0] == "-":
-                        nnf = nf[1:-1]
-                    res2 = f"{nf}{nnf}"
+                    res2 = f"{nf}{nf}"
                 else:
                     nf = str(int(fst)+1)
                     res = f"{nf}{nf[::-1]}"
@@ -28,10 +25,7 @@ class Solution:
                 if nsn <= rf:
                     res = f"{fst}{snum[sn//2]}{rf}"
                     nf = str(int(snum[:sn//2+1])-1)
-                    nnf = nf
-                    if nf[0] == "-":
-                        nnf = nf[1:-1]
-                    res2 = f"{nf}{nnf[::-1]}"
+                    res2 = f"{nf}{nf[::-1]}"
                 else:
                     nf = str(int(snum[:sn//2+1])+1)
                     res = f"{nf}{nf[:-1][::-1]}"
