@@ -20,6 +20,8 @@ class RandomizedSet:
         del self.corr[idx]
         del self.rev[val]
         last = self.ptr - 1
+        if idx == last:
+            return True
         nval = self.corr[last]
         del self.rev[nval]
         del self.corr[last]
