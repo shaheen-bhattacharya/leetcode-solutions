@@ -4,6 +4,7 @@ class Solution:
         adj = defaultdict(list)
         scorr = defaultdict(list)
         ecorr = defaultdict(list)
+
         start = 0
         for i, (s, e) in enumerate(pairs):
             scorr[s].append(i)
@@ -16,7 +17,6 @@ class Solution:
 
         res = []
         def dfs(node):
-            print(node)
             while scorr[pairs[node][1]]:
                 nei = scorr[pairs[node][1]].pop()
                 dfs(nei)
