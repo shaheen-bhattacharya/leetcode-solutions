@@ -14,6 +14,7 @@ class Solution:
                 break
         res = []
         def dfs(node):
+            print(node)
             while scorr[pairs[node][1]]:
                 nei = scorr[pairs[node][1]].pop()
                 dfs(nei)
