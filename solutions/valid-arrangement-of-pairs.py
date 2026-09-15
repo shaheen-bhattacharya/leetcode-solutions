@@ -8,11 +8,10 @@ class Solution:
         for i, (s, e) in enumerate(pairs):
             scorr[s].append(i)
             ecorr[e].append(i)
-        print(scorr, ecorr)
 
         for i in range(n):
             print(pairs[i], ecorr[pairs[i][1]])
-            if len(scorr[pairs[i][1]]) % 2 == 1:
+            if len(scorr[pairs[i][1]]) - len(ecorr[pairs[i][0]]) == 1:
                 start = i
                 break
 
