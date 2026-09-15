@@ -4,19 +4,16 @@ class Solution:
         adj = defaultdict(list)
         scorr = defaultdict(list)
         ecorr = defaultdict(list)
-        for i, (s, e) in enumerate(pairs):
-            adj[i] = ecorr[e]
-        print(adj)
         start = 0
         for i in range(n):
-            if len(adj[i]) % 2 == 1:
+            if len(ecorr[pairs[i][1]]) % 2 == 1:
                 start = i
                 break
         res = []
         def dfs(node):
-            while adj[node]:
-                nei = adj[node].pop()
+            while ecorr[pairs[node][1]]:
+                nei = ecorr[pairs[node][1]].pop()
                 dfs(nei)
-            res.append(pairs[i])
+            res.append(pairs[node])
         dfs(start)
         return res
