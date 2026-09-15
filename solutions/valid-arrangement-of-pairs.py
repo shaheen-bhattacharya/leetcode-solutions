@@ -10,7 +10,6 @@ class Solution:
             ecorr[e].append(i)
 
         for i in range(n):
-            print(pairs[i], ecorr[pairs[i][1]])
             if len(scorr[pairs[i][1]]) - len(ecorr[pairs[i][0]]) == 1:
                 start = i
                 break
@@ -23,4 +22,4 @@ class Solution:
                 dfs(nei)
             res.append(pairs[node])
         dfs(start)
-        return res
+        return res[::-1]
