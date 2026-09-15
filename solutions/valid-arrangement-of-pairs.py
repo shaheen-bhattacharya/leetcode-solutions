@@ -5,14 +5,17 @@ class Solution:
         scorr = defaultdict(list)
         ecorr = defaultdict(list)
         start = 0
+        for i, (s, e) in enumerate(pairs):
+            scorr[s].append(i)
+            ecorr[e].append(i)
         for i in range(n):
             if len(ecorr[pairs[i][1]]) % 2 == 1:
                 start = i
                 break
         res = []
         def dfs(node):
-            while ecorr[pairs[node][1]]:
-                nei = ecorr[pairs[node][1]].pop()
+            while scorr[pairs[node][1]]:
+                nei = scorr[pairs[node][1]].pop()
                 dfs(nei)
             res.append(pairs[node])
         dfs(start)
