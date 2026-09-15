@@ -15,9 +15,10 @@ class Solution:
                 break
         res = []
         def dfs(s):
-            print(s)
+            # print(s)
             while adj[s]:
                 e = adj[s].pop()
                 dfs(e)
                 res.append([s, e])
+        dfs(start)
         return res[::-1]
