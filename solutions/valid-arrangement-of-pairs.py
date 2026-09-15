@@ -6,6 +6,7 @@ class Solution:
         ecorr = defaultdict(list)
         for i, (s, e) in enumerate(pairs):
             adj[i] = ecorr[e]
+        print(adj)
         start = 0
         for i in range(n):
             if len(adj[i]) % 2 == 1:
