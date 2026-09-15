@@ -11,4 +11,4 @@ class Solution:
                 dfs(nei)
             res.append(node)
         dfs("JFK")
-        return res
+        return res[::-1]
