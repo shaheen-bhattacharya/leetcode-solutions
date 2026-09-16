@@ -15,8 +15,8 @@ class Solution:
         hi = n-1
         print(queries)
         for i in range(nq-1, -1, -1):
-            print(i)
             if a == b:
+                print(a)
                 continue
             a, b, ix = queries[i]
             while hi >= b:
