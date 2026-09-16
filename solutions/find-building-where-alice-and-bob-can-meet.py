@@ -26,6 +26,9 @@ class Solution:
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
+            if heights[a] == need and need == stack[0][0]:
+                res[ix] = -1
+                continue
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
