@@ -33,7 +33,6 @@ class Solution:
                     l = m + 1
                 else:
                     r = m
-            print(need, stack, l)
             val = stack[l-1]
             if l == 0:
                 res[ix] = -1
