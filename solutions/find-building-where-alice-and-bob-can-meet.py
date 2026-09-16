@@ -16,14 +16,13 @@ class Solution:
         for i in range(nq-1, -1, -1):
             a, b, ix = queries[i]
             if a == b:
-                res[i] = a
+                res[ix] = a
                 continue
             while hi >= b:
                 while stack and heights[hi] > stack[-1][0]:
                     stack.pop()
                 stack.append((heights[hi], hi))
                 hi -= 1
-            # print(stack)
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
