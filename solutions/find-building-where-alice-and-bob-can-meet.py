@@ -31,14 +31,15 @@ class Solution:
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
-                if hgt >= need:
+                if hgt <= need:
                     l = m + 1
                 else:
                     r = m
-            if l == len(stack):
+            val = stack[l-1]
+            if l == 0:
                 res[ix] = -1
             else:
-                res[ix] = stack[l][1]
+                res[ix] = stack[l-1][1]
         return res
             
                 
