@@ -7,5 +7,5 @@ class Solution:
             for v in coins:
                 if c - v >= 0:
                     dp[c] += dp[c-v]
-        # print(dp)
+        print(dp)
         return dp[amount]
