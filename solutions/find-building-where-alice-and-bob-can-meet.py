@@ -13,10 +13,10 @@ class Solution:
         res = [0] * (nq)
 
         hi = n-1
-        print(queries)
         for i in range(nq-1, -1, -1):
             a, b, ix = queries[i]
             if a == b:
+                res[i] = a
                 continue
             while hi >= b:
                 while stack and heights[hi] > stack[-1][0]:
