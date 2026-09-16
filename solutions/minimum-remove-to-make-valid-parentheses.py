@@ -15,13 +15,13 @@ class Solution:
                 diff -= 1
         print(diff)
         # print(stack)
-        while stack and diff > 0:
+        while stack and diff < 0:
             ch, i = stack.pop()
             if ch == "(":
                 continue
             else:
                 sarr[i] = ""
-                diff -= 1
+                diff += 1
         for i in range(len(sarr)):
             if diff == 0:
                 break
