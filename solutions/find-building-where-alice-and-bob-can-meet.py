@@ -42,8 +42,8 @@ class Solution:
                 else:
                     r = m
             val = stack[l-1]
-            # if ix == 0:
-            #     print(heights[a], heights[b], stack)
+            if ix == 0:
+                print(heights[a], heights[b], stack)
             if l == 0:
                 res[ix] = -1
             else:
