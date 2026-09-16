@@ -13,7 +13,7 @@ class Solution:
                     continue
                 stack.append((ch, i))
                 diff -= 1
-        # print(diff)
+        print(diff)
         # print(stack)
         while stack and diff > 0:
             ch, i = stack.pop()
