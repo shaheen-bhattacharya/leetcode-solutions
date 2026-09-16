@@ -29,6 +29,7 @@ class Solution:
             if heights[a] == need and need == stack[0][0]:
                 res[ix] = -1
                 continue
+
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
@@ -37,7 +38,7 @@ class Solution:
                 else:
                     r = m
             val = stack[l-1]
-            if ix == 8:
+            if ix in (2, 3, 4):
                 print(a, b, stack, heights[a], heights[b])
             if l == 0:
                 res[ix] = -1
