@@ -20,6 +20,7 @@ class RandomizedSet:
         del self.corr[idx]
         del self.rev[val]
         last = self.ptr - 1
+        self.ptr -= 1
         if idx == last:
             return True
         nval = self.corr[last]
@@ -27,10 +28,10 @@ class RandomizedSet:
         del self.corr[last]
         self.corr[idx] = nval
         self.rev[nval] = idx
-        self.ptr -= 1
         return True
 
     def getRandom(self) -> int:
+        print(self.corr)
         x = random.randint(0, self.ptr-1)
         return self.corr[x]
 
