@@ -9,9 +9,7 @@ class Solution:
                 a, b = b, a
             queries[i] = [a, b, i]
         queries.sort(key = lambda x: x[1])  
-
         res = [0] * (nq)
-
         hi = n-1
         for i in range(nq-1, -1, -1):
             a, b, ix = queries[i]
@@ -21,20 +19,13 @@ class Solution:
             if heights[a] < heights[b]:
                 res[ix] = b
                 continue
-
             while hi >= b:
                 while stack and heights[hi] > stack[-1][0]:
                     stack.pop()
                 stack.append((heights[hi], hi))
                 hi -= 1
-
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
-            # if heights[a] == need and need == stack[0][0]:
-            #     res[ix] = -1
-            #     continue
-
-            # cond = heights[a] != heights[b]
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
@@ -43,8 +34,6 @@ class Solution:
                 else:
                     r = m
             val = stack[l-1]
-            if ix == 0:
-                print(heights[a], heights[b], stack)
             if l == 0:
                 res[ix] = -1
             else:
