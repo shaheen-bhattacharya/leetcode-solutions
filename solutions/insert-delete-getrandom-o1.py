@@ -31,7 +31,7 @@ class RandomizedSet:
         return True
 
     def getRandom(self) -> int:
-        print(self.corr)
+        # print(self.corr)
         x = random.randint(0, self.ptr-1)
         return self.corr[x]
 
