@@ -8,7 +8,7 @@ class Solution:
         for c in range(amount+1):
             used = set()
             for v in coins:
-                if c - v >= 0 and c - v not in used:
+                if c - v >= 0 and v not in used:
                     used.add(v)
                     used.add(c-v)
                     dp[c] += dp[c-v]
