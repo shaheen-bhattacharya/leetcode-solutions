@@ -5,10 +5,10 @@ class Solution:
         sc = set(coins)
 
         for c in range(amount+1):
+            used = set()
             for v in coins:
-                if c < v*2:
-                    continue
-                if c - v >= 0:
+                if c - v >= 0 and c - v not in used:
+                    used.add(v)
                     dp[c] += dp[c-v]
         # print(dp)
         return dp[amount]
