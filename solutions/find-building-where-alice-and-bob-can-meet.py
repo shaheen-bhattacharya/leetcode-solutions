@@ -18,11 +18,12 @@ class Solution:
             if a == b:
                 continue
             a, b, ix = queries[i]
-            for j in range(hi, b-1, -1):
-                while stack and heights[j] > heights[stack[-1][0]]:
+            while hi >= b:
+                while stack and heights[hi] > heights[stack[-1][0]]:
                     stack.pop()
-                stack.append((heights[j], j))
-            print(stack)
+                stack.append((heights[hi], hi))
+                hi -= 1
+            # print(stack)
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
