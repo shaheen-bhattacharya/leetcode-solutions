@@ -35,6 +35,7 @@ class Solution:
                     r = m
             val = stack[l-1]
             if l == 0:
+                print(a, b, stack, heights[a], heights[b])
                 res[ix] = -1
             else:
                 res[ix] = stack[l-1][1]
