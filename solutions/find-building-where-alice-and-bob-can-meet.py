@@ -20,6 +20,7 @@ class Solution:
                 continue
             if heights[a] < heights[b]:
                 res[ix] = b
+                continue
 
             while hi >= b:
                 while stack and heights[hi] > stack[-1][0]:
