@@ -22,6 +22,13 @@ class Solution:
             else:
                 sarr[i] = ""
                 diff -= 1
+        for i in range(len(sarr)):
+            if diff == 0:
+                break
+            if sarr[i] == "(":
+                sarr[i] = ""
+                diff -= 1
+            
         return "".join(sarr)
             
 
