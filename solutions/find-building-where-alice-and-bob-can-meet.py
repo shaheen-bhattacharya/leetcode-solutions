@@ -29,11 +29,11 @@ class Solution:
             if heights[a] == need and need == stack[0][0]:
                 res[ix] = -1
                 continue
-
+            cond = heights[a] == need
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
-                if need <= hgt:
+                if (cond and need <= hgt) or ((not cond) and need < hgt):
                     l = m + 1
                 else:
                     r = m
