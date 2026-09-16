@@ -10,5 +10,5 @@ class Solution:
                 if c - v >= 0 and c - v not in used:
                     used.add(v)
                     dp[c] += dp[c-v]
-        # print(dp)
+        print(dp)
         return dp[amount]
