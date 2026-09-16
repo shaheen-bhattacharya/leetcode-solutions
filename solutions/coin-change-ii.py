@@ -9,6 +9,7 @@ class Solution:
             for v in coins:
                 if c - v >= 0 and c - v not in used:
                     used.add(v)
-                    dp[c] += dp[c-v]
+                    used.add(c-v)
+                    dp[c] += max(dp[c-v], dp[v])
         print(dp)
         return dp[amount]
