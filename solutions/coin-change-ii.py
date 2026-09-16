@@ -3,6 +3,7 @@ class Solution:
         dp = [0] * (amount + 1)
         dp[0] = 1
         sc = set(coins)
+        coins.sort(reverse=True)
 
         for c in range(amount+1):
             used = set()
