@@ -15,12 +15,11 @@ class Solution:
         hi = n-1
         print(queries)
         for i in range(nq-1, -1, -1):
-            if a == b:
-                print(a)
-                continue
             a, b, ix = queries[i]
+            if a == b:
+                continue
             while hi >= b:
-                while stack and heights[hi] > heights[stack[-1][0]]:
+                while stack and heights[hi] > stack[-1][0]:
                     stack.pop()
                 stack.append((heights[hi], hi))
                 hi -= 1
