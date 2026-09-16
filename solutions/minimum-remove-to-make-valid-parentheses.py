@@ -13,9 +13,10 @@ class Solution:
                     continue
                 stack.append((ch, i))
                 diff -= 1
-        print(diff)
-        print(stack)
-        for i in range(len(sarr)):
+        # print(diff)
+        # print(stack)
+
+        for i in range(len(sarr)-1, -1, -1):
             if diff == 0:
                 break
             if sarr[i] == "(":
