@@ -11,6 +11,6 @@ class Solution:
                 if c - v >= 0 and c - v not in used:
                     used.add(v)
                     used.add(c-v)
-                    dp[c] += max(dp[c-v], dp[v])
+                    dp[c] += dp[c-v]
         print(dp)
         return dp[amount]
