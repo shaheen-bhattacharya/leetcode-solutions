@@ -43,8 +43,6 @@ class Solution:
                 res[ix] = -1
             else:
                 res[ix] = stack[l-1][1]
-            # if ix in (2, 3, 4):
-            #     print(a, b, stack, heights[a], heights[b], res[ix])
         return res
             
                 
