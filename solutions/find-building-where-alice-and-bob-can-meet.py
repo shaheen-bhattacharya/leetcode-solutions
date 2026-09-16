@@ -27,7 +27,6 @@ class Solution:
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
-            print(need, stack)
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
@@ -35,6 +34,7 @@ class Solution:
                     l = m + 1
                 else:
                     r = m
+            print(need, stack, l)
             val = stack[l-1]
             if l == 0:
                 res[ix] = -1
