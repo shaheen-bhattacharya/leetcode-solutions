@@ -39,7 +39,7 @@ class Solution:
                     r = m
             val = stack[l-1]
             if ix == 0:
-                print(a, b, heights[a], heights[b])
+                print(heights[a], heights[b], stack)
             if l == 0:
                 res[ix] = -1
             else:
