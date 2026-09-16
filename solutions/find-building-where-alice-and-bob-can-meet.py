@@ -22,6 +22,7 @@ class Solution:
                 while stack and heights[j] > heights[stack[-1][0]]:
                     stack.pop()
                 stack.append((heights[j], j))
+            print(stack)
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
