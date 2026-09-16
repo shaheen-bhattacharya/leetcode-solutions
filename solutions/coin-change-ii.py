@@ -2,10 +2,13 @@ class Solution:
     def change(self, amount: int, coins: list[int]) -> int:
         dp = [0] * (amount + 1)
         dp[0] = 1
+        sc = set(coins)
 
         for c in range(amount+1):
             for v in coins:
+                if c - v > v and c-v in sc:
+                    continue
                 if c - v >= 0:
                     dp[c] += dp[c-v]
-        print(dp)
+        # print(dp)
         return dp[amount]
