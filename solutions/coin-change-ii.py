@@ -5,6 +5,6 @@ class Solution:
 
         for c in range(amount + 1):
             for v in coins:
-                
-                dp[c] += dp[c-v]
+                if c - v >= 0:
+                    dp[c] += dp[c-v]
         return dp[amount]
