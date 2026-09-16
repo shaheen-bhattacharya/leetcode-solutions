@@ -29,7 +29,7 @@ class Solution:
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
-                if need <= hgt:
+                if need < hgt:
                     l = m + 1
                 else:
                     r = m
