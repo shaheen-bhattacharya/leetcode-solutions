@@ -13,6 +13,7 @@ class Solution:
         res = [0] * (nq)
 
         hi = n-1
+        print(queries)
         for i in range(nq-1, -1, -1):
             if a == b:
                 continue
