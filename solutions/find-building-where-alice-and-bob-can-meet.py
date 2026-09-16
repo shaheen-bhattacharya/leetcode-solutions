@@ -18,6 +18,9 @@ class Solution:
             if a == b:
                 res[ix] = a
                 continue
+            if heights[a] < heights[b]:
+                res[ix] = b
+
             while hi >= b:
                 while stack and heights[hi] > stack[-1][0]:
                     stack.pop()
@@ -26,24 +29,25 @@ class Solution:
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
-            if heights[a] == need and need == stack[0][0]:
-                res[ix] = -1
-                continue
-            cond = heights[a] != heights[b]
+            # if heights[a] == need and need == stack[0][0]:
+            #     res[ix] = -1
+            #     continue
+
+            # cond = heights[a] != heights[b]
             while l < r:
                 m = (l + r) // 2
                 hgt, idx = stack[m]
-                if (cond and need <= hgt) or ((not cond) and need < hgt):
+                if need < hgt:
                     l = m + 1
                 else:
                     r = m
             val = stack[l-1]
-            if ix == 0:
-                print(heights[a], heights[b], stack)
+            # if ix == 0:
+            #     print(heights[a], heights[b], stack)
             if l == 0:
                 res[ix] = -1
             else:
-                res[ix] = stack[l-1][1]
+                res[ix] = stack[l-1][1] 
         return res
             
                 
