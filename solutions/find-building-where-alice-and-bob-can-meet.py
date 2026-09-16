@@ -23,7 +23,7 @@ class Solution:
                     stack.pop()
                 stack.append((heights[hi], hi))
                 hi -= 1
-            # print(stack)
+            print(stack)
 
             l, r = 0, len(stack) 
             need = max(heights[a], heights[b])
