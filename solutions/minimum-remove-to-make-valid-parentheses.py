@@ -9,6 +9,7 @@ class Solution:
                 stack.append((ch, i))
             elif ch == ")":
                 if diff == 0:
+                    sarr[i] = ""
                     continue
                 stack.append((ch, i))
                 diff -= 1
