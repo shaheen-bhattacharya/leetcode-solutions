@@ -2,12 +2,12 @@ class Solution:
     def lengthOfLIS(self, nums: list[int]) -> int:
         tail = []
         n = len(nums)
-        sl = SortedList()
 
         res = 0
         for i in range(n):
-            sl.add(nums[i])
-            print(nums[i], sl, i)
-            idx = sl.bisect_left(nums[i])
-            res = max(res, idx+1)
-        return res
+            pos = bisect_left(tail, nums[i])
+            if pos == len(tail):
+                tail.append(nums[i])
+            else:
+                tail[pos] = nums[i]
+        return len(tail)
