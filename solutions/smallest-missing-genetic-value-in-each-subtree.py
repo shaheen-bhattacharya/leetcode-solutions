@@ -6,9 +6,8 @@ class Solution:
         for i in range(1, n):
             adj[parents[i]].append(i)
             adj[i].append(parents[i])
-            print(i, parents[i])
             indegree[parents[i]] += 1
-        print(indegree)
+        # print(indegree)
         rev = {}
         for i in range(n):
             rev[nums[i]] = i
@@ -19,6 +18,7 @@ class Solution:
         q = deque([i for i in range(n) if indegree[i] == 0])
 
         while q:    
+            print(q)
             node = q.popleft()
             if node == -1:
                 break
