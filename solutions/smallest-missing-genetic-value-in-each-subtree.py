@@ -18,12 +18,11 @@ class Solution:
         q = deque([i for i in range(n) if indegree[i] == 0])
 
         while q:    
-            print(q)
             node = q.popleft()
             if node == -1:
                 break
             sets[node].add(nums[node])
-            sets[parents[node]].add(nums[node])
+            sets[parents[node]] |= sets[node]
             miss = maxv[node]
             while miss in sets[node]:
                 miss += 1
