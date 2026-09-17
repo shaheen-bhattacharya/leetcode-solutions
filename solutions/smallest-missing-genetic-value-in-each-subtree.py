@@ -3,7 +3,7 @@ class Solution:
         adj = defaultdict(list)
         n = len(parents)
         indegree = [0] * n
-        for i in range(n):
+        for i in range(1, n):
             adj[parents[i]].append(i)
             adj[i].append(parents[i])
             print(i, parents[i])
@@ -19,8 +19,9 @@ class Solution:
         q = deque([i for i in range(n) if indegree[i] == 0])
 
         while q:    
-            print(q)
             node = q.popleft()
+            if node == -1:
+                break
             sets[node].add(nums[node])
             sets[parents[node]].add(nums[node])
             miss = maxv[node]
