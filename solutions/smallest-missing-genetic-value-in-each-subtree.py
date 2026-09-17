@@ -14,7 +14,7 @@ class Solution:
         res = [0] * n
         maxv = [1] * n
         sets = defaultdict(set)
-        q = deque([i for i in range(n) if len(adj[i]) == 1])
+        q = deque([i for i in range(n) if indegree[i] == 0])
 
         while q:    
             print(q)
