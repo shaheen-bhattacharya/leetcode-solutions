@@ -19,6 +19,7 @@ class Solution:
         
         res = [0] * n
         def dfs(mv, allowed):
+            print(allowed)
             if len(allowed) == 0:
                 return 
             node = rev[mv] if mv in rev else -2
