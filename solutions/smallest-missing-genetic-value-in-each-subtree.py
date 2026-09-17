@@ -16,9 +16,9 @@ class Solution:
     
         i = nums.index(1)
         miss = 1
+        dfs(i)
 
         while i >= 0:
-            dfs(i)
             while seen[miss]:
                 miss += 1
             res[i] = miss
