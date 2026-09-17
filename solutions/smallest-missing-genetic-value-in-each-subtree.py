@@ -10,15 +10,16 @@ class Solution:
             adj[parents[i]].append(i)
         
         def dfs(i):
-            for ch in adj[i]:
-                dfs(ch)
-            seen[nums[i]] = 1
+            if seen[nums[i]] == 0:
+                for ch in adj[i]:
+                    dfs(ch)
+                seen[nums[i]] = 1
     
         i = nums.index(1)
         miss = 1
-        dfs(i)
 
         while i >= 0:
+            dfs(i)
             while seen[miss]:
                 miss += 1
             res[i] = miss
