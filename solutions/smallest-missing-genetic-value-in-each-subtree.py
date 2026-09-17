@@ -16,7 +16,7 @@ class Solution:
             for nei in adj[node]:
                 if nei == parents[node]:
                     continue
-                dfs(nei)
+                miss = max(miss, dfs(nei))
             seen.add(nums[node])
             while miss in seen:
                 miss += 1
