@@ -11,27 +11,18 @@ class Solution:
 
         res = [0] * n
         maxv = [1] * n
-        seen = set()
-        def dfs(node):
-            if node == -1:
-                return 
+        sets = defaultdict(set)
+        q = deque([i for i in range(n) if len(adj[i]) == 1])
 
-            seen.add(nums[node])
+        while q:    
+            node = q.popleft()
+            sets[node].add(nums[node])
+            sets[parents[node]].add(nums[node])
             miss = maxv[node]
-            while miss in seen:
+            while miss in sets[node]:
                 miss += 1
             res[node] = miss
-
-            pv = maxv[parents[node]]
             maxv[parents[node]] = max(maxv[parents[node]], miss)
-            dfs(parents[node])
-            seen.remove(nums[node])
-            maxv[parents[node]] = pv
-            return 
-        
-        for i in range(n):
-            if len(adj[i]) == 1:
-                dfs(i)
         return res
 
             
