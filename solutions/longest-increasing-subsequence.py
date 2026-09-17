@@ -10,4 +10,5 @@ class Solution:
                 tail.append(nums[i])
             else:
                 tail[pos] = nums[i]
+            print(tail)
         return len(tail)
