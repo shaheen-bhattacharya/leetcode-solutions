@@ -19,12 +19,12 @@ class Solution:
         
         res = [0] * n
         def dfs(mv, allowed):
-            print(allowed)
             if len(allowed) == 1:
-                res[rev[mv]] = mv + 1
                 return 
+
             node = rev[mv] if mv in rev else -2
             rem = gset(node) if node != -2 else set()
+
             allowed -= rem
             if node != -2:
                 allowed.add(node)
