@@ -9,31 +9,24 @@ class Solution:
         for i in range(n):
             rev[nums[i]] = i
 
-        def gset(node):
-            ret = set([node])
+        res = [0] * n
+        seen = set()
+        def dfs(node):
+            miss = 1
             for nei in adj[node]:
                 if nei == parents[node]:
                     continue
-                ret |= gset(nei)
-            return ret
-        
-        res = [0] * n
-        def dfs(mv, allowed):
-            print(allowed)
-            if len(allowed) == 1:
-                return 
-
-            node = rev[mv] if mv in rev else -2
-            rem = gset(node) if node != -2 else set()
-
-            allowed -= rem
-            if node != -2:
-                allowed.add(node)
-
-            for nd in rem:
-                if nd != node:
-                    res[nd] = mv
-            dfs(mv+1, allowed)
+                dfs(nei)
+            seen.add(nums[node])
+            while miss in seen:
+                miss += 1
+            res[node] = miss
+            return miss
+        dfs(0)
+        return res
+            
+                
+                
 
         dfs(1, set([i for i in range(n)]))
         return res
