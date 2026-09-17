@@ -6,6 +6,7 @@ class Solution:
         for i in range(n):
             adj[parents[i]].append(i)
             adj[i].append(parents[i])
+            print(i, parents[i])
             indegree[parents[i]] += 1
         print(indegree)
         rev = {}
