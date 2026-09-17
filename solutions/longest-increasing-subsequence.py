@@ -9,5 +9,5 @@ class Solution:
             sl.add(nums[i])
             print(nums[i], sl, i)
             idx = sl.bisect_left(nums[i])
-            res = max(res, idx)
+            res = max(res, idx+1)
         return res
