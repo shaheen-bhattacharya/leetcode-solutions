@@ -23,7 +23,7 @@ class Solution:
             res[node] = miss
 
             pv = maxv[parents[node]]
-            maxv[parents[node]] = max(maxv[parents[node]], nums[node])
+            maxv[parents[node]] = max(maxv[parents[node]], miss)
             dfs(parents[node])
             seen.remove(nums[node])
             maxv[parents[node]] = pv
