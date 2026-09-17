@@ -10,25 +10,29 @@ class Solution:
             rev[nums[i]] = i
 
         res = [0] * n
+        maxv = [1] * n
         seen = set()
         def dfs(node):
-            miss = 1
-            for nei in adj[node]:
-                if nei == parents[node]:
-                    continue
-                miss = max(miss, dfs(nei))
-            seen.add(nums[node])
+            if node == -1:
+                return 
+
+            seen.add(node)
+            miss = maxv[node]
             while miss in seen:
                 miss += 1
             res[node] = miss
-            return miss
-        dfs(0)
+
+            pv = maxv[parents[node]]
+            maxv[parents[node]] = max(maxv[parents[node]], nums[node])
+            dfs(parents[node])
+            seen.remove(node)
+            maxv[parents[node]] = pv
+            return 
+        
+        for i in range(n):
+            if len(adj[i]) == 1:
+                dfs(i)
         return res
+
             
-                
-                
-
-        dfs(1, set([i for i in range(n)]))
-        return res
-
 
