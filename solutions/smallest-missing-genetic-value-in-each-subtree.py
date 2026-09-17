@@ -3,7 +3,7 @@ class Solution:
         adj = defaultdict(list)
         n = len(parents)
         res = [1] * n
-        seen = [0] * 100001
+        seen = [0] * 100002
         if 1 not in nums:
             return res
         for i in range(n):
