@@ -7,6 +7,7 @@ class Solution:
             adj[parents[i]].append(i)
             adj[i].append(parents[i])
             indegree[parents[i]] += 1
+        print(indegree)
         rev = {}
         for i in range(n):
             rev[nums[i]] = i
@@ -20,7 +21,6 @@ class Solution:
             node = q.popleft()
             sets[node].add(nums[node])
             sets[parents[node]].add(nums[node])
-            
             miss = maxv[node]
             while miss in sets[node]:
                 miss += 1
