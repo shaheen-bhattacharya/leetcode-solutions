@@ -15,7 +15,6 @@ class Solution:
                 dfs(nei)
             sl.remove(nums[node])
             res[node] = sl[0]
-            sl.add(nums[node])
         dfs(0)
         return res
 
