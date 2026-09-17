@@ -16,7 +16,7 @@ class Solution:
             if node == -1:
                 return 
 
-            seen.add(node)
+            seen.add(nums[node])
             miss = maxv[node]
             while miss in seen:
                 miss += 1
@@ -25,7 +25,7 @@ class Solution:
             pv = maxv[parents[node]]
             maxv[parents[node]] = max(maxv[parents[node]], nums[node])
             dfs(parents[node])
-            seen.remove(node)
+            seen.remove(nums[node])
             maxv[parents[node]] = pv
             return 
         
