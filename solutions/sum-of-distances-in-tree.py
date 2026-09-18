@@ -15,8 +15,10 @@ class Solution:
                 dist[node] += ncnt + tot
                 nodes += ncnt
             return nodes, dist[node]
+        res = []
         for i in range(n):
-            dist[i] = dfs(i, -1)[1]
+            res.append(dfs(i, -1)[1])
+            dist = [0] * n
         return dist
 
 
