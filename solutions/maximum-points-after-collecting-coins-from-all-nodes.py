@@ -22,5 +22,6 @@ class Solution:
                     continue
                 op2 += dfs(nei, node, mods+1)
             dp[key] = max(op1, op2)
+            print(key, dp[key])
             return dp[key]
         return dfs(0, -1, 1)            
