@@ -18,13 +18,12 @@ class Solution:
             sizes[node] = nodes
             return nodes, dist[node]
         dfs(0, -1)
-        # print(sizes)
 
         def dfs2(node, par):
             for nei in adj[node]:
                 if nei == par:
                     continue
-                dist[nei] = dist[node] + n - 2 * sizes[nei]
+                dist[nei] = dist[node] - sizes[nei] + (n - sizes[nei])
                 dfs2(nei, node)
         dfs2(0, -1)
         return dist
