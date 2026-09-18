@@ -15,6 +15,8 @@ class Solution:
                 dist[node] += ncnt + tot
                 nodes += ncnt
             return nodes, dist[node]
-        dfs(0, -1)
-        print(dist)
+        for i in range(n):
+            dist[i] = dfs(i, -1)[1]
+        return dist
+
 
