@@ -16,7 +16,7 @@ class Solution:
                 if nei == par:
                     continue
                 op1 += dfs(nei, node, mods)
-            op2 = coins[node]//pow(2, mods)
+            op2 = coins[node]//pow(2, mods+1)
             for nei in adj[node]:
                 if nei == par:
                     continue
