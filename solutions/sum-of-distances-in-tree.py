@@ -1,6 +1,7 @@
 class Solution:
     def sumOfDistancesInTree(self, n: int, edges: list[list[int]]) -> list[int]:
         dist = [0] * n
+        sizes = [0] * n
         adj = defaultdict(list)
         for u, v in edges:
             adj[u].append(v)
@@ -14,11 +15,16 @@ class Solution:
                 ncnt, tot = dfs(nei, node)
                 dist[node] += ncnt + tot
                 nodes += ncnt
+            sizes[node] = nodes
             return nodes, dist[node]
-        res = []
-        for i in range(n):
-            res.append(dfs(i, -1)[1])
-            dist = [0] * n
-        return res
+        dfs(0, -1)
+        print(sizes)
+
+        # def dfs2(node, par, curr):
+        #     for nei in adj[node]:
+        #         if nei == par:
+        #             continue
+                
+        
 
 
