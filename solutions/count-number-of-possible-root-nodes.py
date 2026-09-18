@@ -20,6 +20,7 @@ class Solution:
                 if nei == par:
                     continue
                 if (node, nei) in gset:
+                    print(node, nei)
                     corr += 1
                 dfs(nei, node)
         dfs(0, -1)
