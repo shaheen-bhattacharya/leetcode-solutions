@@ -17,6 +17,7 @@ class Solution:
                 if l2[idx] == 0:
                     bad = True
                     break
+                l2[idx] -= 1
                 curr += score[idx]
             take = -inf
             if not bad:
