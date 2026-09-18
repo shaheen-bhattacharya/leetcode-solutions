@@ -19,6 +19,6 @@ class Solution:
         for i in range(n):
             res.append(dfs(i, -1)[1])
             dist = [0] * n
-        return dist
+        return res
 
 
