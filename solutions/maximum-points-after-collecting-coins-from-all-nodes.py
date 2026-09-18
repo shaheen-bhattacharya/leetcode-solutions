@@ -12,7 +12,7 @@ class Solution:
             if key in dp:
                 return dp[key]
 
-            op1 = coins[node] - k
+            op1 = coins[node]//2**mods - k
             for nei in adj[node]:
                 if nei == par:
                     continue
