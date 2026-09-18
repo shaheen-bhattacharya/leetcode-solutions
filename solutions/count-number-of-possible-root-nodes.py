@@ -1,6 +1,6 @@
 class Solution:
     def rootCount(self, edges: List[List[int]], guesses: List[List[int]], k: int) -> int:
-        n = len(edges) - 1
+        n = len(edges) + 1
         gadj = defaultdict(list)
         adj = defaultdict(list)
         gset = set([(u, v) for u, v in guesses])
@@ -24,7 +24,7 @@ class Solution:
                     corr += 1
                 dfs(nei, node)
         dfs(0, -1)
-        res = corr==k
+        res = corr>=k
 
         def dfs2(node, par, corr):
             nonlocal res
@@ -36,7 +36,7 @@ class Solution:
                     ncorr -= 1
                 if (nei, node) in gset:
                     ncorr += 1
-                res += ncorr==k
+                res += ncorr>=k
                 dfs2(nei, node, ncorr)
         dfs2(0, -1, corr)
         return res
