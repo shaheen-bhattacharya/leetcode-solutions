@@ -13,6 +13,7 @@ class Solution:
             adj[u].append(v)
             adj[v].append(u)
 
+
         corr = 0
         def dfs(node, par):
             nonlocal corr
@@ -20,11 +21,28 @@ class Solution:
                 if nei == par:
                     continue
                 if (node, nei) in gset:
-                    print(node, nei)
                     corr += 1
                 dfs(nei, node)
         dfs(0, -1)
-        print(corr)
+        res = corr==k
+
+        def dfs2(node, par, corr):
+            nonlocal res
+            for nei in adj[node]:
+                if nei == par:
+                    continue
+                ncorr = corr
+                if (node, nei) in gset:
+                    ncorr -= 1
+                if (nei, node) in gset:
+                    ncorr += 1
+                res += ncorr==k
+                dfs2(nei, node, ncorr)
+        dfs2(0, -1, corr)
+        return res
+
+        
+
 
                 
 
