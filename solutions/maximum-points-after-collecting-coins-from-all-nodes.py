@@ -6,6 +6,7 @@ class Solution:
         for u, v in edges:
             adj[u].append(v)
             adj[v].append(u)
+
         def dfs2(node, par):
             pars[node] = par
             for nei in adj[node]:
@@ -20,6 +21,10 @@ class Solution:
             if key in dp:
                 return dp[key]
 
+            op1 = -inf
+            if mods > 13:
+                return 0
+            
             op1 = coins[node]//2**mods - k
             for nei in adj[node]:
                 if nei == pars[node]:
