@@ -11,18 +11,19 @@ class Solution:
             key = (node, par, mods) 
             if key in dp:
                 return dp[key]
+
             op1 = coins[node] - k
             for nei in adj[node]:
                 if nei == par:
                     continue
                 op1 += dfs(nei, node, mods)
 
-            op2 = coins[node]//pow(2, mods+1)
+            op2 = coins[node]//2**(mods+1)
             for nei in adj[node]:
                 if nei == par:
                     continue
                 op2 += dfs(nei, node, mods+1)
+
             dp[key] = max(op1, op2)
-            print(key, dp[key])
             return dp[key]
         return dfs(0, -1, 0)            
