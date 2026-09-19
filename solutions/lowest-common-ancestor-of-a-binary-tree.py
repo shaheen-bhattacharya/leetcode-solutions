@@ -10,10 +10,10 @@ class Solution:
         def dfs(node):
             if node is p or node is q:
                 return node
-            left = dfs(node.left)
-            right = dfs(node.right)
+            left = dfs(node.left) if node.left else None
+            right = dfs(node.right) if node.right else None
             if left and right:
                 return node
             return left if left else right
-        return 
+        return dfs(root)
             
