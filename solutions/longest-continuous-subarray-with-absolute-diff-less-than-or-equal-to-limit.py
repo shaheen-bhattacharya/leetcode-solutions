@@ -24,6 +24,7 @@ class Solution:
         stack = []
         ustack = []
         for i in range(n-1, -1, -1):
+            print(stack)
             val = num - limit
             rpos, r = n, n
             while stack and val < nums[stack[-1]]:
