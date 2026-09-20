@@ -15,7 +15,8 @@ class Solution:
             while ustack and num >= nums[ustack[-1]]:
                 ustack.pop()
             if ustack:
-                lpos = ustack[-1]
+                lpos[i] = ustack[-1]
+            ustack.append(i)
         
         print(lpos)
         print(left)
@@ -34,6 +35,7 @@ class Solution:
                 ustack.pop()
             if ustack:
                 rpos = ustack[-1]
+            ustack.append(i)
             res = max(res, min(rpos, r) - max(lpos[i], left[i]) - 1)
         return res
 
