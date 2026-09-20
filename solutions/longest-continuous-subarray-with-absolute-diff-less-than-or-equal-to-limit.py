@@ -17,6 +17,8 @@ class Solution:
             if ustack:
                 lpos = ustack[-1]
         
+        print(lpos)
+        print(left)
         res = 0
         stack = []
         ustack = []
