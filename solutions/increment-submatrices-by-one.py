@@ -4,7 +4,8 @@ class Solution:
 
         for r1, c1, r2, c2 in queries:
             diff[r1][c1] += 1
-            diff[r2+1][c2+1] -= 1
+            diff[r2+1][c2] -= 1
+            diff[r2][c2+1] -= 1
 
         res = [[0]*n for _ in range(n)]
         
