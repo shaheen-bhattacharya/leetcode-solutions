@@ -8,10 +8,9 @@ class Solution:
             while q and nums[r] >= nums[q[-1]]:
                 q.pop()
             q.append(r)
-            while nums[q[-1]] - nums[q[0]] > limit:
+            while nums[q[0]] - nums[q[-1]] > limit:
                 l = q[0] + 1
                 q.popleft()
-            print(q)
             res = max(res, r - l + 1)
         return res
             
