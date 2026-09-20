@@ -10,9 +10,9 @@ class Solution:
             if s <= e:
                 res.append([s, e])
             if fe <= se:
-                sp += 1
+                fp += 1
             else:
-                fe += 1
+                sp += 1
         return res                    
 
 
