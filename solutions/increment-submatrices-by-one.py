@@ -11,6 +11,10 @@ class Solution:
             csub[c2] += 1
 
         res = [[0]*n for _ in range(n)]
+        print(radd)
+        print(rsub)
+        print(cadd)
+        print(csub)
         
         cur = 0
         for r in range(n):
