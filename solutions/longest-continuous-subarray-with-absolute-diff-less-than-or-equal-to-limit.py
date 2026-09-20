@@ -11,6 +11,7 @@ class Solution:
             while nums[q[0]] - nums[q[-1]] > limit:
                 l = q[0] + 1
                 q.popleft()
+            print(q)
             res = max(res, r - l + 1)
         return res
             
