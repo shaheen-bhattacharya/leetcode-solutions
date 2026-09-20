@@ -8,6 +8,8 @@ class Solution:
             lsub[r2][c2] += 1
 
         res = [[0]*n for _ in range(n)]
+        print(ladd)
+        print(lsub)
         
         cur = 0
         for r in range(n):
