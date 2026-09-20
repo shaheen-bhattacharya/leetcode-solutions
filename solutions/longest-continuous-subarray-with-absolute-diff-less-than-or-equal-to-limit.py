@@ -36,7 +36,7 @@ class Solution:
             if ustack:
                 rpos = ustack[-1]
             ustack.append(i)
-            print(i, rpos, r, lpos[i], left[i])
+            print(i, rpos, r, lpos[i], left[i], res, min(rpos, r) - max(lpos[i], left[i]) - 1)
             res = max(res, min(rpos, r) - max(lpos[i], left[i]) - 1)
         return res
 
