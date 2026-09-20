@@ -11,8 +11,13 @@ class Solution:
         cur = 0
         for r in range(n):
             for c in range(n):
-                cur += lazy[r][c]
-                res[r][c] = cur
+                val = lazy[r][c]
+                if val > 0:
+                    cur += val
+                    res[r][c] = cur
+                else:
+                    res[r][c] = cur
+                    cur += val
         return res
                 
 
