@@ -5,7 +5,7 @@ class Solution:
 
         for r1, c1, r2, c2 in queries:
             ladd[r1][c1] += 1
-            lsub[r2][c2] -= 1
+            lsub[r2][c2] += 1
 
         res = [[0]*n for _ in range(n)]
         
