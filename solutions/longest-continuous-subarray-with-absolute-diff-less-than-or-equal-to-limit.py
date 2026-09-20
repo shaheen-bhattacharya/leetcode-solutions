@@ -25,7 +25,7 @@ class Solution:
         ustack = []
         for i in range(n-1, -1, -1):
             val = num - limit
-            rpos, r = -1, -1
+            rpos, r = n, n
             while stack and val < nums[stack[-1]]:
                 stack.pop()
             if stack:
