@@ -13,7 +13,7 @@ class Solution:
             for c in range(n):
                 cur += lazy[r][c]
                 res[r][c] = cur
-        return cur
+        return res
                 
 
 
