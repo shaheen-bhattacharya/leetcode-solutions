@@ -8,6 +8,7 @@ class Solution:
             while q and nums[r] >= nums[q[-1]]:
                 q.pop()
             q.append(r)
+            print(nums[q[0]], nums[q[-1]])
             while nums[q[0]] - nums[q[-1]] > limit:
                 l = q[0] + 1
                 q.popleft()
