@@ -7,7 +7,7 @@ class Solution:
         for r in range(n):
             while q and nums[r] >= nums[q[-1]]:
                 q.pop()
-            print(q)
+            print(q, "a")
             q.append(r)
             print(nums[q[0]], nums[q[-1]])
             while nums[q[0]] - nums[q[-1]] > limit:
