@@ -8,11 +8,11 @@ class Solution:
             while q and nums[r] >= nums[q[-1]]:
                 q.pop()
             q.append(r)
-            print(q, "a")
+            # print(q, "a")
             while nums[q[0]] - nums[q[-1]] > limit:
                 l = q[0] + 1
                 q.popleft()
-            print(q)
-            res = max(res, r - l + 1)
+            # print(q)
+            res = max(res, q[-1] - q[0] + 1)
         return res
             
