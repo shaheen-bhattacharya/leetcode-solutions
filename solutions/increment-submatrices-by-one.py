@@ -7,11 +7,10 @@ class Solution:
         for r1, c1, r2, c2 in queries:
             radd[r1] += 1
             rsub[r2] += 1
-            cadd[r1] += 1
-            csub[r2] += 1
+            cadd[c1] += 1
+            csub[c2] += 1
 
         res = [[0]*n for _ in range(n)]
-
         
         cur = 0
         for r in range(n):
