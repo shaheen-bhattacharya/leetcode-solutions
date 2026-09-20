@@ -1,48 +1,16 @@
 class Solution:
     def longestSubarray(self, nums: list[int], limit: int) -> int:
-        stack = []
-        ustack = []
+        q = deque()
         n = len(nums)
-        left = [-1] * n
-        lpos = [-1] * n
-        for i, num in enumerate(nums):
-            print(stack)
-            val = num - limit
-            while stack and val <= nums[stack[-1]]:
-                stack.pop()
-            if stack:
-                left[i] = stack[-1]
-            stack.append(i)
-            while ustack and num >= nums[ustack[-1]]:
-                ustack.pop()
-            if ustack:
-                lpos[i] = ustack[-1]
-            ustack.append(i)
-        
-        # print(lpos)
-        # print(left)
+        l = 0
         res = 0
-        stack = []
-        ustack = []
-        for i in range(n-1, -1, -1):
-            val = num - limit
-            rpos, r = n, n
-            while stack and val < nums[stack[-1]]:
-                stack.pop()
-            if stack:
-                r = stack[-1]
-            stack.append(i)
-            while ustack and num > nums[ustack[-1]]:
-                ustack.pop()
-            if ustack:
-                rpos = ustack[-1]
-            ustack.append(i)
-            # print(i, rpos, r, lpos[i], left[i], res, min(rpos, r) - max(lpos[i], left[i]) - 1)
-            res = max(res, min(rpos, r) - max(lpos[i], left[i]) - 1)
+        for r in range(n):
+            while q and nums[r] >= nums[q[-1]]:
+                q.pop()
+            q.append(r)
+            while nums[q[-1]] - nums[q[0]] > limit:
+                l = q[0] + 1
+                q.popleft()
+            res = max(res, r - l + 1)
         return res
-
-        
-            
-
-            
             
