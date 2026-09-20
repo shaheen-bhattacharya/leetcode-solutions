@@ -18,13 +18,13 @@ class Solution:
                 lpos[i] = ustack[-1]
             ustack.append(i)
         
-        print(lpos)
-        print(left)
+        # print(lpos)
+        # print(left)
         res = 0
         stack = []
         ustack = []
         for i in range(n-1, -1, -1):
-            print(stack)
+            # print(stack)
             val = num - limit
             rpos, r = n, n
             while stack and val < nums[stack[-1]]:
@@ -37,7 +37,7 @@ class Solution:
             if ustack:
                 rpos = ustack[-1]
             ustack.append(i)
-            print(i, rpos, r, lpos[i], left[i], res, min(rpos, r) - max(lpos[i], left[i]) - 1)
+            # print(i, rpos, r, lpos[i], left[i], res, min(rpos, r) - max(lpos[i], left[i]) - 1)
             res = max(res, min(rpos, r) - max(lpos[i], left[i]) - 1)
         return res
 
