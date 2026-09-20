@@ -13,7 +13,6 @@ class Solution:
         for r in range(n):
             for c in range(n):
                 cur += ladd[r][c]
-                print(r, c, cur)
                 res[r][c] = cur
                 cur -= lsub[r][c]
         return res
