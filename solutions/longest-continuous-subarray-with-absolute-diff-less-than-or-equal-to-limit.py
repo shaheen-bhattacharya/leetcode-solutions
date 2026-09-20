@@ -9,7 +9,6 @@ class Solution:
                 q.pop()
             q.append(r)
             print(q, "a")
-            print(nums[q[0]], nums[q[-1]])
             while nums[q[0]] - nums[q[-1]] > limit:
                 l = q[0] + 1
                 q.popleft()
