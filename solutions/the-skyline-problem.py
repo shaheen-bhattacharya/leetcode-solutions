@@ -3,7 +3,7 @@ class Solution:
         events = [] 
         for l, r, h in buildings:
             events.append((l, -h, r))
-            events.append((r, 0, 0))
+            events.append((r, 0, -90))
         events.sort()
 
         heap = []
