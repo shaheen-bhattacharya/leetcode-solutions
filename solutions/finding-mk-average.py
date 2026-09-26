@@ -40,7 +40,7 @@ class MKAverage:
 
     def calculateMKAverage(self) -> int:
         # print(self.tot, self.bad, self.sl)
-        return (self.tot - self.bad) // self.m if len(self.sl) >= self.m else -1
+        return (self.tot - self.bad) // (self.m - 2*self.k) if len(self.sl) >= self.m else -1
 
 
 # Your MKAverage object will be instantiated and called as such:
