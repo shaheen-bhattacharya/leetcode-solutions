@@ -1,0 +1,34 @@
+class MKAverage:
+
+    def __init__(self, m: int, k: int):
+        self.sl = SortedList()
+        self.tot = 0
+        self.bad = 0
+        self.m = m
+        self.k = k
+
+    def addElement(self, num: int) -> None:
+        k = self.k
+        self.tot += num
+        if len(self.sl) < 2*k:
+            self.sl.add(num)
+            self.bad += num
+            return
+
+        idx = self.sl.bisect_left(num)
+        if idx < k:
+            self.bad += num
+            self.bad -= self.sl[k-1]
+            self.sl.add(num)
+        elif idx > len(self.sl) - k:
+            self.bad += num
+            self.bad -= self.sl[len(self.sl) - k]
+
+    def calculateMKAverage(self) -> int:
+        return (self.tot - self.bad) // len(self.sl) if len(self.sl) >= self.m else -1
+
+
+# Your MKAverage object will be instantiated and called as such:
+# obj = MKAverage(m, k)
+# obj.addElement(num)
+# param_2 = obj.calculateMKAverage()
