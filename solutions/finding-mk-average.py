@@ -19,10 +19,10 @@ class MKAverage:
         if idx < k:
             self.bad += num
             self.bad -= self.sl[k-1]
-            self.sl.add(num)
         elif idx > len(self.sl) - k:
             self.bad += num
             self.bad -= self.sl[len(self.sl) - k]
+        self.sl.add(num)
 
     def calculateMKAverage(self) -> int:
         return (self.tot - self.bad) // len(self.sl) if len(self.sl) >= self.m else -1
