@@ -16,16 +16,17 @@ class MKAverage:
             self.sl.add(num)
             self.bad += num
             return
-        if len(self.q) < self.m:
-            idx = self.sl.bisect_left(num)
-            if idx < k:
-                self.bad += num
-                self.bad -= self.sl[k-1]
-            elif idx > len(self.sl) - k:
-                self.bad += num
-                self.bad -= self.sl[len(self.sl) - k]
-            self.sl.add(num)
-        else:
+
+        idx = self.sl.bisect_left(num)
+        if idx < k:
+            self.bad += num
+            self.bad -= self.sl[k-1]
+        elif idx > len(self.sl) - k:
+            self.bad += num
+            self.bad -= self.sl[len(self.sl) - k]
+        self.sl.add(num)
+
+        if len(self.q) > self.m:
             rem = self.q.popleft()
             idx = self.sl.bisect_left(rem)
             if idx < k:
@@ -38,7 +39,7 @@ class MKAverage:
         
 
     def calculateMKAverage(self) -> int:
-        print(self.tot, self.bad, self.sl)
+        # print(self.tot, self.bad, self.sl)
         return (self.tot - self.bad) // len(self.sl) if len(self.sl) >= self.m else -1
 
 
