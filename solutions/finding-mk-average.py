@@ -25,6 +25,7 @@ class MKAverage:
         self.sl.add(num)
 
     def calculateMKAverage(self) -> int:
+        print(self.tot, self.bad, self.sl)
         return (self.tot - self.bad) // len(self.sl) if len(self.sl) >= self.m else -1
 
 
