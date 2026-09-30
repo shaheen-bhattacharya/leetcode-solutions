@@ -17,7 +17,7 @@ class Solution:
                     res += 1
                     continue
                 parent[i] = parent[i+1]
-        return res
+        return res+1
 
 
 
