@@ -6,9 +6,9 @@ class TreeAncestor:
         self.up = [[-1]*(LOG) for _ in range(n)] #self.up[node][p] => 2^p ancestor
         for i in range(n):
             self.up[i][0] = parent[i]
-
-        for node in range(n):
-            for p in range(1, LOG):
+            
+        for p in range(1, LOG):
+            for node in range(n):
                 prev = self.up[node][p-1]
                 if prev != -1:
                     self.up[node][p] = self.up[self.up[node][p-1]][p-1]
