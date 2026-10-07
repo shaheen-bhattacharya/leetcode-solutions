@@ -15,7 +15,6 @@ class Solution:
             if node != 0 and len(adj[node]) == 1:
                 if start[node] != target[node]:
                     res.append(rev[(par, node)])
-                    print(par, node)
                     return True
                 else:
                     return False
@@ -25,18 +24,18 @@ class Solution:
                     continue
                 count += dfs(node, nei)
 
-            if node == 0 and count % 2 != (start[node] == target[node]):
-                solved = False
-                return False
+            if node == 0:
+                if count % 2 != (start[node] == target[node]):
+                    solved = False
+                    return False
+                else:
+                    return True
 
             if count % 2 != (start[node] == target[node]):
                 res.append(rev[(par, node)])
-                print(par, node)
-
                 return True
             else:
                 return False
-            
 
         dfs(-1, 0)
         res.sort()
