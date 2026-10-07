@@ -31,6 +31,8 @@ class Solution:
 
             if count % 2 != (start[node] == target[node]):
                 res.append(rev[(par, node)])
+                print(par, node)
+
                 return True
             else:
                 return False
