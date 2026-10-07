@@ -39,5 +39,5 @@ class Solution:
 
         dfs(-1, 0)
         res.sort()
-        return res if solved else res
+        return res if solved else []
                 
