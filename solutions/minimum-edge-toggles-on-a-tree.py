@@ -15,6 +15,7 @@ class Solution:
             if node != 0 and len(adj[node]) == 1:
                 if start[node] != target[node]:
                     res.append(rev[(par, node)])
+                    print(par, node)
                     return True
                 else:
                     return False
