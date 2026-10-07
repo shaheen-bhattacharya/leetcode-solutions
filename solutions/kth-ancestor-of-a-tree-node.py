@@ -16,9 +16,9 @@ class TreeAncestor:
     def getKthAncestor(self, node: int, k: int) -> int:
         for p in range(k.bit_length()):
             if k & (1 << p):
-                node = self.up[node][p]
                 if node == -1:
                     return -1
+                node = self.up[node][p]
         return node   
 
 
