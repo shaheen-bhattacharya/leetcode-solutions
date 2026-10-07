@@ -3,7 +3,7 @@ class TreeAncestor:
     def __init__(self, n: int, parent: list[int]):
         LOG = n.bit_length()
         self.parent = parent
-        self.up = [[0]*(LOG) for _ in range(n)] #self.up[node][p] => 2^p ancestor
+        self.up = [[-1]*(LOG) for _ in range(n)] #self.up[node][p] => 2^p ancestor
         for i in range(n):
             self.up[i][0] = parent[i]
 
