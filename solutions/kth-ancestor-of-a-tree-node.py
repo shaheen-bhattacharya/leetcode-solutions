@@ -17,6 +17,8 @@ class TreeAncestor:
         for p in range(k.bit_length()):
             if k & (1 << p):
                 node = self.up[node][p]
+                if node == -1:
+                    return -1
         return node   
 
 
