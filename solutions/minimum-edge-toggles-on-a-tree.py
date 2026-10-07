@@ -9,20 +9,33 @@ class Solution:
             rev[(v, u)] = i
 
         res = []
-        def dfs(par, node, changed):
-            if len(adj[node]) == 1 and changed:
-                return inf 
-            amt = 0
-            for nei in adj[node]:
-                if start[nei] != target[nei]:
-                    amt += 1
+        solved = True
+        def dfs(par, node):
+            nonlocal solved
+            if node != 0 and len(adj[node]) == 1:
+                if start[node] != target[node]:
+                    res.append(rev[(par, node)])
+                    return True
+                else:
+                    return False
+            count = 0
             for nei in adj[node]:
                 if nei == par:
                     continue
-                edge = (node, nei)
-                idx = rev[edge]
-                
+                count += dfs(node, nei)
 
-        val = dfs(-1, 0, start[0]==target[0])
-        return res if val != inf else res
+            if node == 0 and count % 2 != (start[node] == target[node]):
+                solved = False
+                return False
+
+            if count % 2 != (start[node] == target[node]):
+                res.append(rev[(par, node)])
+                return True
+            else:
+                return False
+            
+
+        dfs(-1, 0)
+        res.sort()
+        return res if solved else res
                 
