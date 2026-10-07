@@ -25,13 +25,13 @@ class Solution:
                 count += dfs(node, nei)
 
             if node == 0:
-                if count % 2 != (start[node] == target[node]):
+                if count % 2 == (start[node] == target[node]):
                     solved = False
                     return False
                 else:
                     return True
 
-            if count % 2 != (start[node] == target[node]):
+            if count % 2 == (start[node] == target[node]):
                 res.append(rev[(par, node)])
                 return True
             else:
