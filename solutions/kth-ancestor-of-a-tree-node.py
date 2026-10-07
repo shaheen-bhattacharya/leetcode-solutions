@@ -2,6 +2,7 @@ class TreeAncestor:
 
     def __init__(self, n: int, parent: list[int]):
         LOG = n.bit_length()
+        self.parent = parent
         self.up = [[0]*(LOG+1) for _ in range(n)] #self.up[node][p] => 2^p ancestor
         for i in range(n):
             self.up[i][0] = parent[i]
@@ -19,8 +20,11 @@ class TreeAncestor:
             curr += 2**p
             node = self.up[node][p]
             if node == -1:
-                break
+                return -1
             p += 1
+        while curr < k:
+            node = self.parent[node]
+            curr += 1
         return node      
 
 
