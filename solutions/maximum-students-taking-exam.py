@@ -2,7 +2,7 @@ class Solution:
     def maxStudents(self, seats: list[list[str]]) -> int:
         adj = defaultdict(list)
         rows, cols = len(seats), len(seats[0])
-        directions = [(0, -1), (0, 1), (-1, -1), (-1, 1)]
+        directions = [(0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]        
         good = 0
         for r in range(rows):
             for c in range(cols):
