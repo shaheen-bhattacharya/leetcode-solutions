@@ -23,7 +23,7 @@ class Solution:
                     continue
                 seen[nr][nc] = True
                 if match[nr][nc] == (-1, -1) or dfs(nr, nc, seen):
-                    match[r][c] = (r, c)
+                    match[nr][nc] = (r, c)
                     return True
             return False
 
