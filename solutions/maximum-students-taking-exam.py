@@ -3,11 +3,12 @@ class Solution:
         adj = defaultdict(list)
         rows, cols = len(seats), len(seats[0])
         directions = [(0, -1), (0, 1), (-1, -1), (-1, 1)]
-
+        good = 0
         for r in range(rows):
             for c in range(cols):
                 if seats[r][c] != ".":
                     continue
+                good += 1
                 for dx, dy in directions:
                     nr, nc = r + dx, c + dy
                     if not (0 <= nr < rows and 0 <= nc < cols):
@@ -34,7 +35,7 @@ class Solution:
                 seen = [[False]*cols for _ in range(rows)]
                 if dfs(r, c, seen):
                     res += 1    
-        return res
+        return good - res
                     
 
                     
