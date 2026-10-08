@@ -27,7 +27,7 @@ class Solution:
                 mr, mc = match[nr][nc]
                 seen[nr][nc] = True
                 if match[nr][nc] == (-1, -1) or dfs(mr, mc, seen):
-                    match[nr][nc] = (mr, mc)
+                    match[nr][nc] = (r, c)
                     return True
             return False
 
