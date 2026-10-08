@@ -18,8 +18,10 @@ class Solution:
         res = 0
         for i in range(n):
             cnt = 0
+            node = i
             for p in range(k.bit_length()):
                 if k & (1 << p):
-                    cnt += sm[i][p]
+                    cnt += sm[node][p]
+                    node = up[node][p]
             res = max(res, cnt)
         return res
