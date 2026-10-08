@@ -21,9 +21,10 @@ class Solution:
             for nr, nc in adj[(r, c)]:
                 if seen[nr][nc]:
                     continue
+                mr, mc = match[nr][nc]
                 seen[nr][nc] = True
                 if match[nr][nc] == (-1, -1) or dfs(nr, nc, seen):
-                    match[nr][nc] = (r, c)
+                    match[nr][nc] = (mr, mc)
                     return True
             return False
 
