@@ -1,0 +1,39 @@
+class Solution:
+    def maxStudents(self, seats: list[list[str]]) -> int:
+        adj = defaultdict(list)
+        rows, cols = len(seats), len(seats[0])
+        directions = [(0, -1), (0, 1), (-1, -1), (-1, 1)]
+
+        for r in range(rows):
+            for c in range(cols):
+                if seats[r][c] != ".":
+                    continue
+                for dx, dy in directions:
+                    nr, nc = r + dx, c + dy
+                    if not (0 <= nr < rows and 0 <= nc < cols):
+                        continue
+                    if seats[nr][nc] == ".":
+                        adj[(r, c)].append((nr, nc))
+
+        match = [[(-1, -1)]*cols for _ in range(rows)]
+        seen = [[False]*cols for _ in range(rows)]
+
+        def dfs(r, c, seen):
+            for nr, nc in adj[(r, c)]:
+                if seen[nr][nc]:
+                    continue
+                seen[nr][nc] = True
+                if match[nr][nc] == -1 or dfs(nr, nc, seen):
+                    seen[r][c] = (r, c)
+                    return True
+            return False
+
+        res = 0
+        for r in range(rows):
+            for c in range(cols):
+                if not dfs(r, c, seen):
+                    res += 1    
+        return res
+                    
+
+                    
