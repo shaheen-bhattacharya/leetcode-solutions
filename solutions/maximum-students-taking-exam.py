@@ -31,7 +31,7 @@ class Solution:
         res = 0
         for r in range(rows):
             for c in range(cols):
-                if not dfs(r, c, seen):
+                if dfs(r, c, seen):
                     res += 1    
         return res
                     
