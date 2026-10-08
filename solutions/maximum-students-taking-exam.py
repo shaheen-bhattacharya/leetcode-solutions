@@ -34,9 +34,10 @@ class Solution:
         res = 0
         for r in range(rows):
             for c in range(cols):
-                seen = [[False]*cols for _ in range(rows)]
-                if dfs(r, c, seen):
-                    res += 1    
+                if seats[r][c] == "." and (r+c)%2 == 0:
+                    seen = [[False]*cols for _ in range(rows)]
+                    if dfs(r, c, seen):
+                        res += 1    
         return good - res
                     
 
