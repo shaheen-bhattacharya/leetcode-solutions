@@ -21,7 +21,8 @@ class Solution:
             node = i
             for p in range(k.bit_length()):
                 if k & (1 << p):
-                    cnt += sm[node][p]
                     node = up[node][p]
+
+                    cnt += sm[node][p]
             res = max(res, cnt)
         return res
