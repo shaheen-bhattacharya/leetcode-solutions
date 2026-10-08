@@ -16,7 +16,6 @@ class Solution:
                         adj[(r, c)].append((nr, nc))
 
         match = [[(-1, -1)]*cols for _ in range(rows)]
-        seen = [[False]*cols for _ in range(rows)]
 
         def dfs(r, c, seen):
             for nr, nc in adj[(r, c)]:
@@ -31,6 +30,7 @@ class Solution:
         res = 0
         for r in range(rows):
             for c in range(cols):
+                seen = [[False]*cols for _ in range(rows)]
                 if dfs(r, c, seen):
                     res += 1    
         return res
