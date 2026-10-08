@@ -9,7 +9,7 @@ class Solution:
                 if seats[r][c] != ".":
                     continue
                 good += 1
-                if (r+c)%2 == 1:
+                if c%2 == 1:
                     continue
                 for dx, dy in directions:
                     nr, nc = r + dx, c + dy
