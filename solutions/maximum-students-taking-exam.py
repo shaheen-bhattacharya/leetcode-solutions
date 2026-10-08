@@ -6,7 +6,7 @@ class Solution:
         good = 0
         for r in range(rows):
             for c in range(cols):
-                if seats[r][c] != ".":
+                if seats[r][c] != "." and (r+c)%2==0:
                     continue
                 good += 1
                 for dx, dy in directions:
