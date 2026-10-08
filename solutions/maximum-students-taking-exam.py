@@ -34,7 +34,7 @@ class Solution:
         res = 0
         for r in range(rows):
             for c in range(cols):
-                if seats[r][c] == "." and (r+c)%2 == 0:
+                if seats[r][c] == "." and c%2==1:
                     seen = [[False]*cols for _ in range(rows)]
                     if dfs(r, c, seen):
                         res += 1    
