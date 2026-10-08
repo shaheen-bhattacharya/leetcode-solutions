@@ -6,9 +6,11 @@ class Solution:
         good = 0
         for r in range(rows):
             for c in range(cols):
-                if seats[r][c] != "." and (r+c)%2==0:
+                if seats[r][c] != ".":
                     continue
                 good += 1
+                if (r+c)%2 == 1:
+                    continue
                 for dx, dy in directions:
                     nr, nc = r + dx, c + dy
                     if not (0 <= nr < rows and 0 <= nc < cols):
