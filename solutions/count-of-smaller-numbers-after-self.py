@@ -26,4 +26,4 @@ class Solution:
         for num in nums[::-1]:
             ft.update(compress[num], 1)
             res.append(ft.query(compress[num]-1))
-        return res
+        return res[::-1]
