@@ -38,7 +38,7 @@ class Solution:
             L = i - lb
             R = rb - i
 
-            total = min(L, k) * min(R, k)
+            total = (L-1) * (R-1)
 
             excess = max(0, L + R - k - 1)
             total -= excess * (excess + 1) // 2
@@ -48,10 +48,10 @@ class Solution:
 
         res = 0
         for i in range(n):
-            lbn = leftmn[i]
-            lbx = leftmx[i]
-            rbn = rightmn[i]
-            rbx = rightmx[i]
+            lbn = max(i-k, leftmn[i])
+            lbx = max(i-k, leftmx[i])
+            rbn = min(i+k, rightmn[i])
+            rbx = min(i+k, rightmx[i])
             res += nums[i] * solve(lbn, i, rbn) + nums[i] * solve(lbx, i, rbx)
         return int(res)
 
