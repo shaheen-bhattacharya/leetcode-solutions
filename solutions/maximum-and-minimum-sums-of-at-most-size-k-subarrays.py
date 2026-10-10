@@ -49,10 +49,10 @@ class Solution:
 
         res = 0
         for i in range(n):
-            lbn = max(i-k, leftmn[i])
-            lbx = max(i-k, leftmx[i])
-            rbn = min(i+k, rightmn[i])
-            rbx = min(i+k, rightmx[i])
+            lbn = leftmn[i]
+            lbx = leftmx[i]
+            rbn = rightmn[i]
+            rbx = rightmx[i]
             res += nums[i] * solve(lbn, i, rbn) + nums[i] * solve(lbx, i, rbx)
         return int(res)
 
