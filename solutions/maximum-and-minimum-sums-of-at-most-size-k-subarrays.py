@@ -35,13 +35,16 @@ class Solution:
             stack.append(i)
 
         def solve(lb, i, rb):
-            amtl = i - lb - 1
-            amtr = rb - i - 1
-            if amtl <= amtr:
-                s, e = amtr - amtl, amtr
-            else:
-                s, e = amtl - amtr, amtl
-            return (s+e)/2 * (s-e+1)
+            L = i - lb
+            R = rb - i
+
+            a = min(L, k)
+            b = min(R, k)
+
+            if a > b:
+                a, b = b, a
+
+            return a * b - max(0, (a + b - k) * (a + b - k + 1) // 2)
 
 
         res = 0
