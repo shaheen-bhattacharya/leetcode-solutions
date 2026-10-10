@@ -38,7 +38,7 @@ class Solution:
             L = i - lb
             R = rb - i
 
-            total = L*R
+            total = min(L, k) * min(R, k)
 
             excess = max(0, L + R - k - 1)
             total -= excess * (excess + 1) // 2
