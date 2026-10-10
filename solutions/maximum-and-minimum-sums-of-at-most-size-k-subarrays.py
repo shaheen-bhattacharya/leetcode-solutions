@@ -38,9 +38,9 @@ class Solution:
             amtl = i - lb - 1
             amtr = rb - i - 1
             if amtl <= amtr:
-                s, e = k - amtl - 1, amtr
+                s, e = amtr - amtl, amtr
             else:
-                s, e = k - amtr - 1, amtl
+                s, e = amtl - amtr, amtl
             return (s+e)/2 * (s-e+1)
 
 
