@@ -50,6 +50,6 @@ class Solution:
             lbx = max(i-k, leftmx[i])
             rbn = min(i+k, rightmn[i])
             rbx = min(i+k, rightmx[i])
-            res += solve(lbn, i, rbn) + solve(lbx, i, rbx)
+            res += i * solve(lbn, i, rbn) + i * solve(lbx, i, rbx)
         return int(res)
 
