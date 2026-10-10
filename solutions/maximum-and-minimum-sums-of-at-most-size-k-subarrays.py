@@ -35,8 +35,8 @@ class Solution:
             stack.append(i)
 
         def solve(lb, i, rb):
-            amtl = i - lb - 1
-            amtr = rb - i - 1
+            amtl = i - lb
+            amtr = rb - i
             if amtl <= amtr:
                 s, e = amtr - amtl, amtr
             else:
