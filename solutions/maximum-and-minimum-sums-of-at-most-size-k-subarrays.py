@@ -35,24 +35,21 @@ class Solution:
             stack.append(i)
 
         def solve(lb, i, rb):
-            L = i - lb
-            R = rb - i
-
-            a = min(L, k)
-            b = min(R, k)
-
-            if a > b:
-                a, b = b, a
-
-            return a * b - max(0, (a + b - k) * (a + b - k + 1) // 2)
+            amtl = i - lb - 1
+            amtr = rb - i - 1
+            if amtl <= amtr:
+                s, e = amtr - amtl, amtr
+            else:
+                s, e = amtl - amtr, amtl
+            return (s+e)/2 * (s-e+1)
 
 
         res = 0
         for i in range(n):
-            lbn = leftmn[i]
-            lbx = leftmx[i]
-            rbn = rightmn[i]
-            rbx = rightmx[i]
+            lbn = max(i-k, leftmn[i])
+            lbx = max(i-k, leftmx[i])
+            rbn = min(i+k, rightmn[i])
+            rbx = min(i+k, rightmx[i])
             res += nums[i] * solve(lbn, i, rbn) + nums[i] * solve(lbx, i, rbx)
         return int(res)
 
