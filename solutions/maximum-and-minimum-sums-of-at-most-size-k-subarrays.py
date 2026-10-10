@@ -43,7 +43,9 @@ class Solution:
             else:
                 s, e = amtl - amtr, amtl
 
-            return (s + e) * (s - e + 1) / 2
+            total = (s + e) * (e - s + 1) // 2
+            return total - max(0, (amtl + amtr - k) * (amtl + amtr - k + 1) // 2)
+
 
         res = 0
         for i in range(n):
