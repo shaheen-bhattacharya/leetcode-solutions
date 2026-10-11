@@ -19,9 +19,10 @@ class Solution:
         res = 0
         n = len(instructions)
         ft = FenwickTree(max(instructions)+1)
+        MOD = 1_000_000_007
         res = 0
         for i in range(n):
             ft.update(instructions[i], 1)
-            res += min(ft.query(instructions[i]-1), i+1-ft.query(instructions[i]))
-        return res
+            res += min(ft.query(instructions[i]-1), i+1-ft.query(instructions[i])) % MOD
+        return res % MOD
 
