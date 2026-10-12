@@ -12,7 +12,7 @@ class Solution:
         self.tail.prev = self.head
         n = len(people)
         people.sort(key = lambda x: (-x[0], x[1]))
-        print(people)
+        # print(people)
         i = 0
         while i < n:
             curr = []
@@ -36,7 +36,7 @@ class Solution:
                     j += 1
                 amt += 1
                 tmp = tmp.next
-                print(tmp.idx)
+                # print(tmp.idx)
         res = []
         tmp = self.head.next
         while tmp != self.tail:
