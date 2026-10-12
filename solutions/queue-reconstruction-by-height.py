@@ -5,10 +5,12 @@ class Solution:
         """
         [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]
         """
-        # people.sort(key = lambda x: (-x[0], x[1]))
-        people.sort()
+        people.sort(key = lambda x: (-x[0], x[1]))
+        # sl = SortedList([p[0] for p in people])
+        # people.sort()
+
         print(people)
-        # n = len(people)
+        n = len(people)
         # q = deque()
         # res = []
         # curr = 0
