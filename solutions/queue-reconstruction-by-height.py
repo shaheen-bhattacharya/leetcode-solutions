@@ -5,22 +5,17 @@ class Solution:
         """
         [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]
         """
-        people.sort(key = lambda x: (-x[0], x[1]))
-        # sl = SortedList([p[0] for p in people])
-        # people.sort()
+        # people.sort(key = lambda x: (-x[0], x[1]))
+        people.sort()
 
-        print(people)
+        # print(people)
         n = len(people)
-        # q = deque()
-        # res = []
-        # curr = 0
-        # for i in range(n):
-        #     tmp = []
-        #     if people[i][1] == curr:
-        #         tmp.append(people[i])
-        #     tmp.sort()
-        #     res.extend(tmp)
-        # return res
+        q = deque()
+        res = []
+        for i in range(n):
+            p = people[i]
+            # if p[1] == 
+        return res
 
             
 
