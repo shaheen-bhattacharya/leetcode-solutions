@@ -8,7 +8,7 @@ class Solution:
         # people.sort(key = lambda x: (-x[0], x[1]))
         people.sort()
 
-        # print(people)
+        print(people)
         n = len(people)
         q = deque()
         res = []
