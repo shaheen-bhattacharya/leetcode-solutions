@@ -7,13 +7,13 @@ class SD:
         self.blocks = [0] * ((self.n + self.B - 1) // self.B)
         self.odds = 0
 
-        for i, x in enumerate(nums):
-            b = i//self.B
-            old = self.freq[nums[i]] if nums[i] in self.freq else 0
-            if nums[i] not in self.freq:
-                self.freq[nums[i]] = 0
-                self.blocks[b] += 1
-            self.freq[nums[i]] += 1
+        # for i, x in enumerate(nums):
+        #     b = i//self.B
+        #     old = self.freq[nums[i]] if nums[i] in self.freq else 0
+        #     if nums[i] not in self.freq:
+        #         self.freq[nums[i]] = 0
+        #         self.blocks[b] += 1
+        #     self.freq[nums[i]] += 1
 
     def add(self, i):
         b = i//self.B
