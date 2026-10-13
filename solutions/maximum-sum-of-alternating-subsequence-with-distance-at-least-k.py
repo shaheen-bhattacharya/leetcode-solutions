@@ -4,8 +4,11 @@ class Solution:
         maxv = max(nums)
         #dp[i][val][1] max sum from [:i+1] with next being increasing or decreasing
         dp = [[[0,0] for _ in range(maxv+1)] for _ in range(n)] 
-        mv = 0           
-        for i in range(k):
+        mv = 0      
+        dp[0][nums[0]] = [nums[0], nums[0]]     
+        for i in range(1, k):
+            for v in range(maxv+1):
+                dp[i][v] = dp[i-1][v][:]
             mv = max(mv, nums[i])
             dp[i][mv][0] = mv
             dp[i][mv][1] = mv
