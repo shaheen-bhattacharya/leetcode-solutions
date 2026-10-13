@@ -12,6 +12,7 @@ class Solution:
 
         for i in range(k, n):
             dp[i][nums[i]][0] = nums[i]
+            dp[i][nums[i]][1] = nums[i]
             for v in range(nums[i]):
                 dp[i][nums[i]][0] = max(dp[i][nums[i]][0], dp[i-k][v][1] + nums[i])
                 dp[i][v][1] = max(dp[i][v][1], dp[i-k][v][1])
