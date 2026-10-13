@@ -9,10 +9,6 @@ class Solution:
         for i in range(1, k):
             for v in range(maxv+1):
                 dp[i][v] = dp[i-1][v][:]
-            mv = max(mv, nums[i])
-            dp[i][mv][0] = mv
-            dp[i][mv][1] = mv
-
         for i in range(k, n):
             for v in range(maxv+1):
                 dp[i][v] = dp[i-1][v][:]
