@@ -14,7 +14,7 @@ class SD:
 
         if old % 2 == 1:
             self.odds -= 1
-        elif old != 0:
+        else:
             self.odds += 1
 
     def delete(self, i):
@@ -24,7 +24,7 @@ class SD:
             del self.freq[self.nums[i]]
         if old % 2 == 0:
             self.odds += 1
-        elif old != 0:
+        else:
             self.odds -= 1
 
 class Solution:
