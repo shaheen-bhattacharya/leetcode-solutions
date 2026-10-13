@@ -45,12 +45,13 @@ class Solution:
         n = len(nums)
         maxv = max(nums)
         sd = SD(nums)
-        queries.sort(key=lambda x: (x[0]//sd.B, x[1]))
+        qs = [(q, i) for i, q in enumerate(queries)]
+        qs.sort(key=lambda x: (x[0][0]//sd.B, x[0][1]))
         freq = defaultdict(int)
         odds = set()
         L, R = 0, -1
-        res = []
-        for l, r in queries:
+        res = [False]*n
+        for (l, r), i in qs:
             while L > l:
                 sd.delete(L)
                 L -= 1
@@ -63,5 +64,5 @@ class Solution:
             while R < r:
                 sd.add(R)
                 R += 1
-            res.append(len(sd.freq) == k and sd.odds == 0)
+            res[i] = (len(sd.freq) == k and sd.odds == 0)
         return res
