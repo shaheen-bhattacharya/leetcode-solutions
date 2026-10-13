@@ -50,7 +50,7 @@ class Solution:
         freq = defaultdict(int)
         odds = set()
         L, R = 0, -1
-        res = [False]*n
+        res = [False]*len(queries)
         for (l, r), i in qs:
             while L > l:
                 sd.delete(L)
