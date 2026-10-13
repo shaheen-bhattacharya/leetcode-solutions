@@ -40,11 +40,11 @@ class Solution:
         res = [False]*len(queries)
         for (l, r), i in qs:
             while L > l:
-                sd.delete(L)
                 L -= 1
+                sd.delete(L)
             while R < r:
-                sd.add(R)
                 R += 1
+                sd.add(R)
             while L < l:
                 sd.add(L)
                 L += 1
