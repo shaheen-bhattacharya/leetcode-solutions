@@ -11,7 +11,8 @@ class Solution:
             dp[i][mv][1] = mv
 
         for i in range(k, n):
-            dp[i] = dp[i-1][:]
+            for v in range(nums[i]):
+                dp[i][v] = dp[i-1][v][:]
             for v in range(nums[i]):
                 dp[i][nums[i]][0] = max(dp[i][nums[i]][0], dp[i-k][v][1] + nums[i])
                 dp[i][v][1] = max(dp[i][v][1], dp[i-k][v][1])
