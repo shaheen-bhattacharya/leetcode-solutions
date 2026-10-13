@@ -9,18 +9,14 @@ class Solution:
         for i in range(1, k):
             for v in range(maxv+1):
                 dp[i][v] = dp[i-1][v][:]
+
         for i in range(k, n):
             for v in range(maxv+1):
                 dp[i][v] = dp[i-1][v][:]
             for v in range(nums[i]):
                 dp[i][nums[i]][0] = max(dp[i][nums[i]][0], dp[i-k][v][1] + nums[i])
-                dp[i][v][1] = max(dp[i][v][1], dp[i-k][v][1])
-                dp[i][v][0] = max(dp[i][v][0], dp[i-k][v][0])
             for v in range(nums[i]+1, maxv+1):
                 dp[i][nums[i]][1] = max(dp[i][nums[i]][1], dp[i-k][v][0] + nums[i])
-                dp[i][v][1] = max(dp[i][v][1], dp[i-k][v][1])
-                dp[i][v][0] = max(dp[i][v][0], dp[i-k][v][0])
-        
         res = 0
         for i in range(n):
             for v in range(maxv+1):
