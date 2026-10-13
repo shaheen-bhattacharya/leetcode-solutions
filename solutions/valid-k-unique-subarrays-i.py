@@ -39,15 +39,15 @@ class Solution:
         L, R = 0, -1
         res = [False]*len(queries)
         for (l, r), i in qs:
-            while L < l:
-                sd.add(L)
-                L += 1
-            while R < r:
-                sd.add(R)
-                R += 1
             while L > l:
                 sd.delete(L)
                 L -= 1
+            while R < r:
+                sd.add(R)
+                R += 1
+            while L < l:
+                sd.add(L)
+                L += 1
             while R > r:
                 sd.delete(R)
                 R -= 1
