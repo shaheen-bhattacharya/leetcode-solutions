@@ -7,6 +7,8 @@ class Solution:
         mv = 0      
         dp[0][nums[0]] = [nums[0], nums[0]]     
         for i in range(1, k):
+            dp[i][nums[i]][0] = nums[i]
+            dp[i][nums[i]][1] = nums[i]
             for v in range(maxv+1):
                 dp[i][v] = dp[i-1][v][:]
 
