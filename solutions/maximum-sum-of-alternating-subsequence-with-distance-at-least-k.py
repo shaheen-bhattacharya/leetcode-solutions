@@ -39,8 +39,8 @@ class Solution:
             dp[i] = [nums[i], nums[i]]
         
         for i in range(k, n):
-            inc.update(i-k, dp[i-k][1])
-            dec.update(i-k, dp[i-k][0])
+            inc.update(nums[i-k], dp[i-k][1])
+            dec.update(nums[i-k], dp[i-k][0])
             dp[i][0] = inc.query(nums[i]+1, maxv) + nums[i]
             dp[i][1] = dec.query(0, nums[i]-1) + nums[i]
         return max([max(dp[i]) for i in range(n)])
