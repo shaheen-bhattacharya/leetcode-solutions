@@ -30,7 +30,6 @@ class Solution:
     def maxAlternatingSum(self, nums: list[int], k: int) -> int:
         n = len(nums)
         maxv = max(nums)
-        #
         dp = [[0,0] for _ in range(n)]
         inc = SegTree(maxv+1)
         dec = SegTree(maxv+1)
