@@ -25,7 +25,6 @@ class Solution:
             ft.update(corr[nums[i]], 1)
             print(tmp)
         res = tmp
-        print(tmp)
 
         for i in range(k, n):
             ql = ft.query(corr[nums[i-k]] - 1)
