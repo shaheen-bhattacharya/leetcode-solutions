@@ -24,7 +24,7 @@ class Solution:
             tmp += i - ft.query(corr[nums[i]]-1)
             ft.update(corr[nums[i]], 1)
         res = tmp
-        
+        print(tmp)
         for i in range(k, n):
             ql = ft.query(corr[nums[i-k]] - 1)
             qg = k - 1 - ql
