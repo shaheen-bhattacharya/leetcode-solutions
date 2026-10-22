@@ -27,10 +27,8 @@ class Solution:
 
         for i in range(k, n):
             ql = ft.query(corr[nums[i-k]] - 1)
-            if i == k:
-                print(ql)
-            qg = k - 1 - ql
-            tmp -= qg
+            # qg = k - 1 - ql
+            tmp -= ql
             ft.update(corr[nums[i-k]], -1)
             ft.update(corr[nums[i]], 1)
             tmp += ft.query(corr[nums[i]]-1)
