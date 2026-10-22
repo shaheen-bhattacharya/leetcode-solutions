@@ -21,7 +21,7 @@ class Solution:
 
         tmp = 0 
         for i in range(k):
-            tmp += i-ft.query(corr[nums[i]]-1)
+            tmp += i-ft.query(corr[nums[i]])
             ft.update(corr[nums[i]], 1)
             print(tmp)
         res = tmp
@@ -30,8 +30,8 @@ class Solution:
             ql = ft.query(corr[nums[i-k]] - 1)
             tmp -= ql
             ft.update(corr[nums[i-k]], -1)
+            tmp += k - 1 - ft.query(corr[nums[i]])
             ft.update(corr[nums[i]], 1)
-            tmp += k - 1 - ft.query(corr[nums[i]]-1)
             res = min(res, tmp)
         return res
 
