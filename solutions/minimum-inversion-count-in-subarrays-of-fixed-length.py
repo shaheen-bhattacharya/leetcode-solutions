@@ -16,6 +16,7 @@ class Solution:
     def minInversionCount(self, nums: List[int], k: int) -> int:
         n = len(nums)
         ss = list(sorted(set(nums)))
+        print(ss)
         corr = {ss[i-1]:i for i in range(1, len(ss)+1)}
         ft = FenwickTree(len(ss)+2)
 
