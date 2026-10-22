@@ -21,7 +21,7 @@ class Solution:
 
         tmp = 0 
         for i in range(k):
-            tmp += ft.query(corr[nums[i]]-1)
+            tmp += i+1-ft.query(corr[nums[i]]-1)
             ft.update(corr[nums[i]], 1)
         res = tmp
         print(tmp)
