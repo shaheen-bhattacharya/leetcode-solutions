@@ -23,7 +23,7 @@ class Solution:
         for i in range(k):
             tmp += i-ft.query(corr[nums[i]])
             ft.update(corr[nums[i]], 1)
-            print(tmp)
+            # print(tmp)
         res = tmp
 
         for i in range(k, n):
