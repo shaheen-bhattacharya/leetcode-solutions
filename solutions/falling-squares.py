@@ -59,7 +59,7 @@ class Solution:
         for l, d in positions:
             r = l+d
             cl, cr = corr[l], corr[r]
-            h = st.query(cl, cr)
+            h = st.query(cl, cr-1)
             st.update(cl, cr, h+d)
             res.append(st.query(0, st.n-1))
         return res
