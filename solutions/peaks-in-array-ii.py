@@ -1,122 +1,127 @@
 class SegTree:
     def __init__(self, nums):
         self.n = len(nums)
-        self.tree = [0] * (4 * self.n)
-
+        self.tree = [0] * (4*self.n)
         def build(node, l, r):
             if l == r:
                 self.tree[node] = nums[l]
-                return
-            m = (l + r) // 2
-            build(2 * node, l, m)
-            build(2 * node + 1, m + 1, r)
-            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
-
-        build(1, 0, self.n - 1)
+                return 
+            m = (l+r)//2
+            build(2*node, l, m)
+            build(2*node+1, m+1, r) 
+            self.tree[node] = self.tree[2*node] + self.tree[2*node+1]
+        build(1, 0, self.n-1)
 
     def update(self, i, val):
         def dfs(node, l, r):
             if l == r:
                 self.tree[node] = val
-                return
-            m = (l + r) // 2
-            if i <= m:
-                dfs(2 * node, l, m)
+                return 
+            m = (l+r)//2
+            if m >= i:
+                dfs(2*node, l, m)
             else:
-                dfs(2 * node + 1, m + 1, r)
-            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
-
-        dfs(1, 0, self.n - 1)
-
+                dfs(2*node+1, m+1, r)
+            self.tree[node] = self.tree[2*node] + self.tree[2*node+1]
+        dfs(1, 0, self.n-1)
+    
     def query(self, ql, qr):
         def dfs(node, l, r):
             if r < ql or l > qr:
                 return 0
-            if ql <= l and r <= qr:
+            if ql <= l <= r <= qr:
                 return self.tree[node]
-            m = (l + r) // 2
-            return dfs(2 * node, l, m) + dfs(2 * node + 1, m + 1, r)
-
-        return dfs(1, 0, self.n - 1)
-
+            m = (l+r)//2
+            return dfs(2*node, l, m) + dfs(2*node+1, m+1, r)
+        return dfs(1, 0, self.n-1)
 
 class Solution:
     def countOfPeaks(self, nums: list[int], queries: list[list[int]]) -> list[int]:
         n = len(nums)
-
-        def calc(x):
-            return x * (x - 1) // 2
-
+        """
+        .|....|...|....|.....|....|.
+        """
+        def calc(num):
+            return int(num * (num-1)/2)
         def peak(i):
-            return 0 < i < n - 1 and nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+            if i == 0:
+                return False
+            if i == n-1:
+                return True
+            return nums[i] > nums[i-1] and nums[i] > nums[i+1]
 
         prev = [0] * n
-        p = 0
+        pp = 0
         for i in range(n):
-            prev[i] = p
-            if peak(i):
-                p = i
-
-        nxt = [n - 1] * n
-        p = n - 1
-        for i in range(n - 1, -1, -1):
-            nxt[i] = p
-            if peak(i):
-                p = i
+            prev[i] = pp
+            if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
+                pp = i
+        
+        nxt = [0] * n
+        np = n-1
+        for i in range(n-1, -1, -1):
+            nxt[i] = np
+            if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
+                np = i
 
         vals = [0] * n
-        for i in range(1, n):
-            if peak(i) or i == n - 1:
-                vals[i] = calc(i - prev[i] + 1)
+        for i in range(1, n-1):
+            amt = i - prev[i] + 1
+            if nums[i] > nums[i-1] and nums[i] > nums[i+1]:
+                vals[i] = calc(amt)
 
+        vals[-1] = calc(n-1-prev[n-1]+1)
+        
+        print(prev)
+        print(nxt)
+        print("\n")
+        res = []
         st = SegTree(vals)
 
-        def upd(idx, was, now):
-            if was == now:
-                return
-
+        def upd(idx, wp, ip):
             p, nx = prev[idx], nxt[idx]
-
-            if was:
+            if wp and not ip:
+                st.update(idx, 0)
                 nxt[p] = nx
                 prev[nx] = p
-                st.update(idx, 0)
-                st.update(nx, calc(nx - prev[nx] + 1))
-            else:
+            elif not wp and ip:
                 nxt[p] = idx
-                prev[idx] = p
-                nxt[idx] = nx
                 prev[nx] = idx
-                st.update(idx, calc(idx - p + 1))
-                st.update(nx, calc(nx - idx + 1))
-
-        ans = []
+                nxt[idx] = nx
+                prev[idx] = p
+                st.update(idx, calc(idx-prev[idx]+1))
 
         for q in queries:
             if q[0] == 1:
                 l, r = q[1], q[2]
-                bad = st.query(l, r)
-                nv = nxt[l]
-                pv = prev[r]
-                bad -= l - prev[nv]
-                bad += nxt[pv] - r
-                ans.append(calc(r - l + 1) - bad)
+                first = nxt[l]
+                last = prev[r]
+
+                if first > r or last < l or first > last:
+                    res.append(0)
+                    continue
+
+                bad = st.query(first, last)
+                bad -= calc(first - l + 1)
+                bad -= calc(r - last + 1)
+
+                res.append(calc(r - l + 1) - bad)
             else:
                 idx, val = q[1], q[2]
-
-                affected = [i for i in (idx - 1, idx, idx + 1) if 0 < i < n - 1]
-                old = {i: peak(i) for i in affected}
-
+                if idx == 0 or idx == n-1:
+                    nums[idx] = val
+                    continue
+                
+                wpp, wpc, wpn = peak(idx-1), peak(idx), peak(idx+1)
                 nums[idx] = val
+                ipp, ipc, ipn = peak(idx-1), peak(idx), peak(idx+1)
 
-                new = {i: peak(i) for i in affected}
+                upd(idx-1, wpp, ipp)
+                upd(idx, wpc, ipc)
+                upd(idx+1, wpn, ipn)
+        return res
 
-                for i in affected:
-                    if old[i] and not new[i]:
-                        upd(i, True, False)
 
-                for i in affected:
-                    if not old[i] and new[i]:
-                        upd(i, False, True)
 
-        return ans
+
+
