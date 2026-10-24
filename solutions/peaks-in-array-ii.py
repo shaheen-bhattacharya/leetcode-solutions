@@ -66,6 +66,7 @@ class Solution:
                 vals[i] = calc(amt)
 
         vals[-1] = calc(n-1-prev[n-1]+1)
+        print(n-1-prev[n-1]+1)
 
         print(vals)
         print(prev)
