@@ -1,132 +1,118 @@
 from sortedcontainers import SortedList
 
+class FenwickTree:
+    def __init__(self, n):
+        self.n = n
+        self.bit = [0] * (n + 1)
 
-class SegTree:
+    def update(self, i, delta):
+        i += 1
+        while i <= self.n:
+            self.bit[i] += delta
+            i += i & -i
 
-  def __init__(self, nums):
-    self.n = len(nums)
-    self.tree = [0] * (4 * self.n)
+    def query(self, i):
+        # Sum over indices [0, i)
+        res = 0
+        while i > 0:
+            res += self.bit[i]
+            i -= i & -i
+        return res
 
-    def build(node, l, r):
-      if l == r:
-        self.tree[node] = nums[l]
-        return
-      m = (l + r) // 2
-      build(2 * node, l, m)
-      build(2 * node + 1, m + 1, r)
-      self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
-
-    build(1, 0, self.n - 1)
-
-  def update(self, i, val):
-    def dfs(node, l, r):
-      if l == r:
-        self.tree[node] = val
-        return
-      m = (l + r) // 2
-      if m >= i:
-        dfs(2 * node, l, m)
-      else:
-        dfs(2 * node + 1, m + 1, r)
-      self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
-
-    dfs(1, 0, self.n - 1)
-
-  def query(self, ql, qr):
-    def dfs(node, l, r):
-      if r < ql or l > qr:
-        return 0
-      if ql <= l <= r <= qr:
-        return self.tree[node]
-      m = (l + r) // 2
-      return dfs(2 * node, l, m) + dfs(2 * node + 1, m + 1, r)
-
-    return dfs(1, 0, self.n - 1)
+    def range_sum(self, l, r):
+        # Inclusive range [l, r]
+        return self.query(r + 1) - self.query(l)
 
 
 class Solution:
+    def countOfPeaks(self, nums: list[int], queries: list[list[int]]) -> list[int]:
+        n = len(nums)
 
-  def countOfPeaks(
-      self, nums: list[int], queries: list[list[int]]
-  ) -> list[int]:
-    n = len(nums)
+        def is_peak(i):
+            return (
+                0 < i < n - 1
+                and nums[i] > nums[i - 1]
+                and nums[i] > nums[i + 1]
+            )
 
-    def calc(num):
-      return int(num * (num - 1) / 2)
+        peaks = SortedList(i for i in range(1, n - 1) if is_peak(i))
+        bit = FenwickTree(n)
 
-    def peak(i):
-      if 0 < i < n - 1:
-        return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
-      return False
+        def weight(p, prev):
+            return p * (p - prev)
 
-    peaks = SortedList()
-    for i in range(1, n - 1):
-      if peak(i):
-        peaks.add(i)
+        # Initialize weighted contributions.
+        prev = 0
+        for p in peaks:
+            bit.update(p, weight(p, prev))
+            prev = p
 
-    def get_prev(x):
-      idx = peaks.bisect_left(x)
-      return peaks[idx - 1] if idx > 0 else 0
+        def insert_peak(p):
+            j = peaks.bisect_left(p)
+            prev = peaks[j - 1] if j > 0 else 0
+            nxt = peaks[j] if j < len(peaks) else None
 
-    def get_nxt(x):
-      idx = peaks.bisect_right(x)
-      return peaks[idx] if idx < len(peaks) else n - 1
+            # The successor's previous peak changes from prev to p.
+            if nxt is not None:
+                bit.update(nxt, weight(nxt, p) - weight(nxt, prev))
 
-    vals = [0] * n
-    for i in range(1, n - 1):
-      if peak(i):
-        vals[i] = calc(i - get_prev(i) + 1)
-    vals[-1] = calc(n - 1 - get_prev(n - 1) + 1)
+            bit.update(p, weight(p, prev))
+            peaks.add(p)
 
-    res = []
-    st = SegTree(vals)
+        def remove_peak(p):
+            j = peaks.bisect_left(p)
+            prev = peaks[j - 1] if j > 0 else 0
+            nxt = peaks[j + 1] if j + 1 < len(peaks) else None
 
-    def upd(idx, wp, ip):
-      if wp and not ip:
-        # Find next peak BEFORE removing from SortedList
-        nx_idx = peaks.bisect_right(idx)
-        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
-        peaks.remove(idx)
-        st.update(idx, 0)
-        if nx < n - 1:
-          st.update(nx, calc(nx - get_prev(nx) + 1))
-        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
-      elif not wp and ip:
-        # Find next peak BEFORE adding to SortedList
-        nx_idx = peaks.bisect_right(idx)
-        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
-        peaks.add(idx)
-        st.update(idx, calc(idx - get_prev(idx) + 1))
-        if nx < n - 1 and nx != idx:
-          st.update(nx, calc(nx - get_prev(nx) + 1))
-        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
+            bit.update(p, -weight(p, prev))
 
-    for q in queries:
-      if q[0] == 1:
-        l, r = q[1], q[2]
-        bad = st.query(l, r)
+            # The successor's previous peak changes from p to prev.
+            if nxt is not None:
+                bit.update(nxt, weight(nxt, prev) - weight(nxt, p))
 
-        idx_nv = peaks.bisect_left(l)
-        nv = peaks[idx_nv] if idx_nv < len(peaks) else n - 1
+            peaks.remove(p)
 
-        idx_pv = peaks.bisect_right(r) - 1
-        pv = peaks[idx_pv] if 0 <= idx_pv < len(peaks) else 0
+        ans = []
 
-        bad -= l - get_prev(nv)
-        bad += get_nxt(pv) - r
-        res.append(calc(r - l + 1) - bad)
-      else:
-        idx, val = q[1], q[2]
-        if idx == 0 or idx == n - 1:
-          nums[idx] = val
-          continue
+        for typ, x, y in queries:
+            if typ == 1:
+                l, r = x, y
 
-        wpp, wpc, wpn = peak(idx - 1), peak(idx), peak(idx + 1)
-        nums[idx] = val
-        ipp, ipc, ipn = peak(idx - 1), peak(idx), peak(idx + 1)
+                left = peaks.bisect_right(l)
+                right = peaks.bisect_left(r) - 1
 
-        upd(idx - 1, wpp, ipp)
-        upd(idx, wpc, ipc)
-        upd(idx + 1, wpn, ipn)
+                if left > right:
+                    ans.append(0)
+                    continue
 
-    return res
+                a = peaks[left]
+                b = peaks[right]
+                prev = peaks[left - 1] if left > 0 else 0
+
+                # Sum of p * (p - previous_peak) for peaks in [a, b].
+                W = bit.range_sum(a, b)
+
+                ans.append(r * (b - l) - W + a * (l - prev))
+
+            else:
+                idx, val = x, y
+
+                # Only these three positions can change peak status.
+                affected = [
+                    i for i in (idx - 1, idx, idx + 1)
+                    if 0 < i < n - 1
+                ]
+
+                # Remove old peaks before changing nums.
+                for i in affected:
+                    if is_peak(i):
+                        remove_peak(i)
+
+                nums[idx] = val
+
+                # Reinsert positions that are peaks after the update.
+                for i in affected:
+                    if is_peak(i):
+                        insert_peak(i)
+
+        return ans
