@@ -76,6 +76,7 @@ class Solution:
                 pv = prev[r]
                 bad -= l - prev[nv]
                 bad += nxt[pv] - r
+                print(calc(r-l+1))
                 res.append(calc(r-l+1)-bad)
             else:
                 idx, val = q[1], q[2]
