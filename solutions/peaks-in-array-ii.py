@@ -72,6 +72,7 @@ class Solution:
 
         vals[-1] = calc(n-1-prev[n-1]+1)
         
+        print(vals)
         print(prev)
         print(nxt)
         print("\n")
@@ -79,33 +80,27 @@ class Solution:
         st = SegTree(vals)
 
         def upd(idx, wp, ip):
-            p, nx = prev[idx], nxt[idx]
             if wp and not ip:
                 st.update(idx, 0)
-                nxt[p] = nx
-                prev[nx] = p
+                st.update(nxt[idx], nxt[idx]-prev[idx]+1)
+                nxt[prev[idx]] = nxt[idx]
+                prev[nxt[idx]] = prev[idx]
             elif not wp and ip:
-                nxt[p] = idx
-                prev[nx] = idx
-                nxt[idx] = nx
-                prev[idx] = p
                 st.update(idx, calc(idx-prev[idx]+1))
+                st.update(nxt[idx], calc(nxt[idx]-idx+1))
+                nxt[prev[idx]] = idx
+                prev[nxt[idx]] = idx
 
+        sl = SortedList()
         for q in queries:
             if q[0] == 1:
                 l, r = q[1], q[2]
-                first = nxt[l]
-                last = prev[r]
-
-                if first > r or last < l or first > last:
-                    res.append(0)
-                    continue
-
-                bad = st.query(first, last)
-                bad -= calc(first - l + 1)
-                bad -= calc(r - last + 1)
-
-                res.append(calc(r - l + 1) - bad)
+                bad = st.query(l, r)
+                nv = nxt[l]
+                pv = prev[r]
+                bad -= l - prev[nv]
+                bad += nxt[pv] - r
+                res.append(calc(r-l+1)-bad)
             else:
                 idx, val = q[1], q[2]
                 if idx == 0 or idx == n-1:
@@ -119,6 +114,10 @@ class Solution:
                 upd(idx-1, wpp, ipp)
                 upd(idx, wpc, ipc)
                 upd(idx+1, wpn, ipn)
+
+                print(vals)
+                print(prev)
+                print(nxt)
         return res
 
 
