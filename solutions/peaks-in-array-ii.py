@@ -100,6 +100,7 @@ class Solution:
                     st.update(nxt[idx], calc(nxt[idx]-idx+1))
                     nxt[prev[idx]] = idx
                     prev[nxt[idx]] = idx
+                print(nums)
                 print(vals)
                 print(prev)
                 print(nxt)
