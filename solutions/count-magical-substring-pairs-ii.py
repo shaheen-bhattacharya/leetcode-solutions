@@ -13,12 +13,11 @@ class Solution:
                 
         idxr = defaultdict(list)
         fr = defaultdict(SortedList)
-        for i in range(n-1, -1, -1):
+        for i in range(n-1, 0, -1):
             ch = s[i]
             idxr[ch].append(i)
             for c in idxr:
                 fr[i].add(idxr[c][-1])
-            print(idxr)
 
         res = 0
         for i in range(n-1):
