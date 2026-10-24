@@ -72,7 +72,6 @@ class Solution:
 
         vals[-1] = calc(n-1-prev[n-1]+1)
         
-        print(vals)
         print(prev)
         print(nxt)
         print("\n")
@@ -114,7 +113,6 @@ class Solution:
                 upd(idx, wpc, ipc)
                 upd(idx+1, wpn, ipn)
 
-                print(vals)
                 print(prev)
                 print(nxt)
         return res
