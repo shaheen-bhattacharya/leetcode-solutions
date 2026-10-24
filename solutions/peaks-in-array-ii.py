@@ -47,16 +47,16 @@ class Solution:
         prev = [0] * n
         pp = 0
         for i in range(n):
+            prev[i] = pp
             if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
                 pp = i
-            prev[i] = pp
         
         nxt = [0] * n
         np = n-1
         for i in range(n-1, -1, -1):
+            nxt[i] = np
             if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
                 np = i
-            nxt[i] = np
 
         vals = [0] * n
         for i in range(1, n-1):
