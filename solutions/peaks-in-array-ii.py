@@ -85,8 +85,11 @@ class Solution:
                 prev[nxt[idx]] = prev[idx]
             elif not wp and ip:
                 st.update(idx, calc(idx-prev[idx]+1))
-                nxt[prev[idx]] = idx
-                prev[nxt[idx]] = idx
+                p, nx = prev[idx], nxt[idx]
+                nxt[p] = idx
+                prev[nx] = idx
+                nxt[idx] = nx
+                prev[idx] = p
 
         for q in queries:
             if q[0] == 1:
