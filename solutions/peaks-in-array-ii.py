@@ -55,9 +55,11 @@ class Solution:
       return int(num * (num - 1) / 2)
 
     def peak(i):
-      if 0 < i < n - 1:
-        return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
-      return False
+        if i == n-1:
+            return True
+        if 0 < i < n - 1:
+            return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+        return False
 
     peaks = SortedList()
     for i in range(1, n - 1):
