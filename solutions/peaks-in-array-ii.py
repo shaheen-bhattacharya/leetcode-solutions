@@ -83,16 +83,20 @@ class Solution:
 
     def upd(idx, wp, ip):
       if wp and not ip:
+        # Find next peak BEFORE removing from SortedList
+        nx_idx = peaks.bisect_right(idx)
+        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
         peaks.remove(idx)
         st.update(idx, 0)
-        nx = get_nxt(idx)
         if nx < n - 1:
           st.update(nx, calc(nx - get_prev(nx) + 1))
         st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
       elif not wp and ip:
+        # Find next peak BEFORE adding to SortedList
+        nx_idx = peaks.bisect_right(idx)
+        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
         peaks.add(idx)
         st.update(idx, calc(idx - get_prev(idx) + 1))
-        nx = get_nxt(idx)
         if nx < n - 1 and nx != idx:
           st.update(nx, calc(nx - get_prev(nx) + 1))
         st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
