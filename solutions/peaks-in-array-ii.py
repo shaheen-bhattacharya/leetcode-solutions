@@ -55,11 +55,9 @@ class Solution:
       return int(num * (num - 1) / 2)
 
     def peak(i):
-        if i == n-1:
-            return True
-        if 0 < i < n - 1:
-            return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
-        return False
+      if 0 < i < n - 1:
+        return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+      return False
 
     peaks = SortedList()
     for i in range(1, n - 1):
@@ -85,17 +83,19 @@ class Solution:
 
     def upd(idx, wp, ip):
       if wp and not ip:
-        st.update(idx, 0)
         peaks.remove(idx)
+        st.update(idx, 0)
         nx = get_nxt(idx)
-        if nx in peaks:
+        if nx < n - 1:
           st.update(nx, calc(nx - get_prev(nx) + 1))
+        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
       elif not wp and ip:
         peaks.add(idx)
         st.update(idx, calc(idx - get_prev(idx) + 1))
         nx = get_nxt(idx)
-        if nx in peaks and nx != idx:
+        if nx < n - 1 and nx != idx:
           st.update(nx, calc(nx - get_prev(nx) + 1))
+        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
 
     for q in queries:
       if q[0] == 1:
