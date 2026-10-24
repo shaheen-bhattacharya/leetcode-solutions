@@ -31,7 +31,7 @@ class Solution:
                 sl1.add(-1)
                 sl2.add(n)
             
-            # print(i, sl1, sl2)
+            print(i, sl1, sl2)
             dist = min(len(sl1), len(sl2))
             # res += 1
             for d in range(dist-1):
