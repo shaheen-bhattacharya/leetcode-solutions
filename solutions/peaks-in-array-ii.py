@@ -58,6 +58,7 @@ class Solution:
             if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
                 np = i
 
+
         vals = [0] * n
         for i in range(1, n-1):
             amt = i - prev[i] + 1
@@ -65,7 +66,7 @@ class Solution:
                 vals[i] = calc(amt)
 
         vals[-1] = calc(n-1-prev[n-1]+1)
-        print(vals)
+
         print(prev)
         print(nxt)
 
