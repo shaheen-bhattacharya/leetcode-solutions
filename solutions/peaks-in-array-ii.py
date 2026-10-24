@@ -50,81 +50,84 @@ class Solution:
       self, nums: list[int], queries: list[list[int]]
   ) -> list[int]:
     n = len(nums)
-
-    def calc(num):
-      return int(num * (num - 1) / 2)
+    peaks = SortedList()
 
     def peak(i):
       if 0 < i < n - 1:
         return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
       return False
 
-    peaks = SortedList()
+    def get_val(p):
+      idx = peaks.bisect_left(p)
+      prev_p = peaks[idx - 1] if idx > 0 else 0
+      return p * (p - prev_p)
+
     for i in range(1, n - 1):
       if peak(i):
         peaks.add(i)
 
-    def get_prev(x):
-      idx = peaks.bisect_left(x)
-      return peaks[idx - 1] if idx > 0 else 0
-
-    def get_nxt(x):
-      idx = peaks.bisect_right(x)
-      return peaks[idx] if idx < len(peaks) else n - 1
-
     vals = [0] * n
-    for i in range(1, n - 1):
-      if peak(i):
-        vals[i] = calc(i - get_prev(i) + 1)
-    vals[-1] = calc(n - 1 - get_prev(n - 1) + 1)
+    for p in peaks:
+      vals[p] = get_val(p)
 
-    res = []
     st = SegTree(vals)
 
-    def upd(idx, wp, ip):
-      if wp and not ip:
-        nx_idx = peaks.bisect_right(idx)
-        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
-        peaks.remove(idx)
-        st.update(idx, 0)
-        if nx < n - 1:
-          st.update(nx, calc(nx - get_prev(nx) + 1))
-        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
-      elif not wp and ip:
-        nx_idx = peaks.bisect_right(idx)
-        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
-        peaks.add(idx)
-        st.update(idx, calc(idx - get_prev(idx) + 1))
-        if nx < n - 1 and nx != idx:
-          st.update(nx, calc(nx - get_prev(nx) + 1))
-        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
+    def add_peak(p):
+      peaks.add(p)
+      st.update(p, get_val(p))
+      nx_idx = peaks.bisect_right(p)
+      if nx_idx < len(peaks):
+        nx = peaks[nx_idx]
+        st.update(nx, get_val(nx))
 
+    def remove_peak(p):
+      nx_idx = peaks.bisect_right(p)
+      nx = peaks[nx_idx] if nx_idx < len(peaks) else -1
+      peaks.remove(p)
+      st.update(p, 0)
+      if nx != -1:
+        st.update(nx, get_val(nx))
+
+    res = []
     for q in queries:
       if q[0] == 1:
         l, r = q[1], q[2]
-        bad = st.query(l, r)
-
-        idx_nv = peaks.bisect_left(l)
-        nv = peaks[idx_nv] if idx_nv < len(peaks) else n - 1
-
-        idx_pv = peaks.bisect_right(r) - 1
-        pv = peaks[idx_pv] if 0 <= idx_pv < len(peaks) else 0
-
-        bad -= l - get_prev(nv)
-        bad += get_nxt(pv) - r
-        res.append(calc(r - l + 1) - bad)
-      else:
-        idx, val = q[1], q[2]
-        if idx == 0 or idx == n - 1:
-          nums[idx] = val
+        left_bound = l + 1
+        right_bound = r - 1
+        if left_bound > right_bound:
+          res.append(0)
           continue
 
-        wpp, wpc, wpn = peak(idx - 1), peak(idx), peak(idx + 1)
-        nums[idx] = val
-        ipp, ipc, ipn = peak(idx - 1), peak(idx), peak(idx + 1)
+        idx_a = peaks.bisect_left(left_bound)
+        idx_b = peaks.bisect_right(right_bound) - 1
 
-        upd(idx - 1, wpp, ipp)
-        upd(idx, wpc, ipc)
-        upd(idx + 1, wpn, ipn)
+        if idx_a > idx_b or idx_a >= len(peaks) or idx_b < 0:
+          res.append(0)
+          continue
+
+        a = peaks[idx_a]
+        b = peaks[idx_b]
+        if a > right_bound or b < left_bound:
+          res.append(0)
+          continue
+
+        pos_a = peaks.bisect_left(a)
+        q_val = peaks[pos_a - 1] if pos_a > 0 else 0
+
+        W = st.query(a, b)
+        ans = r * (b - l) - W + a * (l - q_val)
+        res.append(ans)
+      else:
+        idx, val = q[1], q[2]
+        nums[idx] = val
+
+        for i in range(idx - 1, idx + 2):
+          if 0 < i < n - 1:
+            was_p = i in peaks
+            is_p = peak(i)
+            if was_p and not is_p:
+              remove_peak(i)
+            elif not was_p and is_p:
+              add_peak(i)
 
     return res
