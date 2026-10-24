@@ -81,12 +81,10 @@ class Solution:
         def upd(idx, wp, ip):
             if wp and not ip:
                 st.update(idx, 0)
-                st.update(nxt[idx], nxt[idx]-prev[idx]+1)
                 nxt[prev[idx]] = nxt[idx]
                 prev[nxt[idx]] = prev[idx]
             elif not wp and ip:
                 st.update(idx, calc(idx-prev[idx]+1))
-                st.update(nxt[idx], calc(nxt[idx]-idx+1))
                 nxt[prev[idx]] = idx
                 prev[nxt[idx]] = idx
 
