@@ -18,7 +18,7 @@ class Solution:
             idxr[ch].append(i)
             for c in idxr:
                 fr[i].add(idxr[c][-1])
-        print(idxr)
+            print(idxr)
 
         res = 0
         for i in range(n-1):
