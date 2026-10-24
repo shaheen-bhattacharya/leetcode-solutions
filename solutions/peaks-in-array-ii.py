@@ -43,6 +43,12 @@ class Solution:
         """
         def calc(num):
             return int(num * (num-1)/2)
+        def peak(i):
+            if i == 0:
+                return False
+            if i == n-1:
+                return True
+            return nums[i] > nums[i-1] and nums[i] > nums[i+1]
 
         prev = [0] * n
         pp = 0
@@ -58,7 +64,6 @@ class Solution:
             if (1 <= i <= n-2) and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
                 np = i
 
-
         vals = [0] * n
         for i in range(1, n-1):
             amt = i - prev[i] + 1
@@ -73,6 +78,19 @@ class Solution:
         print("\n")
         res = []
         st = SegTree(vals)
+
+        def upd(idx, wp, ip):
+            if wp and not ip:
+                st.update(idx, 0)
+                st.update(nxt[idx], nxt[idx]-prev[idx]+1)
+                nxt[prev[idx]] = nxt[idx]
+                prev[nxt[idx]] = prev[idx]
+            elif not wp and ip:
+                st.update(idx, calc(idx-prev[idx]+1))
+                st.update(nxt[idx], calc(nxt[idx]-idx+1))
+                nxt[prev[idx]] = idx
+                prev[nxt[idx]] = idx
+
         for q in queries:
             if q[0] == 1:
                 l, r = q[1], q[2]
@@ -84,23 +102,18 @@ class Solution:
                 res.append(calc(r-l+1)-bad)
             else:
                 idx, val = q[1], q[2]
-                nums[idx] = val
                 if idx == 0 or idx == n-1:
+                    nums[idx] = val
                     continue
-                wp = vals[idx] > 0
-                ip = nums[idx] > nums[idx-1] and nums[idx] > nums[idx+1]
-                                    
-                if wp and not ip:
-                    st.update(idx, 0)
-                    st.update(nxt[idx], nxt[idx]-prev[idx]+1)
-                    nxt[prev[idx]] = nxt[idx]
-                    prev[nxt[idx]] = prev[idx]
-                elif not wp and ip:
-                    st.update(idx, calc(idx-prev[idx]+1))
-                    st.update(nxt[idx], calc(nxt[idx]-idx+1))
-                    nxt[prev[idx]] = idx
-                    prev[nxt[idx]] = idx
-                print(nums)
+                
+                wpp, wpc, wpn = peak(idx-1), peak(idx), peak(idx+1)
+                nums[idx] = val
+                ipp, ipc, ipn = peak(idx-1), peak(idx), peak(idx+1)
+
+                upd(idx-1, wpp, ipp)
+                upd(idx, wpc, ipc)
+                upd(idx+1, wpn, ipn)
+
                 print(vals)
                 print(prev)
                 print(nxt)
