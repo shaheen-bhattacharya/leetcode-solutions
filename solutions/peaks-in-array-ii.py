@@ -65,6 +65,9 @@ class Solution:
                 vals[i] = calc(amt)
 
         vals[-1] = calc(n-1-prev[n-1]+1)
+        print(vals)
+        print(prev)
+        print(nxt)
 
         res = []
         st = SegTree(vals)
@@ -76,7 +79,6 @@ class Solution:
                 pv = prev[r]
                 bad -= l - prev[nv]
                 bad += nxt[pv] - r
-                print(calc(r-l+1))
                 res.append(calc(r-l+1)-bad)
             else:
                 idx, val = q[1], q[2]
