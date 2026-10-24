@@ -1,133 +1,130 @@
 from sortedcontainers import SortedList
 
+
 class SegTree:
-    def __init__(self, nums):
-        self.n = len(nums)
-        self.tree = [0] * (4 * self.n)
 
-        def build(node, l, r):
-            if l == r:
-                self.tree[node] = nums[l]
-                return
-            m = (l + r) // 2
-            build(2 * node, l, m)
-            build(2 * node + 1, m + 1, r)
-            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
+  def __init__(self, nums):
+    self.n = len(nums)
+    self.tree = [0] * (4 * self.n)
 
-        build(1, 0, self.n - 1)
+    def build(node, l, r):
+      if l == r:
+        self.tree[node] = nums[l]
+        return
+      m = (l + r) // 2
+      build(2 * node, l, m)
+      build(2 * node + 1, m + 1, r)
+      self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
 
-    def update(self, i, val):
-        def dfs(node, l, r):
-            if l == r:
-                self.tree[node] = val
-                return
-            m = (l + r) // 2
-            if i <= m:
-                dfs(2 * node, l, m)
-            else:
-                dfs(2 * node + 1, m + 1, r)
-            self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
+    build(1, 0, self.n - 1)
 
-        dfs(1, 0, self.n - 1)
+  def update(self, i, val):
+    def dfs(node, l, r):
+      if l == r:
+        self.tree[node] = val
+        return
+      m = (l + r) // 2
+      if m >= i:
+        dfs(2 * node, l, m)
+      else:
+        dfs(2 * node + 1, m + 1, r)
+      self.tree[node] = self.tree[2 * node] + self.tree[2 * node + 1]
 
-    def query(self, ql, qr):
-        def dfs(node, l, r):
-            if r < ql or l > qr:
-                return 0
-            if ql <= l and r <= qr:
-                return self.tree[node]
-            m = (l + r) // 2
-            return dfs(2 * node, l, m) + dfs(2 * node + 1, m + 1, r)
+    dfs(1, 0, self.n - 1)
 
-        return dfs(1, 0, self.n - 1)
+  def query(self, ql, qr):
+    def dfs(node, l, r):
+      if r < ql or l > qr:
+        return 0
+      if ql <= l <= r <= qr:
+        return self.tree[node]
+      m = (l + r) // 2
+      return dfs(2 * node, l, m) + dfs(2 * node + 1, m + 1, r)
+
+    return dfs(1, 0, self.n - 1)
 
 
 class Solution:
-    def countOfPeaks(self, nums: list[int], queries: list[list[int]]) -> list[int]:
-        n = len(nums)
 
-        def calc(num):
-            return num * (num - 1) // 2
+  def countOfPeaks(
+      self, nums: list[int], queries: list[list[int]]
+  ) -> list[int]:
+    n = len(nums)
 
-        def peak(i):
-            return 0 < i < n - 1 and nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+    def calc(num):
+      return int(num * (num - 1) / 2)
 
-        # Keep your sentinel-based representation.
-        peaks = SortedList([0] + [i for i in range(1, n - 1) if peak(i)] + [n - 1])
+    def peak(i):
+      if 0 < i < n - 1:
+        return nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+      return False
 
-        vals = [0] * n
+    peaks = SortedList()
+    for i in range(1, n - 1):
+      if peak(i):
+        peaks.add(i)
 
-        for j in range(1, len(peaks)):
-            p = peaks[j]
-            prev_p = peaks[j - 1]
-            vals[p] = calc(p - prev_p + 1)
+    def get_prev(x):
+      idx = peaks.bisect_left(x)
+      return peaks[idx - 1] if idx > 0 else 0
 
-        st = SegTree(vals)
-        res = []
+    def get_nxt(x):
+      idx = peaks.bisect_right(x)
+      return peaks[idx] if idx < len(peaks) else n - 1
 
-        def upd(idx, was, now):
-            if was == now or idx == 0 or idx == n - 1:
-                return
+    vals = [0] * n
+    for i in range(1, n - 1):
+      if peak(i):
+        vals[i] = calc(i - get_prev(i) + 1)
+    vals[-1] = calc(n - 1 - get_prev(n - 1) + 1)
 
-            if was:
-                j = peaks.bisect_left(idx)
-                p, nx = peaks[j - 1], peaks[j + 1]
+    res = []
+    st = SegTree(vals)
 
-                # Remove idx's contribution.
-                st.update(idx, 0)
+    def upd(idx, wp, ip):
+      if wp and not ip:
+        nx_idx = peaks.bisect_right(idx)
+        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
+        peaks.remove(idx)
+        st.update(idx, 0)
+        if nx < n - 1:
+          st.update(nx, calc(nx - get_prev(nx) + 1))
+        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
+      elif not wp and ip:
+        nx_idx = peaks.bisect_right(idx)
+        nx = peaks[nx_idx] if nx_idx < len(peaks) else n - 1
+        peaks.add(idx)
+        st.update(idx, calc(idx - get_prev(idx) + 1))
+        if nx < n - 1 and nx != idx:
+          st.update(nx, calc(nx - get_prev(nx) + 1))
+        st.update(n - 1, calc(n - 1 - get_prev(n - 1) + 1))
 
-                # Successor now uses p as its previous peak.
-                st.update(nx, calc(nx - p + 1))
-                peaks.remove(idx)
+    for q in queries:
+      if q[0] == 1:
+        l, r = q[1], q[2]
+        bad = st.query(l, r)
 
-            else:
-                j = peaks.bisect_left(idx)
-                p, nx = peaks[j - 1], peaks[j]
+        idx_nv = peaks.bisect_left(l)
+        nv = peaks[idx_nv] if idx_nv < len(peaks) else n - 1
 
-                # Insert idx between p and nx.
-                peaks.add(idx)
+        idx_pv = peaks.bisect_right(r) - 1
+        pv = peaks[idx_pv] if 0 <= idx_pv < len(peaks) else 0
 
-                st.update(idx, calc(idx - p + 1))
-                st.update(nx, calc(nx - idx + 1))
+        bad -= l - get_prev(nv)
+        bad += get_nxt(pv) - r
+        res.append(calc(r - l + 1) - bad)
+      else:
+        idx, val = q[1], q[2]
+        if idx == 0 or idx == n - 1:
+          nums[idx] = val
+          continue
 
-        for q in queries:
-            if q[0] == 1:
-                l, r = q[1], q[2]
+        wpp, wpc, wpn = peak(idx - 1), peak(idx), peak(idx + 1)
+        nums[idx] = val
+        ipp, ipc, ipn = peak(idx - 1), peak(idx), peak(idx + 1)
 
-                first = peaks.bisect_right(l)
-                last = peaks.bisect_left(r) - 1
+        upd(idx - 1, wpp, ipp)
+        upd(idx, wpc, ipc)
+        upd(idx + 1, wpn, ipn)
 
-                if first > last:
-                    res.append(0)
-                    continue
-
-                # Preserve your original query formula.
-                a = peaks[first]
-                b = peaks[last]
-
-                bad = st.query(a, b)
-                bad -= calc(a - l + 1)
-                bad -= calc(r - b + 1)
-
-                res.append(calc(r - l + 1) - bad)
-
-            else:
-                idx, val = q[1], q[2]
-
-                affected = [i for i in (idx - 1, idx, idx + 1) if 0 < i < n - 1]
-                old = {i: peak(i) for i in affected}
-
-                nums[idx] = val
-
-                new = {i: peak(i) for i in affected}
-
-                # Remove old peaks first, then insert newly created peaks.
-                for i in affected:
-                    if old[i] and not new[i]:
-                        upd(i, True, False)
-
-                for i in affected:
-                    if not old[i] and new[i]:
-                        upd(i, False, True)
-
-        return res
+    return res
