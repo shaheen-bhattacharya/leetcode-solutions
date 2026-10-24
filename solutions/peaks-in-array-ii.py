@@ -66,12 +66,11 @@ class Solution:
                 vals[i] = calc(amt)
 
         vals[-1] = calc(n-1-prev[n-1]+1)
-        print(n-1-prev[n-1]+1)
-
+        
         print(vals)
         print(prev)
         print(nxt)
-
+        print("\n")
         res = []
         st = SegTree(vals)
         for q in queries:
@@ -101,6 +100,9 @@ class Solution:
                     st.update(nxt[idx], calc(nxt[idx]-idx+1))
                     nxt[prev[idx]] = idx
                     prev[nxt[idx]] = idx
+                print(vals)
+                print(prev)
+                print(nxt)
         return res
 
 
