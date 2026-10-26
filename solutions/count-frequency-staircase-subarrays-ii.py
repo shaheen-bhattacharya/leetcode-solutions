@@ -1,65 +1,35 @@
 class Solution:
-    def countStaircase(self, nums: list[int]) -> int:        
+    def countStaircase(self, nums: list[int]) -> int:
         n = len(nums)
-        res = n
-        lgt = 3
-        curr = 3
-        sqv = {}
-        ln = 1
-        cv = 2
-        while ln <= n:
-            sqv[ln] = [cv-1,cv]
-            ln += cv
-            cv += 1
-        
-        while lgt <= n:
-            dlen = sqv[lgt][0]
-            idxs = defaultdict(deque)
-            seen = SortedList()
-            
-            for i in range(lgt):
-                idxs[nums[i]].append(i)
-                if len(idxs[nums[i]]) == 1:
-                    seen.add((i, nums[i]))
-            if len(seen) == dlen:
-                p = 1
-                flag = True
-                for _, v in seen:
-                    if len(idxs[v]) != p:
-                        flag = False
-                        break
-                    p += 1
-                if flag:
-                    res += 1
-                    
-            for i in range(lgt, n):
-                b = idxs[nums[i-lgt]].popleft()
-                seen.remove((b,nums[i-lgt]))
-                
-                if len(idxs[nums[i-lgt]]) > 0:
-                    seen.add((idxs[nums[i-lgt]][0], nums[i-lgt]))
-                    
-                idxs[nums[i]].append(i)
-                if len(idxs[nums[i]]) == 1:
-                    seen.add((i, nums[i]))
-                    
-                if len(seen) == dlen:
-                    p = 1
-                    flag = True
-                    for _, v in seen:
-                        if len(idxs[v]) != p:
-                            flag = False
-                            break
-                        p += 1
-                    if flag:
-                        res += 1
-            lgt += curr
-            curr += 1
-        return res
-
-                
-            
-        
-        
-        
-        
+        max_dist = [0] * (n + 1)
+        k = 1
+        for rem in range(1, n + 1):
+            if (k + 1) * (k + 2) // 2 <= rem:
+                k += 1
+            max_dist[rem] = k
+        ans = 0
+        pos = [-1] * (1 + max(nums))
+        f = []
+        for i in range(n):
+            f = []
+            ok = 0
+            max_d = max_dist[n - i]
+            seen = []
+            for j in range(i,n):
+                if pos[nums[j]] == -1:
+                    f.append(0)
+                    pos[nums[j]] = len(f) - 1
+                    seen.append(nums[j])
+                if len(f) > max_d:
+                    break
+                p = pos[nums[j]]
+                f[p] += 1
+                if f[p] > p + 1:
+                    break
+                if f[p] == p + 1:
+                    ok += 1
+                if ok == len(f):
+                    ans += 1
+            for x in seen:
+                pos[x] = -1
+        return ans
