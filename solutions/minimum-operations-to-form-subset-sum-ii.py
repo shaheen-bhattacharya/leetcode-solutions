@@ -10,6 +10,7 @@ class Solution:
             num = nums[i]
             key = nums[i]
             cost[key].append((key, 0))
+            values[key].add(key)
             ops = 0
             while num > 1:
                 ops += 1
