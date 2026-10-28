@@ -36,6 +36,9 @@ class Solution:
             ndp = [0]*(sm+1)
             for v, c in cost[key]:
                 for i in range(sm+1):
+                    if i < v:
+                        ndp[i] = dp[i]
+                        continue
                     ndp[i] = min(dp[i], dp[i-v]+c)
             dp = ndp[:]
         return dp[sm] if dp[sm] != inf else -1
