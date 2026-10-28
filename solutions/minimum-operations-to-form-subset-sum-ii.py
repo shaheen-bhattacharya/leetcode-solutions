@@ -20,10 +20,10 @@ class Solution:
                     cost[key].append((num, ops))
                 
             while num < sm:
-                ops += 1
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))
                 num *= 2
+                ops += 1
         print(cost)
 
