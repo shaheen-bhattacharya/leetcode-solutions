@@ -1,45 +1,37 @@
-from collections import defaultdict
 from math import inf
 
 class Solution:
     def minOperations(self, nums: list[int], sm: int) -> int:
-        cost = defaultdict(list)
-        seen = set()
-
-        for x in nums:
-            if x in seen:
-                continue
-            seen.add(x)
-
-            best = {x: 0}
-            num = x
-            ops = 0
-
-            while num > 1:
-                ops += 1
-                num //= 2
-                best[num] = min(ops, best.get(num, inf))
-
-                tmp = num
-                top = ops
-                while tmp < sm:
-                    tmp *= 2
-                    top += 1
-                    best[tmp] = min(top, best.get(tmp, inf))
-
-            cost[x] = list(best.items())
-
-        dp = [inf] * (sm + 1)
+        inf_val = 10**9
+        dp = [inf_val] * (sm + 1)
         dp[0] = 0
-
+        
         for x in nums:
             ndp = dp[:]
-            for v, c in cost[x]:
-                if v > sm:
+            for w in range(sm, -1, -1):
+                if dp[w] == inf_val:
                     continue
-                for s in range(v, sm + 1):
-                    if dp[s - v] != inf:
-                        ndp[s] = min(ndp[s], dp[s - v] + c)
+                
+                # Option 1: Only multiply (or keep x)
+                i, y = 0, x
+                while y <= sm:
+                    if w + y <= sm:
+                        ndp[w + y] = min(ndp[w + y], dp[w] + i)
+                    i += 1
+                    y *= 2
+                
+                # Option 2: Divide at least once, then optionally multiply
+                i, y = 1, x // 2
+                while y > 0:
+                    j, z = 0, y
+                    while z <= sm:
+                        if w + z <= sm:
+                            ndp[w + z] = min(ndp[w + z], dp[w] + i + j)
+                        j += 1
+                        z *= 2
+                    i += 1
+                    y //= 2
+                    
             dp = ndp
 
-        return dp[sm] if dp[sm] != inf else -1
+        return dp[sm] if dp[sm] != inf_val else -1
