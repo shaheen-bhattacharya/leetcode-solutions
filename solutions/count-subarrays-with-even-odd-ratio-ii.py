@@ -32,7 +32,7 @@ class Solution:
         ft = FenwickTree(sn+1)
 
         res = 0
-        for v in pref[1:]:
+        for v in pref:
             res += ft.query(corr[v]+1)
             ft.update(corr[v], 1)
         return res
