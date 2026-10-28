@@ -30,11 +30,12 @@ class Solution:
                 num *= 2
                 ops += 1
         
+        print(cost)
         dp = [inf] * (sm+1)
         dp[0] = 0
         for key in cost:
             ndp = [0]*(sm+1)
-            print(dp)
+            # print(dp)
             for v, c in cost[key]:
                 for i in range(sm+1):
                     if i < v:
