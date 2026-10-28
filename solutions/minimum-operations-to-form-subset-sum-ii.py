@@ -24,12 +24,13 @@ class Solution:
                     cost[key].append((num, ops))
 
                 tmp = num  
+                top = ops
                 while tmp < sm:
                     tmp *= 2
-                    ops += 1
+                    top += 1
                     if tmp not in values[key]:
                         values[key].add(tmp)
-                        cost[key].append((tmp, ops))
+                        cost[key].append((tmp, top))
     
         dp = [inf] * (sm+1)
         dp[0] = 0
