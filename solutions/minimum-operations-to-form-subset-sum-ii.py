@@ -12,19 +12,18 @@ class Solution:
                 continue
             seen.add(num)
             key = nums[i]
-            best = {key:0}
+            best = {}
             ops = 0
             while num > 1:
                 best[num] = ops if num not in best else min(ops, best[num])
-                ops += 1
-                num//=2
-
                 tmp = num  
                 top = ops                
                 while tmp < sm:
                     tmp *= 2
                     top += 1
                     best[tmp] = top if tmp not in best else min(top, best[tmp])
+                ops += 1
+                num//=2
             for k in best:
                 cost[nums[i]].append((k, best[k]))
     
