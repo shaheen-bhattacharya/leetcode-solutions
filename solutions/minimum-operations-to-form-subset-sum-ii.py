@@ -41,11 +41,10 @@ class Solution:
                     if i < v:
                         ndp[i] = min(ndp[i], dp[i])
                         continue
-                    # if (v, c) == (5, 1):
-                    #     print(dp[i-v])
+                    if (v, c) == (5, 1):
+                        print(dp[i-v])
                     ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
             dp = ndp[:]
-            print(dp)
         return dp[sm] if dp[sm] != inf else -1
 
                 
