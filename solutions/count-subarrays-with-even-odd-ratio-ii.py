@@ -25,16 +25,16 @@ class Solution:
         pref = list(accumulate(nums))
         # print(nums)
         # print(pref)
-        snum = list(sorted(set(pref)))
+        snum = list(sorted(set(pref) | {0}))
         sn = len(snum)
         corr = {snum[i]:i+1 for i in range(sn)}
         # print(corr)
         ft = FenwickTree(sn+1)
+        ft.update(corr[0], 1)
 
         res = 0
         for v in pref:
             res += ft.query(corr[v])
             ft.update(corr[v], 1)
-
         return res
 
