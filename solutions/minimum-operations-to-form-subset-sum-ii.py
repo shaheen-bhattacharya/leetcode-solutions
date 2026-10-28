@@ -5,7 +5,6 @@ class Solution:
         """
         n = len(nums)
         cost = defaultdict(list)
-        values = defaultdict(set)
         seen = set()
         for i in range(n):
             num = nums[i]
@@ -19,15 +18,13 @@ class Solution:
             while num > 1:
                 ops += 1
                 num//=2
-                if num not in values[key]:
-                    best[num] = min(best[num], ops)
+                best[num] = min(best[num], ops)
                 tmp = num  
                 top = ops
                 while tmp < sm:
                     tmp *= 2
                     top += 1
-                    if tmp not in values[key]:
-                        best[num] = min(best[num], top)
+                    best[num] = min(best[num], top)
                 for k in best:
                     cost[num].append((k, best[k]))
     
