@@ -19,12 +19,11 @@ class Solution:
                     values[key].add(num)
                     cost[key].append((num, ops))
                 
-            while num <= sm:
+            while num < sm:
                 ops += 1
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))
                 num *= 2
-                
         print(cost)
 
