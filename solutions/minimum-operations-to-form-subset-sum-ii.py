@@ -14,10 +14,10 @@ class Solution:
             ops = 0
             while num > 1:
                 ops += 1
+                num//=2
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))
-                num//=2
                 
             while num < sm:
                 ops += 1
