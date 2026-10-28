@@ -33,7 +33,7 @@ class Solution:
 
         res = 0
         for v in pref:
-            res += ft.query(corr[v])
+            res += 1 + ft.query(corr[v])
             ft.update(corr[v], 1)
 
         return res
