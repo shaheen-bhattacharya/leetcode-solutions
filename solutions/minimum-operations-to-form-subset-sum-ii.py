@@ -34,6 +34,7 @@ class Solution:
         dp[0] = 0
         for key in cost:
             ndp = [0]*(sm+1)
+            print(dp)
             for v, c in cost[key]:
                 for i in range(sm+1):
                     if i < v:
