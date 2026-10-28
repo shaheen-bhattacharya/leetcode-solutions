@@ -6,31 +6,26 @@ class Solution:
         n = len(nums)
         cost = defaultdict(list)
         values = defaultdict(set)
-        seen = set()
         for i in range(n):
             num = nums[i]
-            if num in seen:
-                continue
-            seen.add(num)
+            best = defaultdict(lambda:inf)
             key = nums[i]
             cost[key].append((key, 0))
-            values[key].add(key)
             ops = 0
             while num > 1:
                 ops += 1
                 num//=2
                 if num not in values[key]:
-                    values[key].add(num)
-                    cost[key].append((num, ops))
-
+                    best[num] = min(best[num], ops)
                 tmp = num  
                 top = ops
                 while tmp < sm:
                     tmp *= 2
                     top += 1
                     if tmp not in values[key]:
-                        values[key].add(tmp)
-                        cost[key].append((tmp, top))
+                        best[num] = min(best[num], top)
+                for k in best:
+                    cost[num].append((k, best[k]))
     
         dp = [inf] * (sm+1)
         dp[0] = 0
