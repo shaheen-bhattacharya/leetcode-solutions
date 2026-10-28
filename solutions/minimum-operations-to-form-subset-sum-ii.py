@@ -25,8 +25,8 @@ class Solution:
                     tmp *= 2
                     top += 1
                     best[tmp] = top if tmp not in best else min(top, best[tmp])
-                for k in best:
-                    cost[nums[i]].append((k, best[k]))
+            for k in best:
+                cost[nums[i]].append((k, best[k]))
     
         print(cost)
         dp = [inf] * (sm+1)
