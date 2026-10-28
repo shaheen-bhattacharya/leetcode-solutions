@@ -11,20 +11,20 @@ class Solution:
             if num in seen:
                 continue
             seen.add(num)
-            best = defaultdict(lambda:inf)
+            best = {}
             key = nums[i]
             cost[key].append((key, 0))
             ops = 0
             while num > 1:
                 ops += 1
                 num//=2
-                best[num] = min(best[num], ops)
+                best[num] = ops if num not in best else min(ops, best[num])
                 tmp = num  
                 top = ops
                 while tmp < sm:
                     tmp *= 2
                     top += 1
-                    best[num] = min(best[num], top)
+                    best[num] = top if num not in best else min(top, best[num])
                 for k in best:
                     cost[num].append((k, best[k]))
     
