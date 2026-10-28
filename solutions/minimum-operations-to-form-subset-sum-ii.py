@@ -6,8 +6,12 @@ class Solution:
         n = len(nums)
         cost = defaultdict(list)
         values = defaultdict(set)
+        seen = set()
         for i in range(n):
             num = nums[i]
+            if num in seen:
+                continue
+            seen.add(num)
             key = nums[i]
             cost[key].append((key, 0))
             values[key].add(key)
