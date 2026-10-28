@@ -15,11 +15,12 @@ class Solution:
             best = {key:0}
             ops = 0
             while num > 1:
+                best[num] = ops if num not in best else min(ops, best[num])
                 ops += 1
                 num//=2
-                best[num] = ops if num not in best else min(ops, best[num])
+
                 tmp = num  
-                top = ops
+                top = ops                
                 while tmp < sm:
                     tmp *= 2
                     top += 1
