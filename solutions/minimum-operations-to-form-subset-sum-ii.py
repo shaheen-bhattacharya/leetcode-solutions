@@ -9,8 +9,6 @@ class Solution:
         seen = set()
         for i in range(n):
             num = nums[i]
-            if num in seen:
-                continue
             seen.add(num)
             key = nums[i]
             cost[key].append((key, 0))
