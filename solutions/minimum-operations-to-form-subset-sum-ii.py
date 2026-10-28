@@ -37,7 +37,7 @@ class Solution:
             for v, c in cost[key]:
                 for i in range(sm+1):
                     ndp[i] = min(dp[i], dp[i-v]+c)
-            dp = ndp
+            dp = ndp[:]
         return dp[sm] if dp[sm] != inf else -1
 
                 
