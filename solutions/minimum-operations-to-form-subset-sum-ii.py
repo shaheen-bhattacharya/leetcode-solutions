@@ -42,8 +42,6 @@ class Solution:
                         ndp[i] = min(ndp[i], dp[i])
                         continue
                     ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
-                    if (v, c) == (5, 1):
-                        print(ndp)
             dp = ndp[:]
         return dp[sm] if dp[sm] != inf else -1
 
