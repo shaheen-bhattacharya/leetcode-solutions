@@ -6,8 +6,12 @@ class Solution:
         n = len(nums)
         cost = defaultdict(list)
         values = defaultdict(set)
+        seen = set()
         for i in range(n):
             num = nums[i]
+            if num in seen:
+                continue
+            seen.add(num)
             key = nums[i]
             cost[key].append((key, 0))
             values[key].add(key)
@@ -25,5 +29,10 @@ class Solution:
                     cost[key].append((num, ops))
                 num *= 2
                 ops += 1
-        print(cost)
+        
+        # dp = [0] * (sm+1)
+        # for key in cost:
+        #     for v, c in cost[key]:
+                
+
 
