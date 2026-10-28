@@ -28,6 +28,7 @@ class Solution:
                 for k in best:
                     cost[num].append((k, best[k]))
     
+        print(cost)
         dp = [inf] * (sm+1)
         dp[0] = 0
         for key in nums:
