@@ -1,37 +1,48 @@
-from math import inf
-
 class Solution:
     def minOperations(self, nums: list[int], sm: int) -> int:
-        inf_val = 10**9
-        dp = [inf_val] * (sm + 1)
+        """
+        continuous // then only *
+        """
+        n = len(nums)
+        cost = defaultdict(list)
+        seen = set()
+        for i in range(n):
+            num = nums[i]
+            if num in seen:
+                continue
+            seen.add(num)
+            best = {}
+            key = nums[i]
+            cost[key].append((key, 0))
+            ops = 0
+            while num > 1:
+                ops += 1
+                num//=2
+                best[num] = ops if num not in best else min(ops, best[num])
+                tmp = num  
+                top = ops
+                while tmp < sm:
+                    tmp *= 2
+                    top += 1
+                    best[tmp] = top if tmp not in best else min(top, best[tmp])
+            for k in best:
+                cost[nums[i]].append((k, best[k]))
+    
+        print(cost)
+        dp = [inf] * (sm+1)
         dp[0] = 0
-        
-        for x in nums:
-            ndp = dp[:]
-            for w in range(sm, -1, -1):
-                if dp[w] == inf_val:
-                    continue
-                
-                # Option 1: Only multiply (or keep x)
-                i, y = 0, x
-                while y <= sm:
-                    if w + y <= sm:
-                        ndp[w + y] = min(ndp[w + y], dp[w] + i)
-                    i += 1
-                    y *= 2
-                
-                # Option 2: Divide at least once, then optionally multiply
-                i, y = 1, x // 2
-                while y > 0:
-                    j, z = 0, y
-                    while z <= sm:
-                        if w + z <= sm:
-                            ndp[w + z] = min(ndp[w + z], dp[w] + i + j)
-                        j += 1
-                        z *= 2
-                    i += 1
-                    y //= 2
-                    
-            dp = ndp
+        for key in nums:
+            ndp = [inf]*(sm+1)
+            ndp[0] = 0
+            for v, c in cost[key]:
+                for i in range(sm+1):
+                    if i < v:
+                        ndp[i] = min(ndp[i], dp[i])
+                        continue
+                    ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
+            dp = ndp[:]
+        return dp[sm] if dp[sm] != inf else -1
 
-        return dp[sm] if dp[sm] != inf_val else -1
+                
+
+
