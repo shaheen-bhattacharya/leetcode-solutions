@@ -36,7 +36,6 @@ class Solution:
         for key in cost:
             ndp = [inf]*(sm+1)
             ndp[0] = 0
-            # print(dp)
             for v, c in cost[key]:
                 for i in range(sm+1):
                     if i < v:
@@ -44,6 +43,7 @@ class Solution:
                         continue
                     ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
             dp = ndp[:]
+            print(dp)
         return dp[sm] if dp[sm] != inf else -1
 
                 
