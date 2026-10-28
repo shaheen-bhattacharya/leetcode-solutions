@@ -22,6 +22,9 @@ class Solution:
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))
+                if num * 2 not in values[key]:
+                    values[key].add(num*2)
+                    cost[key].append((num*2, ops+1))
                 
             while num < sm:
                 num *= 2
@@ -29,20 +32,20 @@ class Solution:
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))        
-        # print(cost)
-        dp = [inf] * (sm+1)
-        dp[0] = 0
-        for key in cost:
-            ndp = [inf]*(sm+1)
-            ndp[0] = 0
-            for v, c in cost[key]:
-                for i in range(sm+1):
-                    if i < v:
-                        ndp[i] = min(ndp[i], dp[i])
-                        continue
-                    ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
-            dp = ndp[:]
-        return dp[sm] if dp[sm] != inf else -1
+        print(cost)
+        # dp = [inf] * (sm+1)
+        # dp[0] = 0
+        # for key in cost:
+        #     ndp = [inf]*(sm+1)
+        #     ndp[0] = 0
+        #     for v, c in cost[key]:
+        #         for i in range(sm+1):
+        #             if i < v:
+        #                 ndp[i] = min(ndp[i], dp[i])
+        #                 continue
+        #             ndp[i] = min(ndp[i], dp[i], dp[i-v]+c)
+        #     dp = ndp[:]
+        # return dp[sm] if dp[sm] != inf else -1
 
                 
 
