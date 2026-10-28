@@ -35,5 +35,14 @@ class Solution:
         for v in pref:
             res += ft.query(corr[v]+1)
             ft.update(corr[v], 1)
+
+        ec = 0
+        for v in nums:
+            if v == -b:
+                ec += 1
+            else:
+                ec = 0
+            res -= ec
+
         return res
 
