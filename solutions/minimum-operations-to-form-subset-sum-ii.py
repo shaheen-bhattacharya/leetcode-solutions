@@ -30,9 +30,15 @@ class Solution:
                 num *= 2
                 ops += 1
         
-        # dp = [0] * (sm+1)
-        # for key in cost:
-        #     for v, c in cost[key]:
+        dp = [inf] * (sm+1)
+        dp[0] = 0
+        for key in cost:
+            ndp = [0]*(sm+1)
+            for v, c in cost[key]:
+                for i in range(sm+1):
+                    ndp[i] = min(dp[i], dp[i-v]+c)
+        return dp[sm] if dp[sm] != inf else -1
+
                 
 
 
