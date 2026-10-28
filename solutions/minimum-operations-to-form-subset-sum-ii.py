@@ -14,7 +14,7 @@ class Solution:
             key = nums[i]
             best = {}
             ops = 0
-            while num > 1:
+            while num >= 1:
                 best[num] = ops if num not in best else min(ops, best[num])
                 tmp = num  
                 top = ops                
