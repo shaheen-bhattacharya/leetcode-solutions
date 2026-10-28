@@ -22,17 +22,15 @@ class Solution:
                 if num not in values[key]:
                     values[key].add(num)
                     cost[key].append((num, ops))
-                if num * 2 not in values[key]:
-                    values[key].add(num*2)
-                    cost[key].append((num*2, ops+1))
-                
-            while num < sm:
-                num *= 2
-                ops += 1
-                if num not in values[key]:
-                    values[key].add(num)
-                    cost[key].append((num, ops))        
-        print(cost)
+
+                tmp = num  
+                while tmp < sm:
+                    tmp *= 2
+                    ops += 1
+                    if tmp not in values[key]:
+                        values[key].add(tmp)
+                        cost[key].append((tmp, ops))
+    
         dp = [inf] * (sm+1)
         dp[0] = 0
         for key in cost:
