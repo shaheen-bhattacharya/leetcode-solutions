@@ -11,9 +11,8 @@ class Solution:
             if num in seen:
                 continue
             seen.add(num)
-            best = {}
             key = nums[i]
-            cost[key].append((key, 0))
+            best = {key:0}
             ops = 0
             while num > 1:
                 ops += 1
