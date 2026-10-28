@@ -36,13 +36,12 @@ class Solution:
             ft.update(corr[v], 1)
             res += ft.query(corr[v])
 
-        # ec = 0
-        # for v in nums:
-        #     if v == -b:
-        #         ec += 1
-        #     else:
-        #         ec = 0
-        #     res -= ec
-
+        ec = 0
+        for v in nums:
+            if v == -b:
+                ec += 1
+                res -= ec
+            else:
+                ec = 0
         return res
 
