@@ -10,9 +10,10 @@ class Solution:
             idxs[i] = r*4+c
 
         sl, sr = str(l-1), str(r)
+        print(str(r))
         sl = "0"*(16-len(sl))+sl
         sr = "0"*(16-len(sr))+sr
-        print(sl)
+        # print(sl)
 
         def good(snum):
             dp = {}
