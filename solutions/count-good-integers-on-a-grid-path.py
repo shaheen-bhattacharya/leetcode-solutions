@@ -1,16 +1,16 @@
 class Solution:
     def countGoodIntegersOnPath(self, l: int, r: int, directions: str) -> int:
         idxs = [0] * 7
-        r, c = 0,0
+        ro, c = 0,0
         for i in range(1, 7):
             if directions[i-1] == "D":
-                r += 1
+                ro += 1
             else:
                 c += 1
-            idxs[i] = r*4+c
+            idxs[i] = ro*4+c
 
         sl, sr = str(l-1), str(r)
-        print(str(r))
+        # print(str(r))
         sl = "0"*(16-len(sl))+sl
         sr = "0"*(16-len(sr))+sr
         # print(sl)
@@ -18,7 +18,7 @@ class Solution:
         def good(snum):
             dp = {}
             sn = len(snum)
-            print(snum)
+            # print(snum)
             def dfs(i, j, prev):
                 key = (i, j, prev)
                 if key in dp:
