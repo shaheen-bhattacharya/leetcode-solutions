@@ -11,7 +11,8 @@ class Solution:
                 for k in range(i-l, max(-1, i-r-1), -1):
                     if k < 0:
                         continue
-                    dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
+                    if j > 0:
+                        dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
         res = -inf
         for i in range(m+1):
             res = max(res, dp[-1][i])
