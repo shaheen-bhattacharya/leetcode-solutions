@@ -19,21 +19,34 @@ class Solution:
             dp = {}
             sn = len(snum)
             print(snum)
-            def dfs(i, j, prev):
-                key = (i, j, prev)
+            def dfs(i, j, prev, tight):
+                key = (i, j, prev, tight)
                 if key in dp:
                     return dp[key]
                 if i == sn:
                     return 1
-                ub = min(prev, int(snum[i])) if i == idxs[j] else int(snum[i])
+                cd = int(snum[i])
+                ub = min(prev, cd) if i == idxs[j] else cd
                 nj = j
-                if i == idxs[j]:
-                    nj += 1
+
+                if tight:
+                    if i == idxs[j]:
+                        nj += 1
+                        ub = min(prev, cd)
+                    else:
+                        ub = cd
+                else:
+                    if i == idxs[j]:
+                        nj += 1
+                        ub = prev
+                    else:
+                        ub = 9
                 ret = 0
-                for d in range(prev+1):
+                for d in range(ub+1):
                     nprev = prev if i == idxs[j] else d
-                    ret += dfs(i+1, nj, nprev)
+                    ntight = tight and d == cd
+                    ret += dfs(i+1, nj, nprev, ntight)
                 dp[key] = ret
                 return ret
-            return dfs(0,0,9)
+            return dfs(0,0,9,True)
         return good(sr) - good(sl)
