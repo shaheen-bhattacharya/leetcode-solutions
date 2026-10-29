@@ -9,7 +9,7 @@ class Solution:
             for j in range(m+1):
                 dp[i][j] = dp[i-1][j]
                 for k in range(i-l+1, max(0, i-r-1), -1):
-                    dp[i][j] = max(dp[i][j], dp[k][j]+pref[i]-pref[k])
+                    dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
         res = -inf
         for i in range(m+1):
             res = max(res, dp[-1][i])
