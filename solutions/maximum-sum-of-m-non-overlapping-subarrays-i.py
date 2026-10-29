@@ -11,7 +11,7 @@ class Solution:
                 dp[i][j] = dp[i-1][j]
                 if j == 0:
                     continue
-                nv = dp[i-l][j-1] - pref[l]
+                nv = dp[i-l][j-1] - pref[i-l]
                 while q and nv > q[-1][1]:
                     q.pop()
                 q.append((i, nv))
