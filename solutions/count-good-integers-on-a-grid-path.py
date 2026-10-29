@@ -25,7 +25,7 @@ class Solution:
                     return dp[key]
                 if i == sn:
                     return 1
-                ub = prev if i == idxs[j] else 9
+                ub = min(prev, int(snum[i])) if i == idxs[j] else int(snum[i])
                 nj = j
                 if i == idxs[j]:
                     nj += 1
