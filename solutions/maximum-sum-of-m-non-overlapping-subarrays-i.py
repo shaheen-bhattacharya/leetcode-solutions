@@ -8,7 +8,7 @@ class Solution:
         for i in range(1, n+1):
             for j in range(m+1):
                 dp[i][j] = dp[i-1][j]
-                for k in range(i-l, max(0, i-r-2), -1):
+                for k in range(i-l, max(-1, i-r-1), -1):
                     dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
         res = -inf
         for i in range(m+1):
