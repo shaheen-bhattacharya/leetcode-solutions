@@ -15,13 +15,11 @@ class Solution:
                 nv = dp[i-l][j-1] - pref[i-l]
                 while q and nv > q[-1][1]:
                     q.pop()
-                q.append((i, nv))
+                q.append((i-l, nv))
                 if q[0][0] <= i-r-1:
                     q.popleft()
                 dp[i][j] = max(dp[i][j], pref[i] + q[0][1])
-                # for k in range(i-l, max(-1, i-r-1), -1):
-                #     if j > 0:
-                #         dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
+                
         res = -inf
         for i in range(1, m+1):
             res = max(res, dp[-1][i])
