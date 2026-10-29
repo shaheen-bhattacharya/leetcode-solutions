@@ -9,6 +9,8 @@ class Solution:
             for j in range(m+1):
                 dp[i][j] = dp[i-1][j]
                 for k in range(i-l, max(-1, i-r-1), -1):
+                    if k < 0:
+                        continue
                     dp[i][j] = max(dp[i][j], dp[k][j-1]+pref[i]-pref[k])
         res = -inf
         for i in range(m+1):
