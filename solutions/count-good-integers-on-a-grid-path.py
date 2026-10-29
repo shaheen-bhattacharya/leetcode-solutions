@@ -12,6 +12,7 @@ class Solution:
         sl, sr = str(l-1), str(r)
         sl = "0"*(16-len(sl))+sl
         sr = "0"*(16-len(sr))+sr
+        print(sl)
 
         def good(snum):
             dp = {}
