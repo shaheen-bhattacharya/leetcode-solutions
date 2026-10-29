@@ -6,13 +6,13 @@ class Solution:
         dp[0][0] = 0
         # q = deque([(0,0)])
 
-        for i in range(1, n+1):
+        for j in range(m+1):
             q = deque()
-            for j in range(m+1):
+            for i in range(1, n+1):
                 dp[i][j] = dp[i-1][j]
                 if j == 0:
                     continue
-                    
+
                 if i-l >= 0:
                     nv = dp[i-l][j-1] - pref[i-l]
                     while q and nv > q[-1][1]:
