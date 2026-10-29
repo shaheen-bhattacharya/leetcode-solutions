@@ -18,7 +18,7 @@ class Solution:
                     while q and nv > q[-1][1]:
                         q.pop()
                     q.append((i-l, nv))
-                    if q[0][0] <= i-r-1:
+                    if q[0][0] == i-r-1:
                         q.popleft()
                     dp[i][j] = max(dp[i][j], pref[i] + q[0][1])
                 
