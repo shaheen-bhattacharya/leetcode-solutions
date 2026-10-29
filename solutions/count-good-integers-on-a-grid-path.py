@@ -18,7 +18,7 @@ class Solution:
         def good(snum):
             dp = {}
             sn = len(snum)
-            # print(snum)
+            print(snum)
             def dfs(i, j, prev):
                 key = (i, j, prev)
                 if key in dp:
