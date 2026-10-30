@@ -29,7 +29,7 @@ class Solution:
         dp[1][1] = mc(1)
         for i in range(2, n-1):
             for j in range(k+1):
-                dp[i][j] = dp[i][j-1]
+                dp[i][j] = dp[i-1][j]
                 if j > 0:
                     dp[i][j] = min(dp[i][j], dp[i-2][j-1] + mc(i))
 
@@ -42,7 +42,7 @@ class Solution:
 
         for i in range(2, n-1):
             for j in range(k+1):
-                dp[i][j] = dp[i][j-1]
+                dp[i][j] = dp[i-1][j]
                 if j > 0:
                     dp[i][j] = min(dp[i][j], dp[i-2][j-1] + mc(i))
         res = min(res, dp[n-2][k])
