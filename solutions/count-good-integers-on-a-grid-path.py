@@ -30,21 +30,25 @@ class Solution:
                 if tight:
                     if i == idxs[j]:
                         nj += 1
-                        ub = min(prev, cd)
+                        lb = prev
+                        ub = cd
                     else:
+                        lb = 0
                         ub = cd
                 else:
                     if i == idxs[j]:
                         nj += 1
-                        ub = prev
+                        ub = 9
+                        lb = prev
                     else:
+                        lb = 0
                         ub = 9
                 ret = 0
-                for d in range(ub+1):
+                for d in range(lb, ub+1):
                     nprev = prev if i != idxs[j] else d
                     ntight = tight and d == cd
                     ret += dfs(i+1, nj, nprev, ntight)
                 dp[key] = ret
                 return ret
-            return dfs(0,0,9,True)
+            return dfs(0,0,0,True)
         return good(sr) - good(sl)
