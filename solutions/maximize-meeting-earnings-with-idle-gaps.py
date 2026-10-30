@@ -10,6 +10,7 @@ class Solution:
             l, r, cost = meetings[i]
             dp[i] = cost
             idx = sl.bisect_right((l, n))
+            print(sl, idx)
 
             for j in range(idx):
                 r, k = sl[j]
