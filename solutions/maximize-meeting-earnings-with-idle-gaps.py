@@ -11,6 +11,6 @@ class Solution:
             for j in range(i):
                 if meetings[j][1] <= l:
                     diff = l - meetings[j][1]
-                    dp[i] = max(dp[i], dp[j-1]+cost+diff)
+                    dp[i] = max(dp[i], dp[j]+cost+diff)
         return max(dp)
                 
