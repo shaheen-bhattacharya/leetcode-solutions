@@ -27,11 +27,11 @@ class Solution:
             else:
                 l, m, r = nums[i-1], nums[i], nums[i+1]
             return max(0, max(l, r)+1-m)
-        print(mc(3))
+        # print(mc(3))
         #select i=1
         dp[1][0] = inf
         dp[1][1] = mc(1)
-        for i in range(2, n-1):
+        for i in range(3, n-1):
             for j in range(k+1):
                 dp[i][j] = dp[i-1][j]
                 if j > 0:
