@@ -16,13 +16,20 @@ class Solution:
         dp[0][0] = 0
         
         def mc(i):
-            l, m, r = nums[i-1], nums[i], nums[i+1]
+            if i == 1:
+                l, m, r = nums[n-2], nums[i], nums[i+1]
+            elif i == n-2:
+                l, m, r = nums[i-1], nums[i], nums[1]
+            else:
+                l, m, r = nums[i-1], nums[i], nums[i+1]
             return max(0, max(l, r)+1-m)
         
         for i in range(1, n-1):
             for j in range(k+1):
-                cst = dp[i-2][j-1] if i >= 2 else dp[i-1][j-1]
-                dp[i][j] = min(dp[i][j], cst + mc(i))
+                dp[i][j] = min(dp[i][j-1], dp[i-2][j-1] + mc(i))
+        
+        # dp[1][0] = 0
+        # dp[1][1] = mc(i)
 
         res = inf
         for i in range(1, n-1):
