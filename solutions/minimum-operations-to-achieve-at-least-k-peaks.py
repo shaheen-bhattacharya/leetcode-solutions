@@ -28,8 +28,8 @@ class Solution:
             return max(0, max(l, r)+1-m)
         # print(mc(3))
         #select i=1
-        dp[0][0] = inf
-        dp[1][0] = inf
+        dp[0][0] = 0
+        dp[2][1] = mc(1)
         dp[1][1] = mc(1)
         for i in range(3, n-1):
             for j in range(k+1):
