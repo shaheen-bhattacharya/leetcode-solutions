@@ -56,5 +56,5 @@ class Solution:
                         res == dfs(i+1, ntight, d, tot+d, True)
                 dp[key] = res
                 return res
-            return dfs(0, 0, 10, 0, False) + dfs(0, 0, -1, 0, False)
+            return dfs(0, True, 10, 0, False) + dfs(0, True, -1, 0, False)
         return fancy(r) - fancy(l-1)
