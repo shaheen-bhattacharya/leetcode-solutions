@@ -25,7 +25,6 @@ class Solution:
                 if i == sn:
                     return 1
                 cd = int(snum[i])
-                ub = min(prev, cd) if i == idxs[j] else cd
                 nj = j
 
                 if tight:
