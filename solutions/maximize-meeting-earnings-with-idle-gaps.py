@@ -13,8 +13,8 @@ class Solution:
             print(sl, idx)
 
             for j in range(idx):
-                r, k = sl[j]
-                diff = l - r
+                nr, k = sl[j]
+                diff = l - nr
                 dp[i] = max(dp[i], dp[k]+cost+diff)
             sl.add((r, i))
         print(dp)
