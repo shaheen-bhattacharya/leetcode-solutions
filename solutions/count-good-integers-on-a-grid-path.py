@@ -41,7 +41,7 @@ class Solution:
                         ub = 9
                 ret = 0
                 for d in range(ub+1):
-                    nprev = prev if i == idxs[j] else d
+                    nprev = prev if i != idxs[j] else d
                     ntight = tight and d == cd
                     ret += dfs(i+1, nj, nprev, ntight)
                 dp[key] = ret
