@@ -10,13 +10,13 @@ class Solution:
             l, r, cost = meetings[i]
             dp[i] = cost
             idx = sl.bisect_right((l, n))
-            print(sl, idx)
+            # print(sl, idx)
 
             for j in range(idx):
                 nr, k = sl[j]
                 diff = l - nr
                 dp[i] = max(dp[i], dp[k]+cost+diff)
             sl.add((r, i))
-        print(dp)
+        # print(dp)
         return max(dp)
                 
