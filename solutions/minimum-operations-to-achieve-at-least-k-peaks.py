@@ -33,9 +33,7 @@ class Solution:
                 if j > 0:
                     dp[i][j] = min(dp[i][j], dp[i-2][j-1] + mc(i))
 
-        res = inf
-        for i in range(1, n-1):
-            res = min(res, dp[i][k])
+        res = dp[n-2][k]
 
         dp = [[inf]*(k+1) for _ in range(n-1)]
         dp[0][0] = 0
@@ -47,8 +45,8 @@ class Solution:
                 dp[i][j] = dp[i][j-1]
                 if j > 0:
                     dp[i][j] = min(dp[i][j], dp[i-2][j-1] + mc(i))
-        for i in range(1, n-1):
-            res = min(res, dp[i][k])
+        res = min(res, dp[n-2][k])
+
         return res if res != inf else -1
         
 
