@@ -39,7 +39,12 @@ class Solution:
         dp[0][0] = 0
         dp[1][0] = 0
         dp[1][1] = inf
-        
+
+        for i in range(2, n-1):
+            for j in range(k+1):
+                dp[i][j] = min(dp[i][j-1], dp[i-2][j-1] + mc(i))
+        for i in range(1, n-1):
+            res = min(res, dp[i][k])
         return res if res != inf else -1
         
 
