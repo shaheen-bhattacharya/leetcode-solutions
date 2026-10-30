@@ -10,12 +10,12 @@ class Solution:
                 stn = str(n)
                 f1 = False
                 for i in range(1, len(stn)):
-                    if stn[i] < stn[i-1]:
+                    if stn[i] <= stn[i-1]:
                         f1 = True
                         break
                 f2 = False
                 for i in range(1, len(stn)):
-                    if stn[i] > stn[i-1]:
+                    if stn[i] >= stn[i-1]:
                         f2 = True
                         break
                 return not f1 or not f2
