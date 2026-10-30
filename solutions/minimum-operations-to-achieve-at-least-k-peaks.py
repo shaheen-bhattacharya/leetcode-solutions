@@ -3,8 +3,12 @@ class Solution:
         """
         6 4 5 3 6 4
         """
+        if k == 0:
+            return 0
         nums = [nums[-1]] + nums + [nums[0]]
         n = len(nums)
+        if k > (n-2)//2:
+            return -1
         amt = 0
         for i in range(1, n-1):
             if nums[i] > nums[i-1] and nums[i] > nums[i+1]:
