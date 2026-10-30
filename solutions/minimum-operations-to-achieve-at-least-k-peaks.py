@@ -24,16 +24,22 @@ class Solution:
                 l, m, r = nums[i-1], nums[i], nums[i+1]
             return max(0, max(l, r)+1-m)
         
-        for i in range(1, n-1):
+        #select i=1
+        dp[1][0] = inf
+        dp[1][1] = mc(1)
+        for i in range(2, n-1):
             for j in range(k+1):
                 dp[i][j] = min(dp[i][j-1], dp[i-2][j-1] + mc(i))
-        
-        # dp[1][0] = 0
-        # dp[1][1] = mc(i)
 
         res = inf
         for i in range(1, n-1):
             res = min(res, dp[i][k])
+
+        dp = [[inf]*(k+1) for _ in range(n-1)]
+        dp[0][0] = 0
+        dp[1][0] = 0
+        dp[1][1] = inf
+        
         return res if res != inf else -1
         
 
