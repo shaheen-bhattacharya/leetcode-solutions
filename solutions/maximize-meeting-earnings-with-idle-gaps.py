@@ -4,7 +4,7 @@ class Solution:
         n = len(meetings)
         dp = [0]*n
         dp[0] = meetings[0][2]
-        sl = SortedList()
+        sl = SortedList([(meetings[0][1], 0)])
 
         for i in range(1, n):
             l, r, cost = meetings[i]
