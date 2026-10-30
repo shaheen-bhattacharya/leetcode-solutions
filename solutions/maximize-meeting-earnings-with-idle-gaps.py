@@ -17,5 +17,6 @@ class Solution:
                 diff = l - r
                 dp[i] = max(dp[i], dp[k]+cost+diff)
             sl.add((r, i))
+        print(dp)
         return max(dp)
                 
