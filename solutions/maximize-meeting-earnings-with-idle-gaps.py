@@ -4,13 +4,17 @@ class Solution:
         n = len(meetings)
         dp = [0]*n
         dp[0] = meetings[0][2]
+        sl = SortedList()
 
         for i in range(1, n):
             l, r, cost = meetings[i]
             dp[i] = cost
-            for j in range(i):
-                if meetings[j][1] <= l:
-                    diff = l - meetings[j][1]
-                    dp[i] = max(dp[i], dp[j]+cost+diff)
+            idx = sl.bisect_right((l, n))
+
+            for j in range(idx):
+                r, k = sl[j]
+                diff = l - r
+                dp[i] = max(dp[i], dp[k]+cost+diff)
+            sl.add((r, i))
         return max(dp)
                 
