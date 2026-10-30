@@ -17,7 +17,6 @@ class Solution:
             return 0
         #dp[i][j] = at index i min cost to j peaks
         dp = [[inf]*(k+1) for _ in range(n-1)]
-        dp[0][0] = 0
         
         def mc(i):
             if i == 1:
@@ -29,6 +28,7 @@ class Solution:
             return max(0, max(l, r)+1-m)
         # print(mc(3))
         #select i=1
+        dp[0][0] = inf
         dp[1][0] = inf
         dp[1][1] = mc(1)
         for i in range(3, n-1):
