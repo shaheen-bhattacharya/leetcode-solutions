@@ -50,8 +50,7 @@ class Solution:
                 if j > 0:
                     dp[i][j] = min(dp[i][j], dp[i-2][j-1] + mc(i))
         res = min(res, dp[n-2][k])
-
-        return res if res != inf else -1
+        return res 
         
 
 
