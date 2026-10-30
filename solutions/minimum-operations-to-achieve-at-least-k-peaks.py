@@ -22,7 +22,7 @@ class Solution:
         for i in range(1, n-1):
             for j in range(k+1):
                 cst = dp[i-2][j-1] if i >= 2 else dp[i-1][j-1]
-                dp[i][j] = min(dp[i-1][j], cst + mc(i))
+                dp[i][j] = min(dp[i][j], cst + mc(i))
 
         res = inf
         for i in range(1, n-1):
