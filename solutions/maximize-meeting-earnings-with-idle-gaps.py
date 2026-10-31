@@ -1,7 +1,7 @@
 class SegTree:
     def __init__(self, n):
         self.n = n
-        self.tree = [0] * (4*n)
+        self.tree = [-inf] * (4*n)
 
     def update(self, i, val):
         def dfs(node, l, r):
@@ -46,7 +46,7 @@ class Solution:
         for i in range(1, n):
             l, r, cost = meetings[i]
             cl, cr = corr[l], corr[r]
-            dp[i] = st.query(0, cl-1) + l + cost
+            dp[i] = st.query(0, cl) + l + cost
             st.update(cr, dp[i]-r)
         return max(dp)
                 
