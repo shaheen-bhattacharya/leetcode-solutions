@@ -19,7 +19,7 @@ class SegTree:
     def query(self, ql, qr):
         def dfs(node, l, r):
             if qr < l or ql > r:
-                return 0
+                return -inf
             if ql <= l and r <= qr:
                 return self.tree[node]
             m = (l+r)//2
