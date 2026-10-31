@@ -39,12 +39,12 @@ class Solution:
 
         dp = [0]*n
         dp[0] = meetings[0][2]
-        st.update(corr[meetings[0][1]], dp[0])
+        st.update(corr[meetings[0][1]], dp[0]-r)
 
         for i in range(1, n):
             l, r, cost = meetings[i]
             cl, cr = corr[l], corr[r]
-            dp[i] = st.query(0, cl-1) + i + cost
+            dp[i] = st.query(0, cl-1) + l + cost
             st.update(cr, dp[i]-i)
         return max(dp)
                 
