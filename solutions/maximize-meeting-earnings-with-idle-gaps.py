@@ -45,6 +45,6 @@ class Solution:
             l, r, cost = meetings[i]
             cl, cr = corr[l], corr[r]
             dp[i] = st.query(0, cl-1) + l + cost
-            st.update(cr, dp[i]-i)
+            st.update(cr, dp[i]-r)
         return max(dp)
                 
