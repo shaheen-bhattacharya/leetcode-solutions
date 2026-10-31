@@ -41,7 +41,7 @@ class Solution:
 
         dp = [0]*n
         dp[0] = meetings[0][2]
-        st.update(corr[meetings[0][1]], dp[0]-meetings[0][2])
+        st.update(corr[meetings[0][1]], dp[0]-meetings[0][1])
 
         for i in range(1, n):
             l, r, cost = meetings[i]
