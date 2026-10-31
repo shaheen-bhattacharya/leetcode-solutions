@@ -6,7 +6,7 @@ class SegTree:
     def update(self, i, val):
         def dfs(node, l, r):
             if l == r:
-                self.tree[node] = val
+                self.tree[node] = max(self.tree[node], val)
                 return
             m = (l+r)//2
             if i <= m:
