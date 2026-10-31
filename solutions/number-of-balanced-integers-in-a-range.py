@@ -16,7 +16,7 @@ class Solution:
                 for d in range(ub+1):
                     ntight = tight and d == cd
                     nused = used if used == 0 and d == 0 else used + 1
-                    ntot = tot - d if (nused % 2 == 0 and d % 2 == 0) or (nused % 2 == 1 and d % 2 == 1) else tot + d
+                    ntot = tot - d if (nused % 2 == 0 and i % 2 == 0) or (nused % 2 == 1 and i % 2 == 1) else tot + d
                     res += dfs(i+1, nused, ntight, ntot)
                 dp[key] = res
                 return res
