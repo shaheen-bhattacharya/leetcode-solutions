@@ -9,8 +9,10 @@ class SegTree:
                 self.tree[node] = val
                 return
             m = (l+r)//2
-            dfs(2*node, l, m)
-            dfs(2*node+1, m+1, r)
+            if i <= m:
+                dfs(2*node, l, m)
+            else:
+                dfs(2*node+1, m+1, r)
             self.tree[node] = max(self.tree[2*node], self.tree[2*node+1])
         dfs(1, 0, self.n-1)
 
