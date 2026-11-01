@@ -4,14 +4,14 @@ class Solution:
         def value(num):
             return (num*(num+1))//2
         
-        dp = [[0] * (k+1) for _ in range(n+1)]
+        dp = [[inf] * (k+1) for _ in range(n+1)]
         pref = [0] + list(accumulate(nums))
 
         dp[n][k] = 0
         for i in range(n-1, -1, -1):
             for j in range(i, n):
                 for u in range(k):
-                    dp[i][u] = dp[j+1][u+1] + value(pref[j+1] - pref[i])
+                    dp[i][u] = min(dp[i][u], dp[j+1][u+1] + value(pref[j+1] - pref[i]))
         return dp[0][0]
 
         # dp = {}
