@@ -46,5 +46,5 @@ class Solution:
                 x = pref[i]
                 insert(hull, m, c)
                 if hull:
-                    dp[i][u] = query(hull, x) - value(x)
+                    dp[i][u] = query(hull, x) + (x*(x-1))//2
         return dp[0][0]
