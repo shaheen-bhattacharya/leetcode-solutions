@@ -17,7 +17,7 @@ class Solution:
 
             res = 0
             for j in range(i, n):
-                print(value(pref[j+1] - pref[i]))
+                print(i, pref[j+1] - pref[i])
                 res = max(res, dfs(j+1, u+1) + value(pref[j+1] - pref[i]))
             dp[key] = res
             return res
