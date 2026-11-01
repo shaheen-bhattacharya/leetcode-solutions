@@ -44,6 +44,7 @@ class Solution:
                 m = -a
                 c = value(a) + dp[t][u+1]
                 x = pref[i]
+                insert(hull, m, c)
                 if hull:
                     dp[i][u] = query(hull, x) + value(x)
         return dp[0][0]
