@@ -12,7 +12,7 @@ class Solution:
                 return dp[key]
             if i == n:
                 return 0 if u == k else inf
-            if u > k:
+            if u > k or u+n-i<k:
                 return inf
             res = inf
             for j in range(i, n):
