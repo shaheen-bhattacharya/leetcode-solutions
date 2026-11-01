@@ -1,17 +1,24 @@
 class Solution:
     def minPartitionScore(self, nums: List[int], k: int) -> int:
         n = len(nums)
-        #dp[i][j] = min score ending at i with j subarrays
         def value(num):
             return (num*(num+1))//2
 
-        dp = [[inf]*(k+1) for _ in range(n)]
-        dp[0][1] = value(nums[0])
         pref = [0] + list(accumulate(nums))
-        for i in range(1, n):
-            for j in range(i):
-                for u in range(1, k+1):
-                    dp[i][u] = min(dp[i][u], dp[j][u] + value(pref[i] - pref[j]), dp[j][u-1] + value(pref[i] - pref[j]))
-        print(dp)
-        return dp[-1][k]
+        dp = {}
+        def dfs(i, u):
+            key = (i, u)
+            if key in dp:
+                return dp[key]
+            if i == n:
+                return 0 if u == k else -inf
+            if u > k:
+                return -inf
+
+            res = 0
+            for j in range(i, n):
+                res = max(res, dfs(j+1, u+1) + value(pref[j+1] - pref[i]))
+            dp[key] = res
+            return res
+        return dfs(0, 1)
 
