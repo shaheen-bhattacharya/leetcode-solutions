@@ -11,12 +11,12 @@ class Solution:
             if key in dp:
                 return dp[key]
             if i == n:
-                return 0 if u == k else -inf
+                return 0 if u == k else inf
             if u > k:
-                return -inf
-            res = -inf
+                return inf
+            res = inf
             for j in range(i, n):
-                res = max(res, dfs(j+1, u+1) + value(pref[j+1] - pref[i]))
+                res = min(res, dfs(j+1, u+1) + value(pref[j+1] - pref[i]))
             dp[key] = res
             return res
         return dfs(0, 0)
