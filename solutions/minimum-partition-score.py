@@ -14,10 +14,8 @@ class Solution:
                 return 0 if u == k else -inf
             if u > k:
                 return -inf
-
-            res = 0
+            res = -inf
             for j in range(i, n):
-                print(i, pref[j+1] - pref[i])
                 res = max(res, dfs(j+1, u+1) + value(pref[j+1] - pref[i]))
             dp[key] = res
             return res
