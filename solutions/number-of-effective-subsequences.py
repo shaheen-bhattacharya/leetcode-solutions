@@ -5,5 +5,5 @@ class Solution:
         [01, 10, 11] => 11
         """
         MOD = 1_000_000_007
-        print(nums[0].bit_count())
+        print(nums[0] & -nums[0])
 
