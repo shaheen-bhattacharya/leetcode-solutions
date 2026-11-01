@@ -12,7 +12,7 @@ class Solution:
             num = nums[i]
             while num > 0:
                 key = num & -num
-                groups[math.log2(key)].add(i)
+                groups[int(math.log2(key))].add(i)
                 num -= key
         nb = len(groups)
         dp = [0] * nb
