@@ -2,7 +2,6 @@ class Solution:
     def countCoprime(self, mat: List[List[int]]) -> int:
         MOD = 1_000_000_007
         rows, cols = len(mat), len(mat[0])
-        dp = [[0]*cols for _ in range(rows)]
         factors = defaultdict(set)
 
         def sieve(n):
@@ -25,13 +24,18 @@ class Solution:
                 i //= lp[i]
         rc = [[0]*151 for _ in range(rows)]
         mt = pow(cols, rows, MOD)
+
         for r in range(rows):
             for c in range(cols):
                 for f in factors[mat[r][c]]:
                     rc[r][f] += 1
 
+        # dp = [[0]*151 for _ in range(rows)]
+
         bad = 0
         for f in range(2, 151): 
+            if lp[f] == f:
+                continue
             tmp = 1
             for r in range(rows):          
                 tmp = (rc[r][f] * tmp) % MOD
