@@ -24,14 +24,13 @@ class Solution:
                 factors[k].add(i)
                 i //= lp[i]
         rc = [[0]*151 for _ in range(rows)]
-        mt = pow(rows, cols, MOD)
+        mt = pow(cols, rows, MOD)
         for r in range(rows):
             for c in range(cols):
                 for f in factors[mat[r][c]]:
                     rc[r][f] += 1
 
         bad = 0
-        print(mt, bad)
         for f in range(2, 151): 
             tmp = 1
             for r in range(rows):          
