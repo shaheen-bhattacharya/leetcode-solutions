@@ -31,6 +31,7 @@ class Solution:
                     rc[r][f] += 1
 
         bad = 0
+        print(mt, bad)
         for f in range(2, 151): 
             tmp = 1
             for r in range(rows):          
