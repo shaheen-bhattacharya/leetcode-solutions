@@ -18,10 +18,8 @@ class Solution:
             return primes, lp
         primes, lp = sieve(150)
         for i in range(2, 151):
-            k = i
-            while i > 1:
-                factors[k].add(i)
-                i //= lp[i]
+            for d in range(i, 151, i):
+                factors[i].add(d)
         rc = [[0]*151 for _ in range(rows)]
         mt = pow(cols, rows, MOD)
 
