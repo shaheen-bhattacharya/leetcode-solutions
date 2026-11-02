@@ -34,7 +34,7 @@ class Solution:
 
         bad = 0
         for f in range(2, 151): 
-            if lp[f] == f:
+            if lp[f] != f:
                 continue
             tmp = 1
             for r in range(rows):          
