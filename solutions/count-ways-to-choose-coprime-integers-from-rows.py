@@ -3,23 +3,46 @@ class Solution:
         MOD = 1_000_000_007
         rows, cols = len(mat), len(mat[0])
         factors = defaultdict(set)
+
+        def sieve(n):
+            primes = []
+            lp = [-1] * (n+1)
+            for i in range(2, n+1):
+                if lp[i] == -1:
+                    lp[i] = i
+                    primes.append(i)
+                for p in primes:
+                    if p > lp[i] or p * i > n:
+                        break
+                    lp[i*p] = p
+            return primes, lp
+        primes, lp = sieve(150)
+        for i in range(2, 151):
+            k = i
+            while i > 1:
+                factors[k].add(i)
+                i //= lp[i]
+        rc = [[0]*151 for _ in range(rows)]
         mt = pow(cols, rows, MOD)
 
-        dp = {}
-        def dfs(r, val):
-            key = (r, val)
-            if key in dp:
-                return dp[key]
-            if r == rows:
-                return 1
-            res = 0
+        for r in range(rows):
             for c in range(cols):
-                gv = gcd(val, mat[r][c]) if val != -1 else mat[r][c]
-                if gv != 1:
-                    res += dfs(r+1, gv)
-            dp[key] = res
-            return res
-        return (MOD + mt - dfs(0, -1))%MOD
-                        
+                for f in factors[mat[r][c]]:
+                    rc[r][f] += 1
 
-                 
+        # dp = [[0]*151 for _ in range(rows)]
+
+        dp = [0] * 151
+
+        for d in range(150, 0, -1):
+            ways = 1
+
+            for r in range(rows):
+                ways = ways * rc[r][d] % MOD
+
+            for multiple in range(d * 2, 151, d):
+                ways -= dp[multiple]
+
+            dp[d] = ways % MOD
+        return dp[1]
+                        
