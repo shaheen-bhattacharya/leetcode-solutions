@@ -20,7 +20,7 @@ class Solution:
         for i in range(2, 151):
             k = i
             while i > 1:
-                factors[k].add(lp[i])
+                factors[k].add(i)
                 i //= lp[i]
         print(factors)
                  
