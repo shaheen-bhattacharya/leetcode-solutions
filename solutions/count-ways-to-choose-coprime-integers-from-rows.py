@@ -18,8 +18,9 @@ class Solution:
             return primes, lp
         primes, lp = sieve(150)
         for i in range(2, 151):
+            k = i
             while i > 0:
-                factors[i].add(lp[i])
+                factors[k].add(lp[i])
                 i //= lp[i]
         print(factors)
                  
