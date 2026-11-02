@@ -3,9 +3,10 @@ class Solution:
         MOD = 1_000_000_007
         rows, cols = len(mat), len(mat[0])
         factors = defaultdict(set)
+
         for i in range(2, 151):
             for d in range(i, 151, i):
-                factors[i].add(d)
+                factors[d].add(i)
         rc = [[0]*151 for _ in range(rows)]
         mt = pow(cols, rows, MOD)
 
