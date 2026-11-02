@@ -31,12 +31,13 @@ class Solution:
                     if v not in unique:
                         flag = True
                         break
+                    unique.add(v)
                 if not flag:
                     good = False
                     break
                 mask -= b
             res += good
-        return res
+        return res % MOD
 
 
         
