@@ -4,42 +4,21 @@ class Solution:
         rows, cols = len(mat), len(mat[0])
         factors = defaultdict(set)
 
-        def sieve(n):
-            primes = []
-            lp = [-1] * (n+1)
-            for i in range(2, n+1):
-                if lp[i] == -1:
-                    lp[i] = i
-                    primes.append(i)
-                for p in primes:
-                    if p > lp[i] or p * i >= n:
-                        break
-                    lp[i*p] = p
-            return primes, lp
-        primes, lp = sieve(150)
-        for i in range(2, 151):
-            k = i
-            while i > 1:
-                factors[k].add(i)
-                i //= lp[i]
-        rc = [[0]*151 for _ in range(rows)]
-        mt = pow(cols, rows, MOD)
-
-        for r in range(rows):
+        dp = {}
+        def dfs(r, val):
+            key = (r, val)
+            if key in dp:
+                return dp[key]
+            if r == rows:
+                return 1
+            res = 0
             for c in range(cols):
-                for f in factors[mat[r][c]]:
-                    rc[r][f] += 1
-
-        # dp = [[0]*151 for _ in range(rows)]
-
-        bad = 0
-        for f in range(2, 151): 
-            if lp[f] != f:
-                continue
-            tmp = 1
-            for r in range(rows):          
-                tmp = (rc[r][f] * tmp) % MOD
-            bad = (bad + tmp) % MOD
-        return (MOD + mt - bad) % MOD
+                gv = gcd(val, mat[r][c]) if val != -1 else mat[r][c]
+                if gv != 1:
+                    res += dfs(r+1, gv)
+            dp[key] = res
+            return res
+        return dfs(0, -1)
+                        
 
                  
