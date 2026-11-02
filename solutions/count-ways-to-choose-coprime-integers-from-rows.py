@@ -21,13 +21,10 @@ class Solution:
 
         for d in range(150, 0, -1):
             ways = 1
-
             for r in range(rows):
                 ways = ways * rc[r][d] % MOD
-
             for multiple in range(d * 2, 151, d):
                 ways -= dp[multiple]
-
             dp[d] = ways % MOD
         return dp[1] % MOD
         
