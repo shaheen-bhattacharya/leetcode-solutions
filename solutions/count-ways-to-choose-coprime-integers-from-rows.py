@@ -44,5 +44,6 @@ class Solution:
                 ways -= dp[multiple]
 
             dp[d] = ways % MOD
-        return dp[1]
+        return dp[1] % MOD
+        
                         
