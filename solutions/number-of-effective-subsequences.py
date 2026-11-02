@@ -15,8 +15,17 @@ class Solution:
                 groups[int(math.log2(key))].add(i)
                 num -= key
         nb = len(groups)
-        dp = [0] * nb
-        print(groups)
+        keys = sorted(groups.keys())
+        mv = max(keys)
+        # dp = [0] * nb
+
+        # for mask in range(1, 2<<nb+1):
+        return 2<<nb % MOD
+
+
+        
+
+        
 
 
 
