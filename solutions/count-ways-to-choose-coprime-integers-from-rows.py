@@ -3,6 +3,7 @@ class Solution:
         MOD = 1_000_000_007
         rows, cols = len(mat), len(mat[0])
         factors = defaultdict(set)
+        mt = pow(cols, rows, MOD)
 
         dp = {}
         def dfs(r, val):
@@ -10,15 +11,14 @@ class Solution:
             if key in dp:
                 return dp[key]
             if r == rows:
-                return 1
+                return val==1
             res = 0
             for c in range(cols):
                 gv = gcd(val, mat[r][c]) if val != -1 else mat[r][c]
-                if gv != 1:
-                    res += dfs(r+1, gv)
-            dp[key] = res
-            return res
-        return dfs(0, -1)
+                res += dfs(r+1, gv)
+            dp[key] = res % MOD
+            return res % MOD
+        return dfs(0, -1) % MOD
                         
 
                  
