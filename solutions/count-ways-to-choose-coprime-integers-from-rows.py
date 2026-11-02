@@ -4,7 +4,7 @@ class Solution:
         rows, cols = len(mat), len(mat[0])
         factors = defaultdict(set)
 
-        for i in range(2, 151):
+        for i in range(1, 151):
             for d in range(i, 151, i):
                 factors[d].add(i)
         rc = [[0]*151 for _ in range(rows)]
