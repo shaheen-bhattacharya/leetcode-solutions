@@ -17,7 +17,7 @@ class Solution:
                     lp[i*p] = p
             return primes, lp
         primes, lp = sieve(150)
-        for i in range(151):
+        for i in range(2, 151):
             while i > 0:
                 factors[i].add(lp[i])
                 i //= lp[i]
