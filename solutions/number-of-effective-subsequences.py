@@ -16,6 +16,7 @@ class Solution:
                 num -= key
         nb = len(groups)
         keys = sorted(groups.keys())
+        print(groups)
         mv = max(keys)
         # dp = [0] * nb
 
