@@ -11,14 +11,15 @@ class Solution:
             if key in dp:
                 return dp[key]
             if r == rows:
-                return val==1
+                return 1
             res = 0
             for c in range(cols):
                 gv = gcd(val, mat[r][c]) if val != -1 else mat[r][c]
-                res += dfs(r+1, gv)
-            dp[key] = res % MOD
-            return res % MOD
-        return dfs(0, -1) % MOD
+                if gv != 1:
+                    res += dfs(r+1, gv)
+            dp[key] = res
+            return res
+        return (MOD + mt - dfs(0, -1))%MOD
                         
 
                  
