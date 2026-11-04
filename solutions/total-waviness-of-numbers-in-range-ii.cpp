@@ -22,7 +22,7 @@ public:
         for(int d = 0; d <= ub; d++){
             int ntight = tight && cd == d; 
             int nst = started || d != 0;
-            if (nst){
+            if (!nst){
                 res += dfs(snum, sn, i+1, prev, curr, ntight, nst);
                 continue; 
             }
