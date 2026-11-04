@@ -1,7 +1,7 @@
 using ll = long long;
 class Solution {
 public:
-    int dp[16][11][11][2][2];
+    ll dp[16][11][11][2][2];
     long long totalWaviness(long long num1, long long num2) {
         memset(dp, -1, sizeof(dp));
         return good(num2) - good(num1);
@@ -11,14 +11,14 @@ public:
         int sn = snum.size();
         return dfs(snum, sn, 0, 10, 10, 1, 0);
     }
-    int dfs(string& snum, int sn, int i, int prev, int curr, int tight, int started){
+    ll dfs(string& snum, int sn, int i, int prev, int curr, int tight, int started){
         if(dp[i][prev][curr][tight][started] != -1){
             return dp[i][prev][curr][tight][started];
         }
         if(i==sn){return started;}
         int cd = snum[i] - '0';
         int ub = tight ? cd : 9;
-        int res = 0; 
+        ll res = 0; 
         for(int d = 0; d <= ub; d++){
             int ntight = tight && cd == d; 
             int nst = started || d != 0;
