@@ -3,10 +3,10 @@ class Solution {
 public:
     ll dp[16][11][11][2][2];
     long long totalWaviness(long long num1, long long num2) {
-        memset(dp, -1, sizeof(dp));
         return good(num2) - good(num1-1);
     }
     int good(ll num){
+        memset(dp, -1, sizeof(dp));
         string snum = to_string(num);
         int sn = snum.size();
         return dfs(snum, sn, 0, 10, 10, 1, 0);
