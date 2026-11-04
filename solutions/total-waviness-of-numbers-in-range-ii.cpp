@@ -12,10 +12,11 @@ public:
         return dfs(snum, sn, 0, 10, 10, 1, 0);
     }
     ll dfs(string& snum, int sn, int i, int prev, int curr, int tight, int started){
+        if(i==sn){return 0;}
+
         if(dp[i][prev][curr][tight][started] != -1){
             return dp[i][prev][curr][tight][started];
         }
-        if(i==sn){return 0;}
         int cd = snum[i] - '0';
         int ub = tight ? cd : 9;
         ll res = 0; 
