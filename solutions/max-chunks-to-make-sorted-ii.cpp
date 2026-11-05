@@ -11,7 +11,7 @@ public:
 
 
         for(int i = 0; i < n; i++){
-            corr[arr[i]].push_back(i);
+            corr[narr[i]].push_back(i);
             seen.insert(i);
 
         }
