@@ -42,9 +42,7 @@ public:
                 }
             }
         }
-        if (!tight){
-            dp[i][prev][curr][tight][started] = {totw, totc};
-        }
+        dp[i][prev][curr][tight][started] = {totw, totc};
         return {totw, totc};
     }
 };
