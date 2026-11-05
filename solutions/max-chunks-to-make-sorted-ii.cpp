@@ -26,11 +26,12 @@ public:
             auto idx = q.front();
             q.pop_front();
             auto it = seen.lower_bound(idx);
+            cout << *it << ", idx: " << idx; 
             seen.erase(it);
             if(!seen.empty()){
                 int minv = *seen.begin();
                 if(minv == i+1){
-                    res ++;
+                    res++;
                 }
             }
         }
