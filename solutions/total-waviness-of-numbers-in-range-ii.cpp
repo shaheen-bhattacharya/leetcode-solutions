@@ -15,7 +15,7 @@ public:
         if(i==sn){
             return {0, started};
         }
-        if(!dp[i][prev][curr][tight][started].first != -1){
+        if(!tight && !(dp[i][prev][curr][tight][started].first != -1)){
             return dp[i][prev][curr][tight][started];
         }
         int cd = snum[i] - '0';
@@ -42,7 +42,9 @@ public:
                 }
             }
         }
-        dp[i][prev][curr][tight][started] = {totw, totc};
-        return dp[i][prev][curr][tight][started];
+        if (!tight){
+            dp[i][prev][curr][tight][started] = {totw, totc};
+        }
+        return {totw, totc};
     }
 };
