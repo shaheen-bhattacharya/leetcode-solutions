@@ -25,7 +25,7 @@ public:
             auto idx = q.front();
             q.pop_front();
             auto it = seen.lower_bound(idx);
-            cout << arr[i] << ", idx: " << idx << endl; 
+            // cout << arr[i] << ", idx: " << idx << endl; 
             seen.erase(it);
             if(!seen.empty()){
                 int minv = *seen.begin();
