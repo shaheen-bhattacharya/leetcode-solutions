@@ -12,6 +12,7 @@ public:
         for(int i = 0; i < n; i++){
             deque<int>& q = idxs[arr[i]];
             int fidx = q.front();
+            q.pop_front(); 
             furthest = max(furthest, fidx); 
             if (furthest==i){
                 res += 1;
