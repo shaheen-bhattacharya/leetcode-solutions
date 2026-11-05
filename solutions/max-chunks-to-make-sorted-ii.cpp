@@ -26,9 +26,11 @@ public:
             q.pop_front();
             auto it = seen.lower_bound(idx);
             seen.erase(it);
-            int minv = *seen.begin();
-            if(minv == i+1){
-                res += 1;
+            if(!seen.empty()){
+                int minv = *seen.begin();
+                if(minv == i+1){
+                    res ++;
+                }
             }
         }
         return res;
