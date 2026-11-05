@@ -17,6 +17,7 @@ public:
         unordered_map<int, deque<int>> corr; 
         for (auto p : vals){
             corr[p.first].push_back(p.second);
+            cout << p.first << ": " << p.second << endl; 
         }
 
         int res = 0;
