@@ -3,21 +3,20 @@ public:
     int maxChunksToSorted(vector<int>& arr) {
         int n = arr.size();
         int furthest = 0; 
-        unordered_map<int, deque<int>> idxs; 
         set<int> seen; 
         vector<pair<int, int>> vals; 
+        vector<int> narr = arr; 
+        sort(narr.begin(), narr.end());
+        unordered_map<int, deque<int>> corr; 
 
 
         for(int i = 0; i < n; i++){
-            idxs[arr[i]].push_back(i);
-            vals.push_back({arr[i], i});
+            corr[arr[i]].push_back(i);
             seen.insert(i);
+
         }
-        sort(vals.begin(), vals.end(), [](auto a, auto b){return a.first<b.first;});
-        unordered_map<int, deque<int>> corr; 
         for (auto p : vals){
             corr[p.first].push_back(p.second);
-            cout << p.first << ": " << p.second << endl; 
         }
 
         int res = 0;
