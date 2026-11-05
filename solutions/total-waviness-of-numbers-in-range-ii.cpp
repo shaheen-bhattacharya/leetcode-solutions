@@ -15,7 +15,7 @@ public:
         if(i==sn){
             return {0, started};
         }
-        if(!tight && !(dp[i][prev][curr][tight][started].first != -1)){
+        if(!tight && dp[i][prev][curr][tight][started].first != -1){
             return dp[i][prev][curr][tight][started];
         }
         int cd = snum[i] - '0';
