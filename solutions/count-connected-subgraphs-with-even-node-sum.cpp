@@ -46,15 +46,17 @@ public:
         int n = nums.size(); 
         int res = 0;
         for(ll mask = 1LL; mask < (1LL << n); mask++){
-            res += good(mask, n, adj);
+            res += good(mask, n, adj, nums);
         }
         return res; 
     }
-    bool good(ll mask, int& n, auto& adj){
+    bool good(ll mask, int& n, auto& adj, auto& nums){
         UnionFind uf(n);
         int ones = __builtin_popcountll(mask);
+        int tot = 0;
         for(int i = 0; i < n; i++){
             if (mask & (1LL << i)){
+                tot += nums[i];
                 for (auto nei : adj[i]){
                     if (mask & (1LL << nei)){
                         uf.unite(i, nei);
@@ -63,6 +65,6 @@ public:
             }
         }
         // cout << uf.comps << " " << n - ones; 
-        return uf.comps == n - ones + 1; 
+        return tot%2 == 0 && uf.comps == n - ones + 1; 
     }
 };
