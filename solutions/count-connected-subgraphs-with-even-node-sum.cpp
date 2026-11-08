@@ -45,7 +45,7 @@ public:
         }
         int n = nums.size(); 
         int res = 0;
-        for(ll mask = 0; mask < pow(2, n)-1; mask++){
+        for(ll mask = 0; mask < (1LL << n); mask++){
             res += good(mask, n, adj);
         }
         return res; 
@@ -54,9 +54,9 @@ public:
         UnionFind uf(n);
         int ones = __builtin_popcount(mask);
         for(int i = 0; i < n; i++){
-            if (mask & (1 << i)){
+            if (mask & (1LL << i)){
                 for (auto nei : adj[i]){
-                    if (mask & (1 << nei)){
+                    if (mask & (1LL << nei)){
                         uf.unite(i, nei);
                     }
                 }
