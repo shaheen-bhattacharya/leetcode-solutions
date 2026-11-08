@@ -56,7 +56,7 @@ public:
         for(int i = 0; i < n; i++){
             if (mask & (1 << i)){
                 for (auto nei : adj[i]){
-                    if (mask & (1 << i)){
+                    if (mask & (1 << nei)){
                         uf.unite(i, nei);
                     }
                 }
