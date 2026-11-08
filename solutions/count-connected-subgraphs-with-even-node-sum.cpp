@@ -8,6 +8,9 @@ struct UnionFind {
         this->n = n;
         comps = n; 
         par.resize(n);
+        for(int i = 0; i < n; i++){
+            par[i] = i; 
+        }
         rank.resize(n, 0); 
     }
     int find(int x){
@@ -62,6 +65,6 @@ public:
             }
         }
         // cout << uf.comps << " " << n - ones; 
-        return uf.comps == n - ones; 
+        return uf.comps == n - ones + 1; 
     }
 };
