@@ -40,7 +40,7 @@ public:
             adj[edge[1]].push_back(edge[0]);
         }
         int n = nums.size(); 
-        const int* ptr = &n; 
+        int* const ptr = &n; 
         cout << typeid(ptr).name() << endl; 
         return 0; 
     }
