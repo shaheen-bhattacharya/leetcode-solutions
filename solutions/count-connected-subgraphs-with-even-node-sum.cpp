@@ -14,7 +14,7 @@ struct UnionFind {
     int find(int x){
         while(x != par[x]){
             par[par[x]] = par[x];
-            par[x] = x; 
+            x = par[x];  
         }
         return x; 
     }
