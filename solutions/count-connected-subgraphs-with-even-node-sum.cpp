@@ -63,6 +63,6 @@ public:
             }
         }
         // cout << uf.comps << " " << n - ones; 
-        return uf.comps == n - ones + 1; 
+        return ones > 0 && uf.comps == n - ones + 1; 
     }
 };
