@@ -1,10 +1,12 @@
 using ll = long long; 
 struct UnionFind {
     int n; 
+    int comps; 
     vector<int> par;
     vector<int> rank; 
     UnionFind(int n){
         this->n = n;
+        comps = n; 
         par.resize(n);
         rank.resize(n, 0); 
     }
@@ -15,12 +17,13 @@ struct UnionFind {
         }
         return x; 
     }
-    void update(int x, int y){
+    void unite(int x, int y){
         int px = find(x); 
         int py = find(y); 
         if (px==py){
             return; 
         }
+        comps--; 
         if (px < py){
             par[px] = py; 
         }else if (px > py){
@@ -40,11 +43,24 @@ public:
             adj[edge[1]].push_back(edge[0]);
         }
         int n = nums.size(); 
-        int* const ptr = &n; 
-        cout << typeid(ptr).name() << endl; 
-        return 0; 
+        int res = 0;
+        for(ll mask = 0; mask < pow(2, n)-1; mask++){
+            res += good(mask, n, adj);
+        }
+        return res; 
     }
-    // bool good(ll mask){
-
-    // }
+    bool good(ll mask, int& n, auto& adj){
+        UnionFind uf(n);
+        int ones = __builtin_popcount(mask);
+        for(int i = 0; i < n; i++){
+            if (mask & (1 << i)){
+                for (auto nei : adj[i]){
+                    if (mask & (1 << i)){
+                        uf.unite(i, nei);
+                    }
+                }
+            }
+        }
+        return uf.comps == n - ones + 1; 
+    }
 };
