@@ -61,7 +61,7 @@ public:
                 }
             }
         }
-        cout << uf.comps << " " << n - ones + 1 << endl; 
-        return uf.comps == n - ones + 1; 
+        // cout << uf.comps << " " << n - ones; 
+        return uf.comps == n - ones; 
     }
 };
