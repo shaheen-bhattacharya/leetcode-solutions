@@ -52,7 +52,7 @@ public:
     }
     bool good(ll mask, int& n, auto& adj){
         UnionFind uf(n);
-        int ones = __builtin_popcount(mask);
+        int ones = __builtin_popcountll(mask);
         for(int i = 0; i < n; i++){
             if (mask & (1LL << i)){
                 for (auto nei : adj[i]){
