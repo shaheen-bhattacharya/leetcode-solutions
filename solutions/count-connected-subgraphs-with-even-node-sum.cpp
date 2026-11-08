@@ -45,7 +45,7 @@ public:
         }
         int n = nums.size(); 
         int res = 0;
-        for(ll mask = 0; mask < (1LL << n); mask++){
+        for(ll mask = 1LL; mask < (1LL << n); mask++){
             res += good(mask, n, adj);
         }
         return res; 
@@ -63,6 +63,6 @@ public:
             }
         }
         // cout << uf.comps << " " << n - ones; 
-        return ones > 0 && uf.comps == n - ones + 1; 
+        return uf.comps == n - ones + 1; 
     }
 };
