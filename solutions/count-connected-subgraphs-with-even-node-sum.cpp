@@ -8,9 +8,7 @@ struct UnionFind {
         this->n = n;
         comps = n; 
         par.resize(n);
-        for(int i = 0; i < n; i++){
-            par[i] = i; 
-        }
+        iota(par.begin(), par.end(), 0);
         rank.resize(n, 0); 
     }
     int find(int x){
