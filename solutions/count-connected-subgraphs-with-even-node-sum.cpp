@@ -25,9 +25,9 @@ struct UnionFind {
             return; 
         }
         comps--; 
-        if (px < py){
+        if (rank[px] < rank[py]){
             par[px] = py; 
-        }else if (px > py){
+        }else if (rank[px] > rank[py]){
             par[py] = px; 
         }else{
             par[px] = py; 
