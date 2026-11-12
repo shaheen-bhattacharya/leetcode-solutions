@@ -1,9 +1,10 @@
+using ll = long long; 
 class Solution {
 public:
-    vector<int> total;
-    int res;
+    vector<ll> total;
+    ll res;
     long long interactionCosts(int n, vector<vector<int>>& edges, vector<int>& group) {
-        unordered_map<int, vector<int>> adj; 
+        unordered_map<ll, vector<ll>> adj; 
         for (auto& e : edges){
             adj[e[0]].push_back(e[1]);
             adj[e[1]].push_back(e[0]);
