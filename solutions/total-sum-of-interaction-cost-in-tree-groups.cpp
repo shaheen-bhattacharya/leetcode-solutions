@@ -24,7 +24,7 @@ public:
             vector<int> chf = dfs(node, nei, adj, group);
             for(int g = 0; g <= 20; g++){
                 freq[g] += chf[g];
-                res += (total[g] - freq[g]) * freq[g];
+                res += (total[g] - chf[g]) * chf[g];
             }
         }
         freq[group[node]]++;
