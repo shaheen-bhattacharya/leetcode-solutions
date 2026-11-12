@@ -19,7 +19,6 @@ public:
     }
     vector<int> dfs(int par, int node, auto& adj, auto& group){
         vector<int> freq(21, 0);
-        freq[group[node]]++;
         for (auto nei : adj[node]){
             if (nei == par) continue; 
             vector<int> chf = dfs(node, nei, adj, group);
@@ -28,6 +27,7 @@ public:
                 res += (total[g] - freq[g]) * freq[g];
             }
         }
+        freq[group[node]]++;
         return freq;
     }
 };
