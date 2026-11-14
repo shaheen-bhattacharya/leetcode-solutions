@@ -9,8 +9,8 @@ public:
         for (auto& e : edges){
             int u = e[0], v = e[1];
             ll w = e[2];
-            int pu = __builtin_popcount(u)%2; 
-            int pv = __builtin_popcount(v)%2;
+            int pu = __builtin_popcount(values[u])%2; 
+            int pv = __builtin_popcount(values[v])%2;
             if (pu == pv){
                 res = min(res, w);
             }else{
