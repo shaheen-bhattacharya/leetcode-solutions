@@ -18,10 +18,10 @@ class Solution:
         for i in range(1, n):
             dsum = digitSum[i]
             ndp = [0] * 5001
-            if dt(dsum) != digitSum[i]:
-                continue
-            for j in range(dsum):
-                ndp[dsum] += dp[j]
+            pref = list(accumulate(dp))
+            for j in range(5001):
+                if dt(j) == dsum:
+                    ndp[j] = pref[j]
             dp = ndp
         return sum(dp) % MOD
 
