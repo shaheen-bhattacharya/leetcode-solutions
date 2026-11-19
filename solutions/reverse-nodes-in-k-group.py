@@ -15,12 +15,13 @@ class Solution:
             btmp = start
             tmp = start.next
             while tmp and count < k:
+                print(tmp.val, count)
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            print(btmp, tmp, "\n")
             if count < k:
                 return dummy.next
+            # print(btmp.val, tmp.val)
             prev = tmp
             cur = start
             for _ in range(k-1):
