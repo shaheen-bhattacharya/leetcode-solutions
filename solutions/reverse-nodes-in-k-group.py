@@ -18,8 +18,6 @@ class Solution:
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            # print(btmp.val, tmp.val if tmp else "dd", count)
-            # print(" ")
             if count < k:
                 return dummy.next
             prev = start.next
