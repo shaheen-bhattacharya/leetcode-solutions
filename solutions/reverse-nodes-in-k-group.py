@@ -18,7 +18,7 @@ class Solution:
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            print(btmp, tmp)
+            print(btmp, tmp, "\n")
             if count < k:
                 return dummy.next
             prev = tmp
