@@ -19,6 +19,7 @@ class Solution:
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
+                print(" ")
             if count < k:
                 return dummy.next
             # print(btmp.val, tmp.val)
