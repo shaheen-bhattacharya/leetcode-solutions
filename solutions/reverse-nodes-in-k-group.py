@@ -15,22 +15,21 @@ class Solution:
             btmp = start
             tmp = start.next
             while tmp and count < k:
-                print(btmp.val, tmp.val, count)
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            print(btmp.val, tmp.val if tmp else "dd", count)
-            print(" ")
+            # print(btmp.val, tmp.val if tmp else "dd", count)
+            # print(" ")
             if count < k:
                 return dummy.next
-            # print(btmp.val, tmp.val)
-            prev = tmp
-            cur = start
+            prev = start.next
+            cur = start.next.next
             for _ in range(k-1):
                 nxt = cur.next
                 cur.next = prev
                 prev = cur
                 cur = nxt
-            start = tmp
+            start.next.next = tmp
+            start = start.next
         return dummy.next
             
