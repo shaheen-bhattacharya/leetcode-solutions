@@ -15,7 +15,7 @@ class Solution:
             btmp = start
             tmp = start.next
             while tmp and count < k:
-                print(tmp.val, count)
+                print(btmp.val, count)
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
