@@ -20,6 +20,7 @@ class Solution:
                 btmp = tmp
                 tmp = tmp.next
             print(tmp.val if tmp else "dd", count)
+            print(" ")
             if count < k:
                 return dummy.next
             # print(btmp.val, tmp.val)
