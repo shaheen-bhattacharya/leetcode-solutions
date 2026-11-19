@@ -20,8 +20,8 @@ class Solution:
             ndp = [0] * 5001
             if dt(dsum) != digitSum[i]:
                 continue
-            for j in range(i):
-                ndp[i] += dp[j]
+            for j in range(dsum):
+                ndp[dsum] += dp[j]
             dp = ndp
         return sum(dp) % MOD
 
