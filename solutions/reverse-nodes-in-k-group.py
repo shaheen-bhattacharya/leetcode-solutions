@@ -15,11 +15,11 @@ class Solution:
             btmp = start
             tmp = start.next
             while tmp and count < k:
-                print(btmp.val, count)
+                print(tmp.val, count)
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            print(tmp.val if tmp else "dd", count)
+            print(btmp.val, tmp.val if tmp else "dd", count)
             print(" ")
             if count < k:
                 return dummy.next
