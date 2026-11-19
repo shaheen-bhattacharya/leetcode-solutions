@@ -14,14 +14,16 @@ class Solution:
         for i in range(5001):
             if dt(i) == digitSum[0]:
                 dp[i] = 1
+        idxs = defaultdict(list)
+        for i in range(5001):
+            idxs[dt(i)].append(i)
         
         for i in range(1, n):
             dsum = digitSum[i]
             ndp = [0] * 5001
             pref = list(accumulate(dp))
-            for j in range(5001):
-                if dt(j) == dsum:
-                    ndp[j] = pref[j]
+            for j in idxs[dsum]:
+                ndp[j] = pref[j]
             dp = ndp
         return sum(dp) % MOD
 
