@@ -29,7 +29,9 @@ class Solution:
                 cur.next = prev
                 prev = cur
                 cur = nxt
-            start.next.next = tmp
-            start = start.next
+            os = start.next
+            start.next = btmp
+            os.next = tmp
+            start = os
         return dummy.next
             
