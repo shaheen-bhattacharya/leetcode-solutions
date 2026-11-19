@@ -19,7 +19,7 @@ class Solution:
                 count += 1
                 btmp = tmp
                 tmp = tmp.next
-            print(" ")
+            print(tmp.val if tmp else "dd", count)
             if count < k:
                 return dummy.next
             # print(btmp.val, tmp.val)
