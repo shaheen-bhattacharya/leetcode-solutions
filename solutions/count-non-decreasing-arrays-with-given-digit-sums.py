@@ -20,7 +20,7 @@ class Solution:
             ndp = [0] * 5001
             if dt(dsum) != digitSum[i]:
                 continue
-            for j in range(i+1, n):
+            for j in range(i):
                 ndp[i] += dp[j]
             dp = ndp
         return sum(dp) % MOD
