@@ -58,7 +58,6 @@ class Skiplist:
         update = []
         cur = self.toph
 
-        # Find predecessor at every level
         while cur:
             while cur.next and cur.next.val < num:
                 cur = cur.next
@@ -66,7 +65,6 @@ class Skiplist:
             update.append(cur)
             cur = cur.down
 
-        # Insert at bottom level
         prev = update[-1]
         nxt = prev.next
 
@@ -77,7 +75,6 @@ class Skiplist:
         prev.next = node
         nxt.prev = node
 
-        # Randomly promote the node
         level = 0
 
         while random.random() < 0.5 and level < self.mel:
@@ -101,7 +98,6 @@ class Skiplist:
     def erase(self, num: int) -> bool:
         cur = self.toph
 
-        # Find predecessor at every level
         while cur:
             while cur.next and cur.next.val < num:
                 cur = cur.next
@@ -109,7 +105,6 @@ class Skiplist:
             if cur.next and cur.next.val == num:
                 node = cur.next
 
-                # Remove this node and all its upper copies
                 while node:
                     prev = node.prev
                     nxt = node.next
