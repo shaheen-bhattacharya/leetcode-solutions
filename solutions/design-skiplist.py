@@ -31,7 +31,7 @@ class Skiplist:
         nxt = [None] * self.levels
         upg = self.upgrades()
         for lvl in range(self.levels-1, -1, -1):
-            while curr.next[lvl] and curr.next[lvl].val < num:
+            while curr.next[lvl] and curr.next[lvl].val <= num:
                 curr = curr.next[lvl]
             nxt[lvl] = curr
         
