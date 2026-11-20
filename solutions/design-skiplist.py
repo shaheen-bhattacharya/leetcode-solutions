@@ -1,121 +1,71 @@
-import random
-from math import inf
-
 class Node:
-    def __init__(self, val=-1):
-        self.next = None
-        self.down = None
-        self.up = None
-        self.prev = None
+    def __init__(self, val=-float("inf"), layers=16):
+        self.next = [None]*layers 
         self.val = val
 
-
 class Skiplist:
+
     def __init__(self):
         self.head = Node()
-        self.tail = Node(inf)
+        self.levels = 16
 
-        self.head.next = self.tail
-        self.tail.prev = self.head
-
-        self.mel = 16
-
-        ph = self.head
-        pt = self.tail
-
-        for _ in range(self.mel):
-            ch = Node()
-            ct = Node(inf)
-
-            ch.next = ct
-            ct.prev = ch
-
-            ch.down = ph
-            ph.up = ch
-
-            ct.down = pt
-            pt.up = ct
-
-            ph, pt = ch, ct
-
-        self.toph = ph
+    def upgrades(self):
+        amt = 1
+        while amt < self.levels and random.random() < 0.5:
+            amt += 1
+        return amt
 
     def search(self, target: int) -> bool:
-        cur = self.toph
-
-        while cur:
-            while cur.next and cur.next.val < target:
-                cur = cur.next
-
-            if cur.next and cur.next.val == target:
+        curr = self.head
+        for lvl in range(self.levels-1, -1, -1):
+            while curr.next[lvl] and curr.next[lvl].val < target:
+                curr = curr.next[lvl]
+            if curr.next[lvl] and curr.next[lvl].val == target:
                 return True
-
-            cur = cur.down
-
         return False
+
 
     def add(self, num: int) -> None:
-        update = []
-        cur = self.toph
-
-        while cur:
-            while cur.next and cur.next.val < num:
-                cur = cur.next
-
-            update.append(cur)
-            cur = cur.down
-
-        prev = update[-1]
-        nxt = prev.next
-
-        node = Node(num)
-        node.prev = prev
-        node.next = nxt
-
-        prev.next = node
-        nxt.prev = node
-
-        level = 0
-
-        while random.random() < 0.5 and level < self.mel:
-            level += 1
-
-            prev = update[-1 - level]
-            nxt = prev.next
-
-            upper = Node(num)
-            upper.down = node
-            node.up = upper
-
-            upper.prev = prev
-            upper.next = nxt
-
-            prev.next = upper
-            nxt.prev = upper
-
-            node = upper
-
+        curr = self.head
+        node = Node(val=num)
+        nxt = [None] * self.levels
+        upg = self.upgrades()
+        for lvl in range(self.levels-1, -1, -1):
+            while curr.next[lvl] and curr.next[lvl].val < num:
+                curr = curr.next[lvl]
+            nxt[lvl] = curr
+        
+        for lvl in range(upg):
+            node.next[lvl] = nxt[lvl].next[lvl]
+            nxt[lvl].next[lvl] = node
+        
     def erase(self, num: int) -> bool:
-        cur = self.toph
+        prev = [None] * self.levels
+        curr = self.head
+        for lvl in range(self.levels-1, -1, -1):
+            while curr.next[lvl] and curr.next[lvl].val < num:
+                curr = curr.next[lvl]
+            prev[lvl] = curr    
 
-        while cur:
-            while cur.next and cur.next.val < num:
-                cur = cur.next
+        need = prev[0].next[0]
+        if not need or need.val != num:
+            return False
+        
+        for lvl in range(self.levels):
+            if not prev[lvl].next[lvl] or not prev[lvl].next[lvl].val == num:
+                continue
+            node = prev[lvl].next[lvl]
+            prev[lvl].next[lvl] = node.next[lvl]
+        return True
 
-            if cur.next and cur.next.val == num:
-                node = cur.next
 
-                while node:
-                    prev = node.prev
-                    nxt = node.next
 
-                    prev.next = nxt
-                    nxt.prev = prev
 
-                    node = node.up
 
-                return True
+            
 
-            cur = cur.down
-
-        return False
+# Your Skiplist object will be instantiated and called as such:
+# obj = Skiplist()
+# param_1 = obj.search(target)
+# obj.add(num)
+# param_3 = obj.erase(num)
