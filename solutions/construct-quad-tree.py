@@ -31,7 +31,7 @@ class Solution:
             tr = dfs(rl, cm+1, rm, cr)
             bl = dfs(rm+1, cl, rr, cm)
             br = dfs(rm+1, cm+1, rr, cr)
-            return Node(-1, False, tl, tr, br, bl)
+            return Node(-1, False, tl, tr, bl, br)
 
         return dfs(0,0,r-1,r-1)
 
