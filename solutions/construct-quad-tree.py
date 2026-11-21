@@ -14,8 +14,16 @@ class Solution:
     def construct(self, grid: List[List[int]]) -> 'Node':
         r = len(grid)
         def dfs(rl, cl, rr, cr):
-            if rl == rr and cr == cl:
+            val = grid[rl][cl]
+            flag = True
+            for r in range(rl, rr+1):
+                for c in range(cl, cr+1):
+                    if grid[r][c] != val:
+                        flag = False
+                        break
+            if flag:
                 return Node(grid[rl][cl],True,None,None,None,None)
+
             rm = (rl+rr)//2
             cm = (cl+cr)//2
             # print(rl, cl, rr, cr, rm, cm)
@@ -23,18 +31,8 @@ class Solution:
             tr = dfs(rl, cm+1, rm, cr)
             bl = dfs(rm+1, cl, rr, cm)
             br = dfs(rm+1, cm+1, rr, cr)
-            ret = Node()
-            if (not (tl.val == tr.val == bl.val == br.val)) and tl.val != -1:
-                ret.val = tl.val
-                ret.isLeaf = True
-            else:
-                ret.val = tl.val
-                ret.isLeaf = True
-            ret.topLeft = tl
-            ret.topRight = tr
-            ret.bottomRight = br
-            ret.bottomLeft = bl
-            return ret
+            return Node(-1, False, tl, tr, br, bl)
+
         return dfs(0,0,r-1,r-1)
 
 
