@@ -5,7 +5,7 @@ class Solution:
         na = len(a)
         if nb * y > na * x: return False
         dv = math.ceil(nb/na)
-        la = a * min(x, 3*dv)
+        la = a * min(x, 2*dv)
         nla = len(la)
         lp = [0] * nb
         length = 0
