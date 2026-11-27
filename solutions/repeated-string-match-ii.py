@@ -41,6 +41,7 @@ class Solution:
 
         print(la)
         print(b)
+        print(starts)
         ss = set(starts)
         gst = -1
         for fst in starts:
