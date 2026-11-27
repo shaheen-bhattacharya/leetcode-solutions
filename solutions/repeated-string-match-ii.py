@@ -48,7 +48,7 @@ class Solution:
             if fst not in ss:
                 continue
             ss.remove(fst)
-            cur = (fst + nb)%na
+            cur = (fst + nb)%nla
             valid = False
             cnt = 1
             if y == 1:
@@ -56,6 +56,7 @@ class Solution:
             while cur in ss:
                 ss.remove(cur)
                 cur = (cur + nb) % na
+                print(cur)
                 cnt += 1
                 if cnt == y:
                     return True
