@@ -38,10 +38,6 @@ class Solution:
                 i += 1
         if not starts:
             return False
-
-        print(la)
-        print(b)
-        print(starts)
         ss = set(starts)
         gst = -1
         for fst in starts:
@@ -56,7 +52,6 @@ class Solution:
             while cur in ss:
                 ss.remove(cur)
                 cur = (cur + nb) % na
-                # print(cur)
                 cnt += 1
                 if cnt == y:
                     return True
