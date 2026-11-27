@@ -30,7 +30,7 @@ class Solution:
                 length += 1 
                 i += 1
                 if length == nb:
-                    starts.append(i-nb)
+                    starts.append((i-nb) % na)
                     length = lp[length-1]
             elif length > 0:
                 length = lp[length-1]
@@ -48,14 +48,14 @@ class Solution:
             if fst not in ss:
                 continue
             ss.remove(fst)
-            cur = (fst + nb)%nla
+            cur = (fst + nb)%na
             valid = False
             cnt = 1
             if y == 1:
                 return True
             while cur in ss:
                 ss.remove(cur)
-                cur = (cur + nb) % nla
+                cur = (cur + nb) % na
                 cnt += 1
                 if cnt == y:
                     return True
