@@ -56,7 +56,7 @@ class Solution:
             while cur in ss:
                 ss.remove(cur)
                 cur = (cur + nb) % na
-                print(cur)
+                # print(cur)
                 cnt += 1
                 if cnt == y:
                     return True
