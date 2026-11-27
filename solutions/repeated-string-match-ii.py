@@ -39,7 +39,8 @@ class Solution:
         if not starts:
             return False
 
-        # print(starts)
+        print(la)
+        print(b)
         ss = set(starts)
         gst = -1
         for fst in starts:
