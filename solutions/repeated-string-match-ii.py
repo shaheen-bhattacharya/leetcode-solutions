@@ -38,7 +38,8 @@ class Solution:
                 i += 1
         if not starts:
             return False
-        print(starts)
+
+        # print(starts)
         ss = set(starts)
         gst = -1
         for fst in starts:
@@ -47,9 +48,13 @@ class Solution:
             ss.remove(fst)
             cur = (fst + nb)%nla
             valid = False
+            cnt = 1
             while cur in ss:
                 ss.remove(cur)
                 cur = (cur + nb) % nla
+                cnt += 1
+                if cnt == y:
+                    return True
                 if cur == fst:
                     valid = True
                     break
