@@ -5,7 +5,7 @@ class Solution:
         na = len(a)
         if nb * y > na * x: return False
         dv = math.ceil(nb/na)
-        la = a * min(x, 2*dv)
+        la = a * min(x, 3*dv)
         nla = len(la)
         lp = [0] * nb
         length = 0
@@ -30,7 +30,7 @@ class Solution:
                 length += 1 
                 i += 1
                 if length == nb:
-                    starts.append((i-nb) % na)
+                    starts.append((i-nb) % nla)
                     length = lp[length-1]
             elif length > 0:
                 length = lp[length-1]
