@@ -49,6 +49,8 @@ class Solution:
             cur = (fst + nb)%nla
             valid = False
             cnt = 1
+            if y == 1:
+                return True
             while cur in ss:
                 ss.remove(cur)
                 cur = (cur + nb) % nla
