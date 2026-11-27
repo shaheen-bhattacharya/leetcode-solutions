@@ -27,7 +27,6 @@ class Solution:
         starts = []
         while i < nla:
             if b[length] == la[i]:
-                print(nb, nla, length, i)
                 length += 1 
                 i += 1
                 if length == nb:
@@ -39,7 +38,7 @@ class Solution:
                 i += 1
         if not starts:
             return False
-        
+        print(starts)
         ss = set(starts)
         gst = -1
         for fst in starts:
